@@ -47,7 +47,7 @@
       "source": "himself65/finance-skills",
       "sourceType": "github",
       "skillPath": "plugins/data-providers/skills/funda-data/SKILL.md",
-      "computedHash": "e59a03a103a3179fa2777f95b6f29fec19d89dd45d72593edb16b6f4284e1ddd"
+      "computedHash": "81c57e03dc8b6b7a678451f0537f7e310fee7d18c6b6e426784d7273d766d509"
     },
     "generative-ui": {
       "source": "himself65/finance-skills",
@@ -71,7 +71,7 @@
       "source": "himself65/finance-skills",
       "sourceType": "github",
       "skillPath": "plugins/social-readers/skills/opencli-reader/SKILL.md",
-      "computedHash": "efb726bbf0e85d8685a555d1c65e42a0aed91e4dfbea78dae20153daefa3724c"
+      "computedHash": "2554d9fab51606dd8bc349448bdd9302775223783b056fa668ea3e54334d286e"
     },
     "options-payoff": {
       "source": "himself65/finance-skills",
@@ -131,13 +131,13 @@
       "source": "himself65/finance-skills",
       "sourceType": "github",
       "skillPath": "plugins/social-readers/skills/twitter-reader/SKILL.md",
-      "computedHash": "6e5c7ae01f98eb167b79cad18f66687e196e342b93c201b36c5c74826b0d958b"
+      "computedHash": "f11fec2ad7b08c63231b6d95d53e726b00c2667bf39157fd7d8e6196df5031a8"
     },
     "yc-reader": {
       "source": "himself65/finance-skills",
       "sourceType": "github",
       "skillPath": "plugins/social-readers/skills/yc-reader/SKILL.md",
-      "computedHash": "25ef6e79e1074bf04718388c5c27e12dc0df783c8a9599f19658681feaa5b71f"
+      "computedHash": "9276bfb806529ae5a99a8acd79703a72fc67e807b84ee26756ad7c33359d87e8"
     },
     "yfinance-data": {
       "source": "himself65/finance-skills",
