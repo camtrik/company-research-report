@@ -10,8 +10,11 @@
 company-reports/{ticker}-{company-name}/YYYY-MM-DD-reports.md
 ```
 
-- `{ticker}` 使用股票代码，优先大写，例如 `AAPL`、`NVDA`、`TSLA`。
-- `{company-name}` 使用公司英文名或常用简称，建议使用小写 kebab-case，例如 `AAPL-apple`、`NVDA-nvidia`。
+- `{ticker}` 使用股票代码，优先大写，例如 `AAPL`、`NVDA`、`TSLA`、`6098`、`4568`。
+- `{company-name}` 使用公司**本地语言名**，小写 kebab-case：
+  - 日本市场（JP）→ 日语正式名称，例如 `6098-リクルートホールディングス`、`4568-第一三共`、`3632-gree`。
+  - 美股等其他市场 → 英文常用名，例如 `NOW-servicenow`、`SOFI-sofi`、`AAPL-apple`。
+  - 若本地语言名过长或包含特殊字符，可用广为认知的缩略名。
 - 报告文件名必须使用实际报告日期，格式为 `YYYY-MM-DD-reports.md`。
 - 同一公司不同日期的报告保留为独立文件，不要覆盖历史报告。
 - 如果需要补充原始材料、截图、表格或模型文件，可放在同一公司目录下，并使用清晰文件名。

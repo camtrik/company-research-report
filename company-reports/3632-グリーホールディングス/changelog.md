@@ -1,4 +1,4 @@
-# 3632 - GREE Holdings Changelog
+# 3632 - グリーホールディングス Changelog
 
 ## 2026-05-15
 
@@ -8,4 +8,4 @@
 
 ## 2026-05-14
 
-- Created initial post-FY2026-Q3 research report after GREE Holdings announced FY2026-Q3 results and revised dividend policy.
+- Created initial post-FY2026-Q3 research report after GREE announced FY2026-Q3 results and revised dividend policy.
