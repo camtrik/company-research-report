@@ -88,25 +88,30 @@
     </section>
 
     <section class="section section--no-pad-top">
-      <div class="section__inner charts" data-region="charts">
-        <figure class="chart-row">
-          <figcaption class="chart-row__caption">
-            <span class="chart-row__title">10 年股价走势</span>
-            <span class="chart-row__meta">price · 月度</span>
-          </figcaption>
-          <div class="chart-row__canvas-wrap">
-            <canvas data-chart="price-10y"></canvas>
-          </div>
-        </figure>
-        <figure class="chart-row">
-          <figcaption class="chart-row__caption">
-            <span class="chart-row__title">10 年 PER / PBR 走势</span>
-            <span class="chart-row__meta">年度 · 双 Y 轴</span>
-          </figcaption>
-          <div class="chart-row__canvas-wrap">
-            <canvas data-chart="per-pbr-10y"></canvas>
-          </div>
-        </figure>
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <!-- PER / PBR 历史数据表（sync skill 维护；位于 PER/PBR 折线图下方） -->
+        <div class="per-pbr-history"></div>
       </div>
     </section>
     <!-- ↑ 运行时数据区结束 ↑ -->
@@ -156,11 +161,11 @@
       </div>
     </section>
 
-    <!-- 催化剂 — section-2col -->
+    <!-- 催化剂 — section-plain + 短期/中期两张白卡 -->
     <section class="section" data-region="catalysts">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>催化剂 / 关注点</h2></div>
-        <div class="section-2col__body"></div>
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
 
@@ -172,19 +177,19 @@
       </div>
     </section>
 
-    <!-- 风险 — section-2col -->
+    <!-- 风险 — section-plain + risk-grid 2 列卡片网格 -->
     <section class="section" data-region="risks">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>主要风险</h2></div>
-        <div class="section-2col__body"></div>
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>主要风险</h2></div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
 
-    <!-- 待验证问题 — section-2col -->
+    <!-- 待验证问题 — section-plain + tinted Q-badge 卡片 -->
     <section class="section" data-region="open-questions">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>待验证问题</h2></div>
-        <div class="section-2col__body"></div>
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
     <!-- ↑ 内容区结束 ↑ -->

@@ -283,56 +283,77 @@
 .feature-card blockquote p { font-size: 14px; color: var(--granite); }
 
 /* ============================================================
-   Tables — finance-friendly
+   Tables — finance-friendly (matches docs/designs/company-details.html)
    ============================================================ */
 .table-wrap {
   overflow-x: auto;
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: var(--surface-card);
   border: 1px solid rgba(199, 199, 192, 0.4);
 }
-.feature-card .table-wrap { background: var(--surface-low); border-color: rgba(199, 199, 192, 0.3); }
-.section--tinted .section__inner > .section-plain__body .table-wrap { background: var(--surface-card); }
-
-.section-2col__body table,
-.section-plain__body table,
-.feature-card table {
+.feature-card .table-wrap { border-color: rgba(199, 199, 192, 0.3); }
+.table-wrap table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
   font-variant-numeric: tabular-nums;
+  background: var(--surface-card);
 }
-.section-2col__body th,
-.section-2col__body td,
-.section-plain__body th,
-.section-plain__body td,
-.feature-card th,
-.feature-card td {
-  padding: 12px 14px;
+.table-wrap thead { background: var(--surface-low); }
+.table-wrap th {
+  padding: 18px 24px;
   text-align: left;
-  border-bottom: 1px solid rgba(199, 199, 192, 0.5);
-  vertical-align: top;
-}
-.section-2col__body th,
-.section-plain__body th,
-.feature-card th {
   font-weight: 700;
   font-size: 11px;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--slate);
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 1px solid rgba(199, 199, 192, 0.4);
   white-space: nowrap;
 }
-.section-2col__body td.num,
-.section-2col__body th.num,
-.section-plain__body td.num,
-.section-plain__body th.num,
-.feature-card td.num,
-.feature-card th.num { text-align: right; white-space: nowrap; }
-.section-2col__body tr:last-child td,
-.section-plain__body tr:last-child td,
-.feature-card tr:last-child td { border-bottom: 0; }
+.table-wrap td {
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(199, 199, 192, 0.25);
+  vertical-align: top;
+  color: var(--ink);
+}
+.table-wrap tr:last-child td { border-bottom: 0; }
+.table-wrap td.num,
+.table-wrap th.num { text-align: right; white-space: nowrap; }
+.table-wrap td.label,
+.table-wrap td:first-child { font-weight: 500; }
+
+/* Dense modifier for tables with many columns (8+) */
+.table-wrap--dense th,
+.table-wrap--dense td {
+  padding: 12px 14px;
+  font-size: 13px;
+}
+
+/* Semantic value colors */
+.pos { color: var(--link); }
+.neg { color: var(--down); }
+.table-wrap td .pos,
+.table-wrap td.pos { color: var(--link); }
+.table-wrap td .neg,
+.table-wrap td.neg { color: var(--down); }
+
+/* Highlight rows */
+tr.row--highlight { background: rgba(233, 232, 231, 0.35); }
+tr.row--highlight td { font-weight: 500; }
+
+/* Total row — primary (black) full-width emphasis */
+tr.row--total {
+  background: var(--primary);
+  color: var(--canvas);
+}
+tr.row--total td {
+  color: var(--canvas);
+  border-bottom: 0;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+}
 
 /* ============================================================
    Callouts
@@ -528,3 +549,158 @@
   margin-bottom: 6px;
 }
 .changelog-entry__summary { font-size: 16px; line-height: 1.55; }
+
+/* ============================================================
+   PER / PBR history table (sits below the PER/PBR chart)
+   ============================================================ */
+.per-pbr-history {
+  margin-top: var(--s-5);
+}
+.per-pbr-history__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--s-2);
+}
+.per-pbr-history__hint {
+  font-size: 12px;
+  color: var(--slate);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.per-pbr-history > blockquote {
+  margin-top: var(--s-2);
+  border-left: 3px solid var(--signal-light);
+  background: var(--surface-low);
+  padding: 14px 20px;
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  font-size: 14px;
+  color: var(--granite);
+}
+
+/* ============================================================
+   Risks — 2-column card grid
+   ============================================================ */
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-4);
+}
+@media (max-width: 768px) { .risk-grid { grid-template-columns: 1fr; } }
+.risk-item {
+  display: flex !important;
+  flex-direction: column;
+  gap: 8px;
+}
+.risk-item--wide { grid-column: 1 / -1; }
+.risk-item > h4 {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--tracking-tight) !important;
+  text-transform: none !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+  line-height: 1.25;
+}
+.risk-item > p {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: var(--granite) !important;
+  margin: 0 !important;
+}
+
+/* ============================================================
+   Catalysts — two cards (short-term + medium-term)
+   ============================================================ */
+.catalyst-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gutter);
+}
+@media (max-width: 900px) { .catalyst-grid { grid-template-columns: 1fr; gap: var(--s-3); } }
+.catalyst-card {
+  background: var(--surface-card);
+  border: 1px solid rgba(199, 199, 192, 0.4);
+  border-radius: 32px;
+  padding: var(--s-4);
+  box-shadow: var(--shadow-card);
+}
+.catalyst-card > h3 {
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--tracking-tight) !important;
+  margin: 0 0 var(--s-3) !important;
+  color: var(--ink) !important;
+}
+.catalyst-card > ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+.catalyst-card li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  line-height: 1.55 !important;
+  font-size: 15px !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+}
+.catalyst-card .material-symbols-outlined {
+  color: var(--signal);
+  font-size: 18px !important;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.catalyst-card--medium .material-symbols-outlined { color: var(--link); }
+
+/* ============================================================
+   Open questions — tinted card with Q-badge list
+   ============================================================ */
+.open-questions-card {
+  background: rgba(233, 232, 231, 0.4);
+  border: 1px solid rgba(199, 199, 192, 0.4);
+  border-radius: 32px;
+  padding: var(--s-5);
+}
+@media (max-width: 768px) { .open-questions-card { padding: var(--s-4); } }
+.open-questions-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--s-3) !important;
+}
+.open-questions-list li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 16px !important;
+  margin: 0 !important;
+}
+.q-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--canvas);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.open-questions-list p {
+  flex: 1;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+  color: var(--ink) !important;
+}
