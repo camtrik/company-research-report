@@ -21,27 +21,19 @@
     <!-- ============ Header ============ -->
     <header class="company-header">
       <div class="section__inner">
-        <div class="company-header__row">
-          <div class="company-header__lead">
-            <div class="eyebrow eyebrow--muted company-header__eyebrow">
-              <span data-bind="market">JP</span>
-              <span class="sep">·</span>
-              <span data-bind="sector">Human Capital / Internet Platform</span>
-              <span class="sep">·</span>
-              <span data-bind="last-updated">2026-05-15</span>
-            </div>
-            <h1 class="company-header__title" data-bind="name">リクルートホールディングス</h1>
-            <p class="company-header__name-en" data-bind="name-en">Recruit Holdings Co., Ltd.</p>
-            <div class="company-header__sub">
-              <span class="company-header__ticker" data-bind="ticker">6098.T</span>
-              <span class="pill pill--view"><span class="material-symbols-outlined" style="font-size:14px">trending_up</span><span data-bind="view">Long</span></span>
-            </div>
-          </div>
-          <div class="company-header__side">
-            <div class="eyebrow eyebrow--muted">数据更新</div>
-            <div class="company-header__side-value" data-bind="updated-at">—</div>
-          </div>
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market">JP</span>
+          <span class="sep">·</span>
+          <span data-bind="sector">Human Capital / Internet Platform</span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated">2026-05-15</span>
         </div>
+        <h1 class="company-header__title" data-bind="name">リクルートホールディングス</h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker">6098</span>
+          <span class="sep">·</span>
+          <span data-bind="name-en">Recruit Holdings Co., Ltd.</span>
+        </p>
         <div class="company-header__meta" data-bind="tags-row"></div>
       </div>
     </header>
@@ -96,8 +88,8 @@
     </section>
 
     <!-- ============ Charts (runtime; AI 永远不动) ============ -->
-    <section class="section section--no-pad-top" data-region="charts">
-      <div class="section__inner charts">
+    <section class="section section--no-pad-top">
+      <div class="section__inner charts" data-region="charts">
         <figure class="chart-row">
           <figcaption class="chart-row__caption">
             <span class="chart-row__title">10 年股价走势</span>
@@ -119,43 +111,14 @@
       </div>
     </section>
 
-    <!-- ============ 核心结论 ============ -->
-    <section class="section section--top-border" data-region="thesis">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>核心结论</h2></div>
-        <div class="section-2col__body">
-
-          <div class="callout callout--ink">
-            <div class="callout__label">观点 · Long · 基准合理价值 ¥12,000</div>
-            <p>
-              Recruit Holdings（TSE: 6098）FY2025 决算是明显的 beat + raise：收入、EBITDA+S、EPS 均超过 2026 年 2 月修正指引，FY2026 指引继续给出
-              <span class="kpi">收入 +9.0%</span> / <span class="kpi">EBITDA+S +19.5%</span> / <span class="kpi">EPS +27.8%</span>。
-            </p>
-            <p>
-              当前股价 <span class="kpi">¥7,825</span>，对 FY2026 EPS 指引 447 日元的 forward P/E 约
-              <span class="kpi">17.5x</span>。按扣除库存股后的 1,396.2 百万股，市值约 ¥10.93 万亿、EV 约 ¥10.16 万亿。
-              交叉验证后基准合理价值约 <span class="kpi">¥12,000</span>，合理区间
-              <span class="kpi">¥10,000 – ¥14,500</span>。
-            </p>
-          </div>
-
-          <p class="lede">
-            核心看多点是 HR Technology 的结构性利润率提升：FY2026 分部 EBITDA+S margin 指引升至 41.0%，管理层中期目标是超过 50%。
-          </p>
-          <p>
-            核心反向风险是招聘需求周期下行、ARPJ 提价影响客户 ROI，以及当前利润率改善中有多少来自短期控费而非产品效率。
-            当前价格相对基准合理价值约有 <span class="kpi">50%+ 上行空间</span>，但需要用 FY2026 Q1 - Q2 数据验证 HR Technology 指引质量。
-          </p>
+    <!-- ============ 公司概要（first content section） ============ -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ 公司概要 ============ -->
-    <section class="section" data-region="company-overview">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>公司概要</h2></div>
-        <div class="section-2col__body">
-
+        <div class="section-plain__body">
           <div class="kv-grid">
             <div class="kv-grid__item">
               <div class="kv-grid__label">上市地 / 代码</div>
@@ -166,18 +129,22 @@
               <div class="kv-grid__value">东京</div>
             </div>
             <div class="kv-grid__item">
-              <div class="kv-grid__label">FY2025 末员工数</div>
+              <div class="kv-grid__label">FY2025 员工数</div>
               <div class="kv-grid__value">约 49,480</div>
             </div>
             <div class="kv-grid__item">
               <div class="kv-grid__label">归母权益比率</div>
               <div class="kv-grid__value">56.8%</div>
             </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业（yfinance）</div>
+              <div class="kv-grid__value">Comm. Services · Internet</div>
+            </div>
           </div>
 
           <p>
             Recruit 是全球招聘与日本本地垂直平台集团。公司通过 Indeed、Glassdoor、日本 HR Solutions、Staffing 派遣网络，
-            以及 Lifestyle / Housing / Beauty 等本地匹配平台连接企业和个人用户。yfinance 行业分类为 Communication Services · Internet Content。
+            以及 Lifestyle / Housing / Beauty 等本地匹配平台连接企业和个人用户。
           </p>
 
           <h3>护城河来源（速览）</h3>
@@ -196,13 +163,41 @@
       </div>
     </section>
 
-    <!-- ============ 业务模式 (tinted feature card) ============ -->
+    <!-- ============ 核心结论 ============ -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Long · 基准合理价值 ¥12,000</div>
+            <p>
+              Recruit Holdings（TSE: 6098）FY2025 决算是明显的 beat + raise：收入、EBITDA+S、EPS 均超过 2026 年 2 月修正指引，
+              FY2026 指引继续给出 <span class="kpi">收入 +9.0%</span> / <span class="kpi">EBITDA+S +19.5%</span> / <span class="kpi">EPS +27.8%</span>。
+            </p>
+            <p>
+              当前股价 <span class="kpi">¥7,825</span>，对 FY2026 EPS 指引 447 日元的 forward P/E 约
+              <span class="kpi">17.5x</span>。按扣除库存股后的 1,396.2 百万股，市值约 ¥10.93 万亿、EV 约 ¥10.16 万亿。
+              交叉验证后基准合理价值约 <span class="kpi">¥12,000</span>，合理区间
+              <span class="kpi">¥10,000 – ¥14,500</span>。
+            </p>
+          </div>
+
+          <p class="lede">
+            核心看多点是 HR Technology 的结构性利润率提升：FY2026 分部 EBITDA+S margin 指引升至 41.0%，管理层中期目标超过 50%。
+          </p>
+          <p>
+            核心反向风险是招聘需求周期下行、ARPJ 提价影响客户 ROI，以及当前利润率改善中有多少来自短期控费而非产品效率。
+            当前价格相对基准合理价值约有 <span class="kpi">50%+ 上行空间</span>，但需要用 FY2026 Q1 - Q2 数据验证 HR Technology 指引质量。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 业务模式（card 仅含核心；表格在外） ============ -->
     <section class="section section--tinted" data-region="business-model">
       <div class="section__inner">
         <div class="feature-card">
-          <div class="feature-card__icon"><span class="material-symbols-outlined">account_tree</span></div>
           <h2>业务模式</h2>
-
           <p class="lede">Recruit 的业务模式可以拆成三层，互相支撑：</p>
           <ul class="numbered-list">
             <li>
@@ -226,7 +221,9 @@
               </div>
             </li>
           </ul>
+        </div>
 
+        <div class="section-plain__body">
           <h3>Business Segments</h3>
           <div class="table-wrap">
             <table>
@@ -285,7 +282,6 @@
           <span class="section-plain__meta">FY2021 – FY2026E · 单位：十亿日元</span>
         </div>
         <div class="section-plain__body">
-
           <div class="table-wrap">
             <table>
               <thead>
@@ -346,14 +342,12 @@
       </div>
     </section>
 
-    <!-- ============ 竞争与护城河 (tinted feature card) ============ -->
+    <!-- ============ 护城河 ============ -->
     <section class="section section--tinted" data-region="moat">
       <div class="section__inner">
         <div class="feature-card">
-          <div class="feature-card__icon"><span class="material-symbols-outlined">security</span></div>
-          <h2>竞争与护城河</h2>
-
-          <p>当前评估：<strong>Wide and Expanding</strong>。护城河可拆成五个来源：</p>
+          <h2>护城河</h2>
+          <p class="lede">当前评估：<strong>Wide and Expanding</strong>。护城河可拆成五个来源：</p>
 
           <div class="moat-block">
             <h4>全球招聘流量和职位数据库</h4>
@@ -375,7 +369,9 @@
             <h4>资本配置纪律</h4>
             <p>持续回购减少流通股，增强每股收益增长；FY2025 总派现率 143.5%。</p>
           </div>
+        </div>
 
+        <div class="section-plain__body">
           <h3>同业对比</h3>
           <div class="table-wrap">
             <table>
@@ -419,7 +415,6 @@
       <div class="section__inner section-2col">
         <div class="section-2col__head"><h2>催化剂 / 关注点</h2></div>
         <div class="section-2col__body">
-
           <h3>短期（&lt; 6 月）</h3>
           <ul>
             <li>下次财报：FY2026 Q1，预计 2026 年 8 月上旬，具体日期待 IR 日历确认。</li>
@@ -541,7 +536,7 @@
               <div class="scenario-card__trigger">招聘需求复苏，HR Technology 收入重回高双位数增长，市场接受 50%+ margin 路径。</div>
             </div>
           </div>
-          <p style="margin-top: var(--s-3);">
+          <p>
             <strong>当前 vs 合理价值：</strong>
             当前 ¥7,825 相对基准 ¥12,000 折价约 <span class="kpi">35%</span>；相对合理区间 ¥10,000 – ¥14,500，仍处在偏低位置。
           </p>
@@ -563,7 +558,6 @@
       <div class="section__inner section-2col">
         <div class="section-2col__head"><h2>主要风险</h2></div>
         <div class="section-2col__body">
-
           <p>按可能性 × 影响排序：</p>
           <ul>
             <li>
@@ -602,7 +596,6 @@
       <div class="section__inner section-2col">
         <div class="section-2col__head"><h2>待验证问题</h2></div>
         <div class="section-2col__body">
-
           <ul>
             <li>FY2026 Q1 和 Q2，美国 ARPJ 提升是否继续带来收入增长，还是开始影响客户续费和投放 ROI？</li>
             <li>HR Technology 41.0% EBITDA+S margin 中，多少来自结构性效率提升，多少来自短期营销 / 人员费用控制？</li>

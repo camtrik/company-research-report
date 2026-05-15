@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aethelgard Institutional Research</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#454747",
+                      "signal-orange": "#CF4500",
+                      "secondary-container": "#e2dfdd",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1b1c1c",
+                      "secondary-fixed-dim": "#c8c6c4",
+                      "dust-taupe": "#D1CDC7",
+                      "on-primary-fixed": "#1c1c1a",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#767872",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "surface": "#fbf9f8",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#c9c6c4",
+                      "tertiary-fixed": "#e2e2e2",
+                      "inverse-surface": "#303031",
+                      "link-blue": "#3860BE",
+                      "on-secondary-container": "#636261",
+                      "surface-container-low": "#f5f3f3",
+                      "lifted-cream": "#FCFBFA",
+                      "surface-tint": "#5f5e5d",
+                      "tertiary-container": "#1a1c1c",
+                      "primary-fixed": "#e5e2e0",
+                      "light-signal-orange": "#F37338",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-surface-variant": "#464742",
+                      "on-tertiary-container": "#838484",
+                      "on-primary-fixed-variant": "#474745",
+                      "on-primary-container": "#858382",
+                      "surface-container-highest": "#e4e2e2",
+                      "background": "#fbf9f8",
+                      "primary-container": "#1c1c1a",
+                      "surface-dim": "#dbdad9",
+                      "surface-variant": "#e4e2e2",
+                      "on-secondary-fixed-variant": "#474745",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#1c1c1b",
+                      "tertiary": "#000000",
+                      "primary": "#000000",
+                      "surface-container-high": "#e9e8e7",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-surface": "#1b1c1c",
+                      "primary-fixed-dim": "#c9c6c4",
+                      "surface-bright": "#fbf9f8",
+                      "outline-variant": "#c7c7c0",
+                      "on-error-container": "#93000a",
+                      "clay-brown": "#9A3A0A",
+                      "secondary": "#5f5e5d",
+                      "secondary-fixed": "#e5e2e0",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "surface-container": "#efeded"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter-desktop": "48px",
+                      "card-padding": "40px",
+                      "max-width": "1280px",
+                      "margin-container": "24px",
+                      "section-v-mobile": "56px",
+                      "section-v-desktop": "112px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-eyebrow": [
+                              "Sofia Sans"
+                      ],
+                      "body-main": [
+                              "Sofia Sans"
+                      ],
+                      "caption-data": [
+                              "Sofia Sans"
+                      ],
+                      "headline-section": [
+                              "Sofia Sans"
+                      ],
+                      "display-hero": [
+                              "Sofia Sans"
+                      ],
+                      "interactive-pill": [
+                              "Sofia Sans"
+                      ],
+                      "display-hero-mobile": [
+                              "Sofia Sans"
+                      ],
+                      "headline-card": [
+                              "Sofia Sans"
+                      ]
+              },
+              "fontSize": {
+                      "label-eyebrow": [
+                              "14px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-main": [
+                              "16px",
+                              {
+                                      "lineHeight": "22.4px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "450"
+                              }
+                      ],
+                      "caption-data": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "450"
+                              }
+                      ],
+                      "headline-section": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-hero": [
+                              "64px",
+                              {
+                                      "lineHeight": "64px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "interactive-pill": [
+                              "16px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-hero-mobile": [
+                              "40px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-card": [
+                              "24px",
+                              {
+                                      "lineHeight": "28.8px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-main antialiased min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="bg-lifted-cream/90 dark:bg-tertiary-container/90 backdrop-blur-md fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[800px] rounded-full px-6 py-3 z-50 shadow-[0px_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none border border-outline-variant/20 shadow-sm transition-transform duration-200">
+<nav class="flex justify-between items-center gap-gutter-desktop">
+<a class="font-headline-card text-headline-card font-bold tracking-tight text-primary dark:text-on-primary-fixed shrink-0 hover:scale-[0.98] transition-transform duration-200" href="#">
+                Aethelgard Research
+            </a>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-interactive-pill text-interactive-pill text-secondary dark:text-on-secondary-container hover:text-primary dark:hover:text-on-primary-fixed transition-colors" href="#">Research</a>
+<a class="font-interactive-pill text-interactive-pill text-secondary dark:text-on-secondary-container hover:text-primary dark:hover:text-on-primary-fixed transition-colors" href="#">Articles</a>
+<a class="font-interactive-pill text-interactive-pill text-secondary dark:text-on-secondary-container hover:text-primary dark:hover:text-on-primary-fixed transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4 shrink-0">
+<button class="text-primary dark:text-on-primary-fixed hover:scale-[0.98] transition-transform duration-200 flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-lowest">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="flex-grow pt-[120px] pb-section-v-desktop">
+<!-- Company Constellation Section -->
+<section class="max-w-max-width mx-auto px-margin-container mb-section-v-desktop relative">
+<div class="flex flex-col md:flex-row items-baseline justify-between mb-12">
+<div>
+<span class="inline-block font-label-eyebrow text-label-eyebrow text-signal-orange uppercase mb-2">• PORTFOLIO</span>
+<h2 class="font-headline-section text-headline-section text-primary">Active Coverage</h2>
+</div>
+<a class="font-interactive-pill text-interactive-pill text-secondary hover:text-primary transition-colors flex items-center gap-2 mt-4 md:mt-0" href="#">
+                    View All Equities <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Asymmetric Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+<!-- Background Connecting Lines (Visual only, implemented via CSS gradients/borders in a real app, simplified here) -->
+<div class="hidden lg:block absolute top-1/2 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-light-signal-orange/30 to-transparent -translate-y-1/2 z-0"></div>
+<!-- Primary Satellite Card (Offset Left) -->
+<div class="lg:col-span-5 lg:col-start-2 relative z-10 flex justify-center lg:justify-end items-center">
+<div class="relative group">
+<div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-[0px_24px_48px_rgba(0,0,0,0.08)] bg-surface-container">
+<img alt="A conceptual architectural image focusing on the clean, geometric lines of a modern building facade. The composition is abstract, featuring intersecting planes of concrete and glass against a clear sky. The colors are muted and cool, emphasizing structural rigor and stability, suitable for representing a robust corporate entity like Recruit Holdings in a high-end financial context." class="w-full h-full object-cover" data-alt="A conceptual architectural image focusing on the clean, geometric lines of a modern building facade. The composition is abstract, featuring intersecting planes of concrete and glass against a clear sky. The colors are muted and cool, emphasizing structural rigor and stability, suitable for representing a robust corporate entity like Recruit Holdings in a high-end financial context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc6_AA9Y3uaU1IsYdV94RugbxJf0w_tdb6zhhNZ3o1m9ATBbYDWQpZkQurLC3MhZHnx9tmXzIr9Z1ww3gCGFm8oYdZEjj0AJTjaxC7o5CDtS4t1OKcqugpMQRcgC_r0ozDi2MrTtfteecB7CsCC_pZuAVi8MeGkykqIx4lpezkhgYYr10EFzljZYL58wH1-37iHhdzGH3z-oW2C9yzpo1yB-mI5-06RHnaTaeENp5PIHkUNKALizyLIN4X9dlGwIrWIklUDxpfZa0"/>
+</div>
+<!-- Satellite CTA -->
+<button class="absolute bottom-4 right-4 w-16 h-16 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-[0px_4px_24px_rgba(0,0,0,0.08)] hover:scale-[0.98] transition-transform duration-200 group-hover:bg-primary group-hover:text-on-primary text-primary">
+<span class="material-symbols-outlined text-2xl">arrow_outward</span>
+</button>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-surface-container-lowest px-6 py-3 rounded-full shadow-sm whitespace-nowrap border border-outline-variant/20">
+<span class="font-headline-card text-headline-card text-primary block text-center">Recruit Holdings</span>
+<span class="font-caption-data text-caption-data text-secondary block text-center">6098.T</span>
+</div>
+</div>
+</div>
+<!-- Secondary Nodes (Offset Right) -->
+<div class="lg:col-span-4 lg:col-start-8 flex flex-col justify-center gap-12 relative z-10 mt-16 lg:mt-0">
+<!-- Node 1 -->
+<div class="flex items-center gap-6 group cursor-pointer">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-surface-container-lowest shadow-sm bg-surface-container-high shrink-0">
+<img alt="A close-up abstract view of server racks or digital infrastructure, featuring glowing lights and metallic textures. The image conveys themes of technology, data processing, and artificial intelligence, aligning with the tech sector focus of companies like NVDA. The lighting is dramatic, highlighting the complexity and power of the hardware." class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A close-up abstract view of server racks or digital infrastructure, featuring glowing lights and metallic textures. The image conveys themes of technology, data processing, and artificial intelligence, aligning with the tech sector focus of companies like NVDA. The lighting is dramatic, highlighting the complexity and power of the hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8DgUo0R6EMEuC_OhAlRw2USgO-6nq_hqTFmBRgJHvz_eZW4P7u4k5rGA-Jckzkx-k4Ey_RW-JqTuky0FjgdAt6tvdvF5pn-aUVVfcromx4PjPEfAsgIZqHdk_rrHEZ1CCxFHc313BBs9MCogQt4wMwbUMbz2xuenargWGcVWTRB06RgdDRavYsD18UDSzVC-q4Q1wvl4EWezAEpe36IRj-5KAYGZYWJKlAXWzh187qXie8og-pF9X07IpKc0ZsIRBNOLv9qKNBrA"/>
+</div>
+<div>
+<h3 class="font-headline-card text-headline-card text-primary group-hover:text-signal-orange transition-colors">NVDA</h3>
+<p class="font-caption-data text-caption-data text-secondary">Semiconductors</p>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="flex items-center gap-6 group cursor-pointer ml-8">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface-container-lowest shadow-sm bg-surface-container-high shrink-0">
+<img alt="An abstract visualization of global commerce and logistics, perhaps featuring shipping containers or a stylized map overlay. The image is sophisticated and modern, utilizing a muted palette with subtle industrial tones, representing the vast scale and reach of an entity like BABA." class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="An abstract visualization of global commerce and logistics, perhaps featuring shipping containers or a stylized map overlay. The image is sophisticated and modern, utilizing a muted palette with subtle industrial tones, representing the vast scale and reach of an entity like BABA." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOejYzrzAhdS7BCgiqqU21d1dfuB2ppbTp7qlZ-yUXp_wSorvIKazpzRFrRcosQ3Xi5nREn33Ia-yXr9Oy8P3sETnJch7Da4_gNtJC1zLZIVFY_nrwciLmgxkqTa90TrlRUMa7XNToUceq9Oz8zgeMKuNXCGBs76-LFT1B8H5QGUvZ1A_4EFx2DYLQs-DMcPs35jEU-g1Nfp0ShXHimqwge_AKTq8ybTsQzCePB7HaZUeF9NKH2JjTtR5vaBp2s7VCpKAlz6qNodc"/>
+</div>
+<div>
+<h3 class="font-headline-card text-[20px] leading-[24px] font-medium tracking-tight text-primary group-hover:text-signal-orange transition-colors">BABA</h3>
+<p class="font-caption-data text-caption-data text-secondary">E-Commerce</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Articles Section -->
+<section class="max-w-max-width mx-auto px-margin-container mb-section-v-desktop bg-surface-container-lowest rounded-[40px] p-8 md:p-16 shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+<div class="flex flex-col md:flex-row items-baseline justify-between mb-12 border-b border-outline-variant/20 pb-6">
+<div>
+<span class="inline-block font-label-eyebrow text-label-eyebrow text-signal-orange uppercase mb-2">• PERSPECTIVES</span>
+<h2 class="font-headline-section text-headline-section text-primary">Recent Articles</h2>
+</div>
+<button class="bg-surface-container-lowest text-primary border-[1.5px] border-primary font-interactive-pill text-interactive-pill px-6 py-2.5 rounded-full hover:scale-[0.98] transition-transform duration-200 mt-4 md:mt-0">
+                    All Perspectives
+                </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Article Card 1 -->
+<article class="group cursor-pointer flex flex-col gap-6">
+<div class="aspect-[4/3] rounded-[24px] overflow-hidden bg-surface-container">
+<img alt="A close up shot of physical stock certificates or stylized financial documents stacked neatly. The lighting is soft and directional, highlighting the texture of the paper and the intricate security patterns. The mood is analytical and historical, evoking the traditional foundations of financial strategy within a modern editorial context." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="A close up shot of physical stock certificates or stylized financial documents stacked neatly. The lighting is soft and directional, highlighting the texture of the paper and the intricate security patterns. The mood is analytical and historical, evoking the traditional foundations of financial strategy within a modern editorial context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_wjow2C9IBLkxe0o5yuQ8OeTLLK50YTsRVKFzB8Y7JiQzc00NwEnl6MywAP2jY6Qbobvv782NWAPUgoAaxYxutRX14AUyhSd1d7Ofhyd7n1y2__upv14RdvkPZyLn8IvlQmP1gPXFtt9Xyg2L3RCfQo8NinGsY4N1QTzH3kXy0M9rfM5ml7Cy2yBDbZ4EXrhkdDXRUHooJf5VDosWkxrmpWRrzyUjtbE7RlGwI-Bnkd0r6u9KjpbTbU4J4XnX8citEY6yLTRaalo"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded-full bg-surface text-primary font-caption-data text-caption-data border border-outline-variant/30">Strategy</span>
+<span class="font-caption-data text-caption-data text-secondary">Oct 24, 2024</span>
+</div>
+<h3 class="font-headline-card text-headline-card text-primary mb-3 group-hover:text-signal-orange transition-colors line-clamp-2">The Structural Shift in Japanese Corporate Governance</h3>
+<p class="font-body-main text-body-main text-secondary line-clamp-3">Analyzing the long-term implications of TSE reforms and the accelerating pace of share buybacks across mid-cap industrials.</p>
+</div>
+</article>
+<!-- Article Card 2 -->
+<article class="group cursor-pointer flex flex-col gap-6">
+<div class="aspect-[4/3] rounded-[24px] overflow-hidden bg-surface-container">
+<img alt="An abstract macro photography shot of layered, translucent materials or perhaps a stylized chart representation. The image uses subtle gradients and muted colors like dust taupe and lifted cream, suggesting complex macroeconomic layers and the careful unpeeling of data needed for high-level institutional analysis." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="An abstract macro photography shot of layered, translucent materials or perhaps a stylized chart representation. The image uses subtle gradients and muted colors like dust taupe and lifted cream, suggesting complex macroeconomic layers and the careful unpeeling of data needed for high-level institutional analysis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHI0J06PYqH6XuWe_CZ1pITxdR8s3E0yC1K0XWaFhbPGFQii9s26JhHa65um2rIXE0v_QTLFDJ_P-f5l1AhewMl_bovHX6CYSTuCE0648PL84oFXftt0HRSBoNfwfYI3QqWAS0xYzujkmzdIHqs_R9NgiGKWnOP5wGUriOzBp2E1TH8Dnt8N1WGCieDkB2zSOXlHuEqDff7nRAHf4ZzRKYBCV9eht-fchpxn0wuPD4KogLSDUKPH4493T14abJOsDIKUQaec2xhh0"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-3">
+<span class="px-3 py-1 rounded-full bg-surface text-primary font-caption-data text-caption-data border border-outline-variant/30">Macro</span>
+<span class="font-caption-data text-caption-data text-secondary">Oct 18, 2024</span>
+</div>
+<h3 class="font-headline-card text-headline-card text-primary mb-3 group-hover:text-signal-orange transition-colors line-clamp-2">Navigating the Terminal Rate Plateau</h3>
+<p class="font-body-main text-body-main text-secondary line-clamp-3">How prolonged elevated rates are silently restructuring capital allocation preferences among tier-one pension funds.</p>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-primary dark:bg-tertiary-container w-full pt-section-v-desktop pb-margin-container no-border tonal-layering flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-desktop max-w-max-width mx-auto px-margin-container">
+<div class="md:col-span-12">
+<h2 class="font-headline-section text-headline-section text-on-primary mb-base">Aethelgard Research</h2>
+</div>
+<div class="md:col-span-8 flex flex-wrap gap-6 mt-8 md:mt-0">
+<a class="font-body-main text-body-main text-secondary-fixed-dim hover:text-on-primary transition-colors hover:text-signal-orange" href="#">Methodology</a>
+<a class="font-body-main text-body-main text-secondary-fixed-dim hover:text-on-primary transition-colors hover:text-signal-orange" href="#">Compliance</a>
+<a class="font-body-main text-body-main text-secondary-fixed-dim hover:text-on-primary transition-colors hover:text-signal-orange" href="#">Analyst Directory</a>
+<a class="font-body-main text-body-main text-secondary-fixed-dim hover:text-on-primary transition-colors hover:text-signal-orange" href="#">Privacy Policy</a>
+<a class="font-body-main text-body-main text-secondary-fixed-dim hover:text-on-primary transition-colors hover:text-signal-orange" href="#">Terms of Service</a>
+</div>
+<div class="md:col-span-12 mt-12 pt-8 border-t border-on-primary/10">
+<p class="font-body-main text-body-main text-secondary-fixed-dim">
+                    © 2024 Aethelgard Institutional Research. All rights reserved. Precision in Every Thesis.
+                </p>
+</div>
+</div>
+</footer>
+</body></html>

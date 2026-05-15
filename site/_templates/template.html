@@ -21,32 +21,24 @@
     <!-- ============ Header ============ -->
     <header class="company-header">
       <div class="section__inner">
-        <div class="company-header__row">
-          <div class="company-header__lead">
-            <div class="eyebrow eyebrow--muted company-header__eyebrow">
-              <span data-bind="market"></span>
-              <span class="sep">·</span>
-              <span data-bind="sector"></span>
-              <span class="sep">·</span>
-              <span data-bind="last-updated"></span>
-            </div>
-            <h1 class="company-header__title" data-bind="name"></h1>
-            <p class="company-header__name-en" data-bind="name-en"></p>
-            <div class="company-header__sub">
-              <span class="company-header__ticker" data-bind="ticker"></span>
-              <span class="pill pill--view"><span class="material-symbols-outlined" style="font-size:14px">trending_up</span><span data-bind="view"></span></span>
-            </div>
-          </div>
-          <div class="company-header__side">
-            <div class="eyebrow eyebrow--muted">数据更新</div>
-            <div class="company-header__side-value" data-bind="updated-at">—</div>
-          </div>
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market"></span>
+          <span class="sep">·</span>
+          <span data-bind="sector"></span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated"></span>
         </div>
+        <h1 class="company-header__title" data-bind="name"></h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker"></span>
+          <span class="sep">·</span>
+          <span data-bind="name-en"></span>
+        </p>
         <div class="company-header__meta" data-bind="tags-row"></div>
       </div>
     </header>
 
-    <!-- ============ Market data (runtime; AI 永远不动) ============ -->
+    <!-- ↓ 运行时数据区：AI 与 sync skill 永远不动 ↓ -->
     <section class="section section--no-pad-top">
       <div class="section__inner">
         <div class="market-data" data-region="market-data">
@@ -67,7 +59,7 @@
             <span class="market-data__value" data-bind="pb">—</span>
           </div>
           <div class="market-data__tile">
-            <span class="market-data__label">Revenue Growth</span>
+            <span class="market-data__label">Revenue Growth (TTM)</span>
             <span class="market-data__value" data-bind="revenue-growth-ttm">—</span>
           </div>
           <div class="market-data__tile">
@@ -95,9 +87,8 @@
       </div>
     </section>
 
-    <!-- ============ Charts (runtime; AI 永远不动) ============ -->
-    <section class="section section--no-pad-top" data-region="charts">
-      <div class="section__inner charts">
+    <section class="section section--no-pad-top">
+      <div class="section__inner charts" data-region="charts">
         <figure class="chart-row">
           <figcaption class="chart-row__caption">
             <span class="chart-row__title">10 年股价走势</span>
@@ -118,31 +109,36 @@
         </figure>
       </div>
     </section>
+    <!-- ↑ 运行时数据区结束 ↑ -->
 
-    <!-- ============ 内容区（sync skill 维护，AI 可自由生成 HTML 片段） ============ -->
-    <section class="section section--top-border" data-region="thesis">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>核心结论</h2></div>
-        <div class="section-2col__body"></div>
+    <!-- ↓ 内容区（sync skill 维护，AI 可自由生成 HTML 片段） ↓ -->
+    <!-- 公司概要 — section-plain，作为第一个内容 section -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>公司概要</h2></div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
 
-    <section class="section" data-region="company-overview">
-      <div class="section__inner section-2col">
-        <div class="section-2col__head"><h2>公司概要</h2></div>
-        <div class="section-2col__body"></div>
+    <!-- 核心结论 — section-plain -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
 
+    <!-- 业务模式 — 浅灰底 + feature-card 仅含核心，扩展内容（如分部表）放在 section-plain__body -->
     <section class="section section--tinted" data-region="business-model">
       <div class="section__inner">
         <div class="feature-card">
-          <div class="feature-card__icon"><span class="material-symbols-outlined">account_tree</span></div>
           <h2>业务模式</h2>
         </div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
 
+    <!-- 财务表现 — section-plain（含宽表格） -->
     <section class="section" data-region="financials">
       <div class="section__inner">
         <div class="section-plain__head"><h2>财务表现</h2></div>
@@ -150,15 +146,17 @@
       </div>
     </section>
 
+    <!-- 护城河 — 浅灰底 + feature-card 仅含核心，对比表放在 section-plain__body -->
     <section class="section section--tinted" data-region="moat">
       <div class="section__inner">
         <div class="feature-card">
-          <div class="feature-card__icon"><span class="material-symbols-outlined">security</span></div>
-          <h2>竞争与护城河</h2>
+          <h2>护城河</h2>
         </div>
+        <div class="section-plain__body"></div>
       </div>
     </section>
 
+    <!-- 催化剂 — section-2col -->
     <section class="section" data-region="catalysts">
       <div class="section__inner section-2col">
         <div class="section-2col__head"><h2>催化剂 / 关注点</h2></div>
@@ -166,6 +164,7 @@
       </div>
     </section>
 
+    <!-- 估值 — section-plain（含宽表格） -->
     <section class="section" data-region="valuation">
       <div class="section__inner">
         <div class="section-plain__head"><h2>估值</h2></div>
@@ -173,6 +172,7 @@
       </div>
     </section>
 
+    <!-- 风险 — section-2col -->
     <section class="section" data-region="risks">
       <div class="section__inner section-2col">
         <div class="section-2col__head"><h2>主要风险</h2></div>
@@ -180,12 +180,14 @@
       </div>
     </section>
 
+    <!-- 待验证问题 — section-2col -->
     <section class="section" data-region="open-questions">
       <div class="section__inner section-2col">
         <div class="section-2col__head"><h2>待验证问题</h2></div>
         <div class="section-2col__body"></div>
       </div>
     </section>
+    <!-- ↑ 内容区结束 ↑ -->
 
     <!-- 变更日志入口（固定结构，AI 不动） -->
     <div class="changelog-cta" data-region="changelog-link">
