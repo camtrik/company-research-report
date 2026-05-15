@@ -2,6 +2,18 @@
   <div class="site-nav__pill">
     <a href="{{SITE_BASE_PATH}}/" class="site-nav__logo">投资研究</a>
     <a href="{{SITE_BASE_PATH}}/">全部公司</a>
-    <a href="{{SITE_BASE_PATH}}/#articles">文章</a>
   </div>
 </nav>
+<script>
+(function(){
+  var nav=document.querySelector('.site-nav');
+  if(!nav)return;
+  var prev=0,threshold=80;
+  window.addEventListener('scroll',function(){
+    var curr=window.pageYOffset;
+    if(curr>threshold&&curr>prev){nav.classList.add('site-nav--hidden')}
+    else{nav.classList.remove('site-nav--hidden')}
+    prev=curr;
+  },{passive:true});
+})();
+</script>

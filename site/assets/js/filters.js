@@ -45,8 +45,7 @@ function renderCompanyCard(company) {
   a.dataset.view = company.view || "";
   a.href = withBasePath(`/companies/${company.ticker}/`);
   a.innerHTML = `
-    <div class="company-card__eyebrow">${MARKET_LABEL[company.market] || company.market || "—"}${company.view ? " · " + company.view : ""}</div>
-    <div class="company-card__ticker">${company.ticker}</div>
+    <div class="company-card__eyebrow">${company.market || "—"}・${company.ticker}</div>
     <h3 class="company-card__name">${company.name || ""}</h3>
     <div class="company-card__name-en">${company.name_en || ""}</div>
     <div class="company-card__price-row">

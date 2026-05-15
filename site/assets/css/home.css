@@ -188,8 +188,8 @@
 
 .company-card__price-row {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
   margin-top: auto;
 }
 .company-card__price {
@@ -221,8 +221,7 @@
 }
 .company-card:hover .company-card__satellite { background: var(--ink); }
 
-.company-card[data-view="Long"] .company-card__eyebrow::before { background: var(--up); }
-.company-card[data-view="Pass"] .company-card__eyebrow::before { background: var(--down); }
+
 
 /* Empty state for filter results */
 .company-grid__empty {

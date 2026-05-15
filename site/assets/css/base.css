@@ -51,7 +51,7 @@
   --shadow-3: 0 70px 110px rgba(0, 0, 0, 0.25);
 
   /* ---- Typography ---- */
-  --font-sans: "Sofia Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Sofia Sans", -apple-system, "Hiragino Sans", "PingFang SC", "Yu Gothic", "Microsoft YaHei", sans-serif;
   --tracking-tight: -0.02em;
   --tracking-tightest: -0.03em;
   --tracking-eyebrow: 0.04em;
@@ -174,13 +174,19 @@ hr { border: 0; height: 1px; background: var(--dust); margin: var(--s-4) 0; }
 /* ---- Navigation pill (floating, sticky-ish) ---- */
 .site-nav {
   position: sticky;
-  top: 20px;
+  top: 0;
   z-index: 50;
   display: flex;
   justify-content: center;
   padding-top: 24px;
   padding-bottom: var(--s-3);
   pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.site-nav--hidden {
+  transform: translateY(calc(-100% - 24px));
+  opacity: 0;
 }
 .site-nav__pill {
   display: inline-flex;
