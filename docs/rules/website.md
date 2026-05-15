@@ -32,6 +32,7 @@ site/
 │   ├── changelog.html                  ← 变更日志（AI 追加）
 │   └── data.json                       ← 动态数据（GitHub Actions 写）
 ├── partials/{head,header,footer}.html  ← 公共片段
+├── _templates/template.html            ← HTML 详情页骨架（构建期素材，不部署）
 └── assets/{css,js,vendor}/
 
 scripts/build.py                        ← 构建：注入 partials + COMPANIES_JSON
@@ -63,7 +64,7 @@ site/_dist/                             ← 构建输出（GitHub Pages 服务�
 2. 调用 `sync-md-to-html` skill（或让用户触发）把变更同步到 HTML。
 3. Skill 会：对应 `data-region` 更新内容；在 `changelog.html` 顶部追加一行 `YYYY-MM-DD — 1-2 句关键变化摘要`。
 
-新公司：skill 会用 `docs/template.html` 作为详情页骨架，并初始化 `changelog.html`。
+新公司：skill 会用 `site/_templates/template.html` 作为详情页骨架，并初始化 `changelog.html`。
 
 ## 公共片段
 

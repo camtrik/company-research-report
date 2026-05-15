@@ -27,6 +27,7 @@
 │   │   ├── changelog.html                                   ← 变更日志（AI 追加）
 │   │   └── data.json                                        ← 动态数据（Actions 写）
 │   ├── partials/{head,header,footer}.html                   ← 公共片段
+│   ├── _templates/template.html                             ← HTML 详情页骨架（构建期素材，不部署）
 │   └── assets/{css,js,vendor}/
 ├── scripts/
 │   ├── build.py                                             ← 注入 partials + 生成首页 JSON
@@ -36,8 +37,7 @@
 │   ├── daily-data-us.yml                                    ← cron：美股盘后更新
 │   └── daily-data-jp.yml                                    ← cron：日股盘后更新
 ├── .agents/skills/sync-md-to-html/SKILL.md                  ← markdown → HTML 同步 skill（.claude/skills 是 symlink）
-├── docs/template.md                                         ← 既有 markdown 模板
-└── docs/template.html                                       ← 新增 HTML 详情页骨架
+└── docs/template.md                                         ← 既有 markdown 写作模板
 ```
 
 ### 三方编辑边界（清晰隔离）
@@ -65,7 +65,7 @@ push → deploy.yml  →  build.py（注入 partials + 首页 JSON）→ GitHub 
 
 ## 3. HTML 详情页结构
 
-### 3.1 骨架（`docs/template.html`）
+### 3.1 骨架（`site/_templates/template.html`）
 
 ```html
 <!DOCTYPE html>
@@ -152,7 +152,7 @@ push → deploy.yml  →  build.py（注入 partials + 首页 JSON）→ GitHub 
 ### 4.2 工作流程
 
 1. 解析 ticker → 找到 `company-reports/{ticker}-*/最新.md`
-2. 读现有 `site/companies/{TICKER}/index.html`；若不存在，从 `docs/template.html` 复制
+2. 读现有 `site/companies/{TICKER}/index.html`；若不存在，从 `site/_templates/template.html` 复制
 3. 解析 markdown frontmatter，更新 HTML 的 `<meta data-region="meta">` 属性
 4. 解析 markdown 各章节，按章节 → region 的映射生成 HTML 片段：
    - 段落 → `<p>`
@@ -382,7 +382,7 @@ build.py 的行为：
 1. 把 `site/` 的所有内容**原样镜像**到 `site/_dist/`（保留目录结构）
 2. 对镜像中的 `.html` 文件做两件事：替换 `<!-- include: xxx.html -->` 注释为对应 partial 内容；替换 `{{COMPANIES_JSON}}`、`{{BUILD_TIME}}` 等占位
 3. **非 HTML 文件原样保留**（关键：`data.json`、CSS、JS、字体、图片等都直接落到 `_dist/`，不做任何处理）
-4. `partials/` 目录本身不复制到 `_dist/`（它只是构建期的素材）
+4. `partials/` 和 `_templates/` 目录本身不复制到 `_dist/`（它们只是构建期的素材）
 
 这样保证：
 
@@ -440,7 +440,7 @@ jobs:
 1. 创建 `company-reports/NVDA-nvidia/2026-05-15-reports.md`，按 `docs/template.md` 写
 2. 跟 AI 说"同步 NVDA 到 HTML"
 3. sync skill：
-   - 复制 `docs/template.html` 到 `site/companies/NVDA/index.html`
+   - 复制 `site/_templates/template.html` 到 `site/companies/NVDA/index.html`
    - 填入元数据 meta + 各 region 内容
    - 创建 `changelog.html`，写"2026-05-15 — 初次研究"
 4. `git add site/companies/NVDA/ && git commit && git push`
@@ -481,7 +481,7 @@ GitHub Actions 页面，每个 workflow 都有 "Run workflow" 按钮（`workflow
 **风险：**
 
 - yfinance 偶发数据缺失或异常值 → update_market_data.py 必须对单个 ticker 失败容错，保留上次成功数据
-- HTML 详情页结构演化（新增 region）→ 用 git 管理 `docs/template.html`；老公司页面手动补 region 或由 sync skill 检测并补齐
+- HTML 详情页结构演化（新增 region）→ 用 git 管理 `site/_templates/template.html`；老公司页面手动补 region 或由 sync skill 检测并补齐
 - 港股 / A 股加入时 → 复制一个 daily-data-{hk,cn}.yml，调整 cron 时间和 `--market` 参数
 
 **留白（YAGNI）：**
@@ -495,7 +495,7 @@ GitHub Actions 页面，每个 workflow 都有 "Run workflow" 按钮（`workflow
 
 实现阶段需要做的事（不在本设计内展开，留给 writing-plans）：
 
-1. 写 `docs/template.html`
+1. 写 `site/_templates/template.html`
 2. 写 `site/partials/{head,header,footer}.html`
 3. 写 `site/index.html`（带 `{{COMPANIES_JSON}}` 占位）和 `site/assets/css/base.css`、`site/assets/js/filters.js`
 4. 写 `site/assets/js/charts.js`（Chart.js 初始化、`loadCompanyData`、`fillMarketData`）
