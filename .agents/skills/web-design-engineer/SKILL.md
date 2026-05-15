@@ -1,19 +1,10 @@
 ---
 name: web-design-engineer
 description: |
-  Build high-quality visual Web artifacts using HTML/CSS/JavaScript/React — web pages, landing pages, dashboards, interactive prototypes, HTML slide decks, animated demos, UI mockups, data visualizations, and more.
-  Use this skill whenever the user's request involves a visual, interactive, or front-end deliverable, including:
-  - Creating web pages, landing pages, dashboards, marketing pages
-  - Building interactive prototypes or UI mockups (with device frames)
-  - Building HTML slide decks / presentations
-  - Creating CSS/JS animations or timeline-driven animated demos
-  - Turning design mockups, screenshots, or PRDs into interactive implementations
-  - Data visualization (Chart.js / D3, etc.)
-  - Design system / UI Kit exploration
-  - Reviewing / critiquing existing visual work (when the user asks "review this", "is it good?", "score this design")
-  Even if the user doesn't explicitly say "HTML" or "web page," this skill applies whenever the intent is to produce something visual, interactive, or presentational.
-  Includes a fact-verification step (WebSearch real products before assuming), a brand asset protocol (logo / product imagery / UI screenshots > color hex codes), a Design Direction Advisor fallback for vague requests, and an on-demand 5-dimension Critique mode.
-  Not applicable: pure back-end logic, CLI tools, data-processing scripts, non-visual code tasks, command-line debugging.
+  Build polished visual web artifacts with HTML/CSS/JavaScript/React, including landing pages, dashboards, interactive prototypes, slide decks, animations, UI mockups, and data visualizations.
+  Use this skill whenever the request is primarily visual, interactive, front-end, or presentational, including turning mockups, screenshots, or PRDs into interactive implementations and reviewing visual design quality.
+  It includes fact verification for real products, a brand-asset-first workflow, a fallback mode for vague design direction, and an on-demand critique mode.
+  Do not use it for back-end logic, CLI tools, data-processing scripts, or other non-visual tasks.
 ---
 
 # Web Design Engineer
