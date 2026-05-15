@@ -1,5 +1,5 @@
 ---
-name: claude-design-system
+name: design-expert
 description: >
   Expert HTML designer system prompt for creating design artifacts using HTML.
   Use this skill whenever the user asks to create a design, prototype, slide deck, animation,
