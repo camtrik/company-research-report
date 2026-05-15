@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">TICKER — Company Name</title>
+  <link rel="stylesheet" href="/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="TICKER"
+        data-name="中文名"
+        data-name-en="English Name"
+        data-market="US"
+        data-sector="Sector"
+        data-view="Watch"
+        data-tags=""
+        data-last-updated="YYYY-MM-DD">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <header class="company-header">
+      <div class="eyebrow eyebrow--muted company-header__eyebrow">
+        <span data-bind="market"></span> · <span data-bind="sector"></span> · <span data-bind="view"></span>
+      </div>
+      <h1 class="company-header__title">
+        <span class="ticker" data-bind="ticker"></span> — <span data-bind="name"></span>
+      </h1>
+      <p class="company-header__name-en" data-bind="name-en"></p>
+      <div class="company-header__meta" data-bind="tags-row"></div>
+    </header>
+
+    <!-- ↓ 运行时数据区：AI 与 sync skill 永远不动 ↓ -->
+    <section class="market-data" data-region="market-data">
+      <div class="market-data__tile">
+        <div class="market-data__label">股价</div>
+        <div class="market-data__value" data-bind="price">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">市值</div>
+        <div class="market-data__value" data-bind="market-cap">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Forward P/E</div>
+        <div class="market-data__value" data-bind="pe-forward">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">P/B</div>
+        <div class="market-data__value" data-bind="pb">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Revenue Growth (TTM)</div>
+        <div class="market-data__value" data-bind="revenue-growth-ttm">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Operating Margin</div>
+        <div class="market-data__value" data-bind="operating-margin">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Net Margin</div>
+        <div class="market-data__value" data-bind="net-margin">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">52 周区间</div>
+        <div class="market-data__value" data-bind="week52-range">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">分析师中位目标价</div>
+        <div class="market-data__value" data-bind="analyst-target">—</div>
+      </div>
+      <div class="market-data__footer">
+        <span>数据更新：<span data-bind="updated-at">—</span></span>
+        <span class="market-data__mock-badge" data-bind-mock-badge hidden>MOCK</span>
+      </div>
+    </section>
+
+    <section class="charts" data-region="charts">
+      <figure class="chart-row">
+        <figcaption>
+          <span class="chart-row__title">10 年股价走势</span>
+          <span>price · 月度</span>
+        </figcaption>
+        <div class="chart-row__canvas-wrap">
+          <canvas data-chart="price-10y"></canvas>
+        </div>
+      </figure>
+      <figure class="chart-row">
+        <figcaption>
+          <span class="chart-row__title">10 年 PER / PBR 走势</span>
+          <span>年度 · 双 Y 轴</span>
+        </figcaption>
+        <div class="chart-row__canvas-wrap">
+          <canvas data-chart="per-pbr-10y"></canvas>
+        </div>
+      </figure>
+    </section>
+    <!-- ↑ 运行时数据区结束 ↑ -->
+
+    <!-- ↓ 内容区：sync skill 维护，AI 可自由生成 HTML 片段 ↓ -->
+    <section data-region="thesis"><h2>核心结论</h2></section>
+    <section data-region="company-overview"><h2>公司概要</h2></section>
+    <section data-region="business-model"><h2>业务模式</h2></section>
+    <section data-region="financials"><h2>财务表现</h2></section>
+    <section data-region="moat"><h2>竞争与护城河</h2></section>
+    <section data-region="catalysts"><h2>催化剂 / 关注点</h2></section>
+    <section data-region="valuation"><h2>估值</h2></section>
+    <section data-region="risks"><h2>主要风险</h2></section>
+    <section data-region="open-questions"><h2>待验证问题</h2></section>
+    <!-- ↑ 内容区结束 ↑ -->
+
+    <!-- 变更日志入口（固定结构，AI 不动） -->
+    <section data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </section>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="/assets/vendor/chart.umd.min.js"></script>
+  <script src="/assets/js/charts.js"></script>
+  <script>loadCompanyData('TICKER');</script>
+</body>
+</html>

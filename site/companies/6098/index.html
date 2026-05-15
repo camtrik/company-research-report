@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">6098 — Recruit Holdings</title>
+  <link rel="stylesheet" href="/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="6098"
+        data-name="Recruit Holdings"
+        data-name-en="Recruit Holdings Co., Ltd."
+        data-market="JP"
+        data-sector="Human Capital / Internet Platform"
+        data-view="Long"
+        data-tags="japan,hr-tech,recruiting,staffing,platform,buyback,valuation"
+        data-last-updated="2026-05-15">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <header class="company-header">
+      <div class="eyebrow eyebrow--muted company-header__eyebrow">
+        <span data-bind="market">JP</span> · <span data-bind="sector">Human Capital / Internet Platform</span> · <span data-bind="view">Long</span>
+      </div>
+      <h1 class="company-header__title">
+        <span class="ticker" data-bind="ticker">6098</span> — <span data-bind="name">Recruit Holdings</span>
+      </h1>
+      <p class="company-header__name-en" data-bind="name-en">リクルートホールディングス · Recruit Holdings Co., Ltd.</p>
+      <div class="company-header__meta" data-bind="tags-row"></div>
+    </header>
+
+    <section class="market-data" data-region="market-data">
+      <div class="market-data__tile">
+        <div class="market-data__label">股价</div>
+        <div class="market-data__value" data-bind="price">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">市值</div>
+        <div class="market-data__value" data-bind="market-cap">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Forward P/E</div>
+        <div class="market-data__value" data-bind="pe-forward">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">P/B</div>
+        <div class="market-data__value" data-bind="pb">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Revenue Growth (FY26E)</div>
+        <div class="market-data__value" data-bind="revenue-growth-ttm">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Operating Margin</div>
+        <div class="market-data__value" data-bind="operating-margin">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">Net Margin</div>
+        <div class="market-data__value" data-bind="net-margin">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">52 周区间</div>
+        <div class="market-data__value" data-bind="week52-range">—</div>
+      </div>
+      <div class="market-data__tile">
+        <div class="market-data__label">分析师中位目标价</div>
+        <div class="market-data__value" data-bind="analyst-target">—</div>
+      </div>
+      <div class="market-data__footer">
+        <span>数据更新：<span data-bind="updated-at">—</span></span>
+        <span class="market-data__mock-badge" data-bind-mock-badge hidden>MOCK</span>
+      </div>
+    </section>
+
+    <section class="charts" data-region="charts">
+      <figure class="chart-row">
+        <figcaption>
+          <span class="chart-row__title">10 年股价走势</span>
+          <span>price · 月度</span>
+        </figcaption>
+        <div class="chart-row__canvas-wrap">
+          <canvas data-chart="price-10y"></canvas>
+        </div>
+      </figure>
+      <figure class="chart-row">
+        <figcaption>
+          <span class="chart-row__title">10 年 PER / PBR 走势</span>
+          <span>年度 · 双 Y 轴</span>
+        </figcaption>
+        <div class="chart-row__canvas-wrap">
+          <canvas data-chart="per-pbr-10y"></canvas>
+        </div>
+      </figure>
+    </section>
+
+    <section data-region="thesis">
+      <h2>核心结论</h2>
+
+      <div class="callout callout--ink">
+        <div class="callout__label">观点 · Long · 基准合理价值 ¥12,000</div>
+        <p>
+          Recruit Holdings（TSE: 6098）FY2025 决算是明显的 beat + raise：收入、EBITDA+S、EPS 均超过 2026 年 2 月修正指引，FY2026 指引继续给出
+          <span class="kpi">收入 +9.0%</span> / <span class="kpi">EBITDA+S +19.5%</span> / <span class="kpi">EPS +27.8%</span>。
+        </p>
+        <p>
+          当前股价 <span class="kpi">¥7,825</span>，对 FY2026 EPS 指引 447 日元的 forward P/E 约
+          <span class="kpi">17.5x</span>。按扣除库存股后的 1,396.2 百万股，市值约 ¥10.93 万亿、EV 约 ¥10.16 万亿。
+          交叉验证后基准合理价值约 <span class="kpi">¥12,000</span>，合理区间
+          <span class="kpi">¥10,000 – ¥14,500</span>。
+        </p>
+      </div>
+
+      <p>
+        核心看多点是 HR Technology 的结构性利润率提升：FY2026 分部 EBITDA+S margin 指引升至 41.0%，管理层中期目标是超过 50%。
+      </p>
+      <p>
+        核心反向风险是招聘需求周期下行、ARPJ 提价影响客户 ROI，以及当前利润率改善中有多少来自短期控费而非产品效率。
+        当前价格相对基准合理价值约有 <span class="kpi">50%+ 上行空间</span>，但需要用 FY2026 Q1 - Q2 数据验证 HR Technology 指引质量。
+      </p>
+    </section>
+
+    <section data-region="company-overview">
+      <h2>公司概要</h2>
+
+      <div class="kv-grid">
+        <div class="kv-grid__item">
+          <div class="kv-grid__label">上市地 / 代码</div>
+          <div class="kv-grid__value">TSE Prime · 6098</div>
+        </div>
+        <div class="kv-grid__item">
+          <div class="kv-grid__label">总部</div>
+          <div class="kv-grid__value">东京</div>
+        </div>
+        <div class="kv-grid__item">
+          <div class="kv-grid__label">行业（yfinance）</div>
+          <div class="kv-grid__value">Communication Services · Internet Content</div>
+        </div>
+        <div class="kv-grid__item">
+          <div class="kv-grid__label">FY2025 末员工数</div>
+          <div class="kv-grid__value">约 49,480</div>
+        </div>
+        <div class="kv-grid__item">
+          <div class="kv-grid__label">归母权益比率</div>
+          <div class="kv-grid__value">56.8%</div>
+        </div>
+      </div>
+
+      <p>
+        Recruit 是全球招聘与日本本地垂直平台集团。公司通过 Indeed、Glassdoor、日本 HR Solutions、Staffing 派遣网络，
+        以及 Lifestyle / Housing / Beauty 等本地匹配平台连接企业和个人用户。
+      </p>
+
+      <h3>护城河来源（速览）</h3>
+      <ul>
+        <li>招聘流量、雇主与求职者的双边网络</li>
+        <li>职位与求职者数据 + AI matching</li>
+        <li>日本本地垂直平台的高频用户入口</li>
+        <li>品牌、商户关系与持续的股东回报纪律</li>
+      </ul>
+
+      <blockquote>
+        Recruit 不能简单按传统 staffing 公司估值。Staffing 占收入接近一半，但利润贡献有限；
+        真正决定价值的是 HR Technology 的高利润率平台属性和 MMT 的稳定本地平台现金流。
+      </blockquote>
+    </section>
+
+    <section data-region="business-model">
+      <h2>业务模式</h2>
+
+      <p>Recruit 的业务模式可以拆成三层：</p>
+      <ol>
+        <li>
+          <strong>HR Technology</strong>：Indeed、Glassdoor 和日本 HR Solutions。收入主要来自招聘广告、职位推广和相关匹配服务。
+          核心 KPI 是付费职位、ARPJ、Premium Sponsored Jobs 渗透率以及 AI matching 带来的雇主 ROI。
+        </li>
+        <li>
+          <strong>Staffing</strong>：日本、欧洲、美国、澳洲派遣业务。收入规模大，经营杠杆低，利润率接近中个位数，估值应接近传统 staffing 同行。
+        </li>
+        <li>
+          <strong>Marketing Matching Technologies（MMT）</strong>：日本本地垂直匹配平台，覆盖 Lifestyle、Housing &amp; Real Estate 和 Others。
+          该业务利润率较高，Beauty 开始向 GMV-linked model 转型。
+        </li>
+      </ol>
+
+      <h3>Business Segments</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>板块</th>
+              <th class="num">FY2025 营收占比</th>
+              <th class="num">FY2025 EBITDA+S 占比</th>
+              <th class="num">FY2026 收入指引</th>
+              <th>简述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HR Technology</td>
+              <td class="num">39.4%</td>
+              <td class="num">69.2%</td>
+              <td class="num">+13.4%</td>
+              <td>价值核心；FY2026 margin 指引 41.0%</td>
+            </tr>
+            <tr>
+              <td>Staffing</td>
+              <td class="num">46.1%</td>
+              <td class="num">12.5%</td>
+              <td class="num">+5.8%</td>
+              <td>低利润率派遣现金流；周期属性强</td>
+            </tr>
+            <tr>
+              <td>MMT</td>
+              <td class="num">15.3%</td>
+              <td class="num">19.5%</td>
+              <td class="num">+7.1%</td>
+              <td>日本本地垂直平台；FY2028 margin 目标约 35%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>占比按分部金额 / 合并金额粗算。由于分部间抵消和 unallocated 项目存在，合计可能不严格等于 100%。</blockquote>
+
+      <h3>分部 P&amp;L 明细</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>分部</th>
+              <th class="num">FY2025 Revenue</th>
+              <th class="num">YoY</th>
+              <th class="num">FY2025 EBITDA+S</th>
+              <th class="num">YoY</th>
+              <th class="num">Margin</th>
+              <th class="num">FY2026 Revenue 指引</th>
+              <th class="num">FY2026 EBITDA+S 指引</th>
+              <th class="num">FY2026 Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HR Technology</td>
+              <td class="num">1,458.4</td>
+              <td class="num">+6.3%</td>
+              <td class="num">549.9</td>
+              <td class="num">+21.5%</td>
+              <td class="num">37.7%</td>
+              <td class="num">1,653.7</td>
+              <td class="num">677.4</td>
+              <td class="num">41.0%</td>
+            </tr>
+            <tr>
+              <td>Staffing</td>
+              <td class="num">1,703.4</td>
+              <td class="num">+2.2%</td>
+              <td class="num">99.7</td>
+              <td class="num">+2.4%</td>
+              <td class="num">5.9%</td>
+              <td class="num">1,802.5</td>
+              <td class="num">100.5</td>
+              <td class="num">5.6%</td>
+            </tr>
+            <tr>
+              <td>MMT</td>
+              <td class="num">564.6</td>
+              <td class="num">+4.7%</td>
+              <td class="num">154.9</td>
+              <td class="num">+13.0%</td>
+              <td class="num">27.4%</td>
+              <td class="num">605.0</td>
+              <td class="num">181.5</td>
+              <td class="num">30.0%</td>
+            </tr>
+            <tr>
+              <td><strong>Consolidated</strong></td>
+              <td class="num"><strong>3,697.3</strong></td>
+              <td class="num"><strong>+3.9%</strong></td>
+              <td class="num"><strong>794.3</strong></td>
+              <td class="num"><strong>+17.0%</strong></td>
+              <td class="num"><strong>21.5%</strong></td>
+              <td class="num"><strong>4,030.0</strong></td>
+              <td class="num"><strong>949.0</strong></td>
+              <td class="num"><strong>23.5%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>金额单位：十亿日元。</blockquote>
+    </section>
+
+    <section data-region="financials">
+      <h2>财务表现</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>年度</th>
+              <th class="num">Revenue</th>
+              <th class="num">YoY</th>
+              <th class="num">Operating Margin</th>
+              <th class="num">Net Income</th>
+              <th class="num">EPS</th>
+              <th class="num">FCF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>FY2021</td><td class="num">2,871.7</td><td class="num">+26.5%</td><td class="num">13.2%</td><td class="num">296.8</td><td class="num">181.68</td><td class="num">375.3</td></tr>
+            <tr><td>FY2022</td><td class="num">3,429.5</td><td class="num">+19.4%</td><td class="num">10.0%</td><td class="num">269.7</td><td class="num">168.59</td><td class="num">361.4</td></tr>
+            <tr><td>FY2023</td><td class="num">3,416.4</td><td class="num">-0.4%</td><td class="num">11.8%</td><td class="num">353.6</td><td class="num">225.99</td><td class="num">465.5</td></tr>
+            <tr><td>FY2024</td><td class="num">3,557.4</td><td class="num">+4.1%</td><td class="num">13.8%</td><td class="num">408.5</td><td class="num">271.44</td><td class="num">545.1</td></tr>
+            <tr><td>FY2025</td><td class="num">3,697.3</td><td class="num">+3.9%</td><td class="num">17.1%</td><td class="num">496.9</td><td class="num">349.78</td><td class="num">607.2</td></tr>
+            <tr><td>FY2026E</td><td class="num">4,030.0</td><td class="num">+9.0%</td><td class="num">19.5%</td><td class="num">623.0</td><td class="num">447.00</td><td class="num">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>金额单位：十亿日元。EPS 单位：日元。FY2026E 来自公司指引。</blockquote>
+
+      <p>
+        FY2025 的利润质量比收入增长更强。收入只增长 <span class="kpi">3.9%</span>，
+        但 EBITDA+S 增长 <span class="kpi">17.0%</span>、营业利润增长 <span class="kpi">28.5%</span>、EPS 增长 <span class="kpi">28.9%</span>。
+        驱动因素包括 HR Technology 变现效率提升、SG&amp;A 管控、股权激励费用下降，以及大额回购带来的股数下降。
+      </p>
+      <p>
+        现金流质量也较好。FY2025 经营现金流 ¥669.4 十亿日元，扣除 PPE 与无形资产购置后的简化 FCF 约 ¥607.2 十亿日元。
+        公司 FY2025 分红加回购合计 ¥713.1 十亿日元，总派现率 <span class="kpi">143.5%</span>，说明资本配置明显偏股东回报。
+      </p>
+
+      <h3>近 10 年 PER / PBR（历史参考）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>年度</th>
+              <th class="num">期末股价</th>
+              <th class="num">EPS</th>
+              <th class="num">BPS</th>
+              <th class="num">PER</th>
+              <th class="num">PBR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>FY2016</td><td class="num">1,800</td><td class="num">81.33</td><td class="num">441</td><td class="num">22.1</td><td class="num">4.1</td></tr>
+            <tr><td>FY2017</td><td class="num">2,537</td><td class="num">90.79</td><td class="num">500</td><td class="num">28.0</td><td class="num">5.1</td></tr>
+            <tr><td>FY2018</td><td class="num">3,058</td><td class="num">104.31</td><td class="num">578</td><td class="num">29.3</td><td class="num">5.3</td></tr>
+            <tr><td>FY2019</td><td class="num">2,731</td><td class="num">108.27</td><td class="num">600</td><td class="num">25.2</td><td class="num">4.6</td></tr>
+            <tr><td>FY2020</td><td class="num">5,298</td><td class="num">79.83</td><td class="num">668</td><td class="num">66.4</td><td class="num">7.9</td></tr>
+            <tr><td>FY2021</td><td class="num">5,328</td><td class="num">181.68</td><td class="num">827</td><td class="num">29.3</td><td class="num">6.4</td></tr>
+            <tr><td>FY2022</td><td class="num">3,613</td><td class="num">168.59</td><td class="num">1,023</td><td class="num">21.4</td><td class="num">3.5</td></tr>
+            <tr><td>FY2023</td><td class="num">6,639</td><td class="num">225.99</td><td class="num">1,293</td><td class="num">29.4</td><td class="num">5.1</td></tr>
+            <tr><td>FY2024</td><td class="num">7,631</td><td class="num">271.44</td><td class="num">1,102.86</td><td class="num">28.1</td><td class="num">6.9</td></tr>
+            <tr><td>FY2025</td><td class="num">6,526</td><td class="num">349.78</td><td class="num">1,134.01</td><td class="num">18.7</td><td class="num">5.8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>期末股价使用 yfinance 后复权收盘价；EPS 和财务数据来自 Recruit 官方 financial data；BPS 以归母权益和对应流通股数估算。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
+    </section>
+
+    <section data-region="moat">
+      <h2>竞争与护城河</h2>
+
+      <h3>护城河来源</h3>
+      <ul>
+        <li><strong>全球招聘流量和职位数据库</strong>：Indeed / Glassdoor 在美国和欧洲招聘搜索中具备强品牌和流量入口。</li>
+        <li><strong>双边网络效应</strong>：职位越多，求职者越多；求职者数据越丰富，匹配效率越高。</li>
+        <li><strong>AI matching 与定价能力</strong>：如果 AI 能提升雇主 ROI，ARPJ 与 Premium Sponsored Jobs 的变现空间会扩大。</li>
+        <li><strong>日本本地平台资产</strong>：MMT 在 Beauty、Housing、Lifestyle 等领域有本地高频入口和商户关系。</li>
+        <li><strong>资本配置纪律</strong>：持续回购减少流通股，增强每股收益增长。</li>
+      </ul>
+
+      <h3>同业对比</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>公司</th>
+              <th>Ticker</th>
+              <th class="num">市值</th>
+              <th class="num">Forward P/E</th>
+              <th class="num">P/S TTM</th>
+              <th class="num">Revenue Growth</th>
+              <th class="num">EV/EBITDA</th>
+              <th class="num">EBITDA Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Recruit Holdings</strong></td>
+              <td>6098.T</td>
+              <td class="num">¥10.93T</td>
+              <td class="num">17.5x</td>
+              <td class="num">3.04x</td>
+              <td class="num">+9.0% FY26E</td>
+              <td class="num">10.7x FY26E</td>
+              <td class="num">23.5% FY26E</td>
+            </tr>
+            <tr><td>PERSOL Holdings</td><td>2181.T</td><td class="num">¥0.53T</td><td class="num">13.2x</td><td class="num">0.35x</td><td class="num">+8.9%</td><td class="num">5.6x</td><td class="num">6.4%</td></tr>
+            <tr><td>Randstad</td><td>RAND.AS</td><td class="num">€4.21B</td><td class="num">8.1x</td><td class="num">0.18x</td><td class="num">-2.5%</td><td class="num">9.6x</td><td class="num">2.7%</td></tr>
+            <tr><td>Adecco</td><td>ADEN.SW</td><td class="num">CHF2.58B</td><td class="num">5.8x</td><td class="num">0.11x</td><td class="num">+1.5%</td><td class="num">7.5x</td><td class="num">3.2%</td></tr>
+            <tr><td>ManpowerGroup</td><td>MAN</td><td class="num">$1.21B</td><td class="num">5.4x</td><td class="num">0.07x</td><td class="num">+10.3%</td><td class="num">6.8x</td><td class="num">2.0%</td></tr>
+            <tr><td>Robert Half</td><td>RHI</td><td class="num">$2.52B</td><td class="num">12.0x</td><td class="num">0.47x</td><td class="num">-3.8%</td><td class="num">19.5x</td><td class="num">2.4%</td></tr>
+            <tr><td>SEEK</td><td>SEK.AX</td><td class="num">A$4.77B</td><td class="num">19.3x</td><td class="num">3.95x</td><td class="num">+20.6%</td><td class="num">22.2x</td><td class="num">21.8%</td></tr>
+            <tr><td>ZipRecruiter</td><td>ZIP</td><td class="num">$0.30B</td><td class="num">8.4x</td><td class="num">0.66x</td><td class="num">-2.3%</td><td class="num">N.M.</td><td class="num">-1.0%</td></tr>
+            <tr><td>Upwork</td><td>UPWK</td><td class="num">$1.00B</td><td class="num">4.6x</td><td class="num">1.26x</td><td class="num">+1.4%</td><td class="num">5.7x</td><td class="num">17.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>市值为本币口径；Recruit 的 Forward P/E 使用公司 FY2026 EPS 指引重算，其余主要来自 yfinance。</blockquote>
+
+      <p>
+        Recruit 处在两类同行之间：传统 staffing 同行估值低但利润率弱；线上招聘 / matching 平台估值高但波动大。
+        Recruit 当前估值的核心矛盾是：市场是否愿意把 HR Technology 按平台型利润池重估，而不是按 Staffing 周期股折价。
+      </p>
+    </section>
+
+    <section data-region="catalysts">
+      <h2>催化剂 / 关注点</h2>
+
+      <h3>短期（&lt; 6 月）</h3>
+      <ul>
+        <li>下次财报：FY2026 Q1，预计 2026 年 8 月上旬，具体日期待 IR 日历确认。</li>
+        <li>关注 HR Technology 的美国收入、US ARPJ、Premium Sponsored Jobs 进展，以及 FY2026 41.0% EBITDA+S margin 指引是否可信。</li>
+        <li>关注 3,500 亿日元回购计划执行节奏（预计 2026 年 11 月底结束）。</li>
+        <li>关注 USD/JPY 和 EUR/JPY 是否显著偏离公司 FY2026 指引假设（154.0 / 182.0）。</li>
+      </ul>
+
+      <h3>中期（6 – 18 月）</h3>
+      <ul>
+        <li>HR Technology 能否在非强招聘周期下仍维持双位数美元收入增长。</li>
+        <li>MMT 的 Beauty GMV-linked model 是否带来收入弹性和利润率提升。</li>
+        <li>公司是否继续给出中期 HR Technology margin 超过 50% 的可验证路径。</li>
+        <li>回购结束后资本配置是否延续，还是转向 HR Technology 的战略 M&amp;A。</li>
+      </ul>
+    </section>
+
+    <section data-region="valuation">
+      <h2>估值</h2>
+
+      <h3>P/B / P/TBV（辅助）</h3>
+      <p>
+        当前 P/B 约 <span class="kpi">6.9x</span>、P/TBV 约 <span class="kpi">12.6x</span>。
+        这个指标只能作为辅助，因为 Recruit 的核心资产是 Indeed / Glassdoor 的品牌、流量、数据、模型和市场网络，大部分不会完整体现在账面净资产中。
+      </p>
+      <p>
+        历史上，Recruit 的 PBR 多数时间高于 4x；在 FY2022 末招聘周期回落时降至约 3.5x，在 FY2020 高估值时期达到约 7.9x。
+        当前 P/B 约 6.9x 并不便宜，但 forward P/E 和 EV/EBITDA+S 已经明显低于 HR Technology 的利润扩张速度。
+      </p>
+
+      <h3>本期 EV / EBITDA+S</h3>
+      <p>
+        以 2026-05-15 股价 ¥7,825 和 1,396.2 百万股计算，市值约 ¥10.93 万亿日元。
+        公司 FY2025 末净现金 ¥765.9 十亿日元，EV 约 ¥10.16 万亿日元。
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>指标</th><th class="num">数值</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>股价</td><td class="num">¥7,825</td></tr>
+            <tr><td>扣除库存股后流通股数</td><td class="num">1,396.2 百万</td></tr>
+            <tr><td>Equity value</td><td class="num">¥10.93 万亿</td></tr>
+            <tr><td>Net cash</td><td class="num">¥765.9 十亿</td></tr>
+            <tr><td>Enterprise value</td><td class="num">¥10.16 万亿</td></tr>
+            <tr><td>FY2026E EBITDA+S</td><td class="num">¥949.0 十亿</td></tr>
+            <tr><td>FY2026E EV / EBITDA+S</td><td class="num">10.7x</td></tr>
+            <tr><td>FY2026E EV / Revenue</td><td class="num">2.5x</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        对一个 FY2026 EBITDA+S 增长 19.5%、EBITDA+S margin 23.5%、且 HR Technology 分部 margin 达 41.0% 的公司，
+        10.7x FY2026E EBITDA+S 不高。若给 14 – 16x FY2026E EBITDA+S，并加回净现金，隐含每股价值约 <span class="kpi">¥10,100 – ¥11,400</span>。
+      </p>
+
+      <h3>5 年 EPS 折现</h3>
+      <h4>关键假设</h4>
+      <ul>
+        <li>FY2026 EPS：447 日元（公司指引）</li>
+        <li>FY2027 – FY2031 EPS CAGR：10% – 13%，由 HR Technology margin 扩张和回购驱动</li>
+        <li>折现率：7.5% – 8.0%</li>
+        <li>退出倍数：22x – 25x</li>
+      </ul>
+      <p>
+        基准情景假设 FY2031 EPS 达 725 日元，退出 P/E 23x，按 7.5% 折现 5 年，对应每股价值约 ¥11,600；
+        考虑期间少量分红和回购的每股增厚，基准可上调到约 ¥12,000。
+      </p>
+
+      <h4>敏感性表：每股价值（日元）</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>EPS CAGR \ 折现率</th>
+              <th class="num">7.0%</th>
+              <th class="num">7.5%</th>
+              <th class="num">8.0%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>8%</td><td class="num">9,800</td><td class="num">9,600</td><td class="num">9,400</td></tr>
+            <tr><td>10%</td><td class="num">10,700</td><td class="num">10,500</td><td class="num">10,200</td></tr>
+            <tr><td>12%</td><td class="num">11,800</td><td class="num">11,500</td><td class="num">11,200</td></tr>
+            <tr><td>14%</td><td class="num">13,000</td><td class="num">12,700</td><td class="num">12,300</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>SOTP / DCF 交叉检查</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>分部</th>
+              <th class="num">FY2026 EBITDA+S</th>
+              <th class="num">估值倍数</th>
+              <th class="num">分部 EV</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>HR Technology</td><td class="num">677.4</td><td class="num">19x</td><td class="num">12,870.6</td></tr>
+            <tr><td>Staffing</td><td class="num">100.5</td><td class="num">8x</td><td class="num">804.0</td></tr>
+            <tr><td>MMT</td><td class="num">181.5</td><td class="num">14x</td><td class="num">2,541.0</td></tr>
+            <tr><td>Corporate / unallocated</td><td class="num">-10.4</td><td class="num">10x</td><td class="num">-104.0</td></tr>
+            <tr><td><strong>Enterprise value</strong></td><td class="num"></td><td class="num"></td><td class="num"><strong>16,111.6</strong></td></tr>
+            <tr><td>Net cash</td><td class="num"></td><td class="num"></td><td class="num">765.9</td></tr>
+            <tr><td><strong>Equity value</strong></td><td class="num"></td><td class="num"></td><td class="num"><strong>16,877.5</strong></td></tr>
+            <tr><td><strong>Implied price</strong></td><td class="num"></td><td class="num"></td><td class="num"><strong>≈ ¥12,100</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote>金额单位：十亿日元。DCF 起点为 FY2026 指引，FY2027 – FY2031 收入 CAGR 约 6%、营业利润率逐步升至 21.5% 左右，WACC 7.2%、terminal growth 2.5%，结果约 ¥13,000 / 股。</blockquote>
+
+      <h3>估值结论</h3>
+      <div class="scenario-grid">
+        <div class="scenario-card">
+          <div class="scenario-card__label">保守</div>
+          <div class="scenario-card__value">¥10,000</div>
+          <div class="scenario-card__trigger">HR Technology 增速放缓，margin 回落，市场仅给 14 – 16x HR Tech EBITDA+S。</div>
+        </div>
+        <div class="scenario-card scenario-card--base">
+          <div class="scenario-card__label">基准</div>
+          <div class="scenario-card__value">¥12,000</div>
+          <div class="scenario-card__trigger">FY2026 指引兑现，HR Technology margin 维持 40% 左右，回购持续。</div>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-card__label">乐观</div>
+          <div class="scenario-card__value">¥14,500+</div>
+          <div class="scenario-card__trigger">招聘需求复苏，HR Technology 收入重回高双位数增长，市场接受 50%+ margin 路径。</div>
+        </div>
+      </div>
+      <p>
+        <strong>当前 vs 合理价值：</strong>
+        当前 ¥7,825 相对基准 ¥12,000 折价约 <span class="kpi">35%</span>；
+        相对合理区间 ¥10,000 – ¥14,500，仍处在偏低位置。
+      </p>
+
+      <h3>管理层与资本配置</h3>
+      <ul>
+        <li><strong>核心高管</strong>：Representative Director, President &amp; CEO — Hisayuki "Deko" Idekoba；Executive Vice President &amp; CFO — Junichi Arai。</li>
+        <li><strong>分红 / 回购</strong>：FY2025 全年分红 25 日元/股，FY2026 分红指引 26 日元/股。FY2025 分红与回购合计 713.1 十亿日元，总派现率 143.5%。</li>
+        <li><strong>回购进展</strong>：截至 2026-03-31，扣除库存股后的流通股数为 1,396.2 百万，较 2022-03-31 下降 13.2%。当前 3,500 亿日元回购计划预计 2026-11 结束。</li>
+        <li><strong>现金政策</strong>：FY2026 – FY2028 维持年末 gross cash 约 750.0 十亿日元，作为周期下行储备。</li>
+        <li><strong>资本配置优先级</strong>：现有业务产品 / 营销投入 → 稳定每股分红 → HR Technology 战略 M&amp;A → 视市场状况进行回购。</li>
+      </ul>
+    </section>
+
+    <section data-region="risks">
+      <h2>主要风险</h2>
+
+      <p>按可能性 × 影响排序：</p>
+      <ul>
+        <li>
+          <strong>招聘需求周期风险</strong>：美国或欧洲就业市场走弱会压低招聘广告预算、付费职位和点击转化。
+          监控信号是 HR Technology 美国收入增速、付费职位数和 ARPJ 是否同时放缓。
+        </li>
+        <li>
+          <strong>ARPJ 提升不可持续</strong>：Q4 FY2025 美国 ARPJ 同比增长 25%，FY2026 指引仍假设美国 ARPJ +18%。
+          若提价损害雇主 ROI，短期收入增长可能以长期客户留存为代价。
+        </li>
+        <li>
+          <strong>利润率结构性被高估</strong>：FY2026 HR Technology margin 指引 41.0%，中期目标超过 50%。
+          若后续为了增长必须重新加大营销、研发和 AI 基础设施投入，当前估值需要下修。
+        </li>
+        <li>
+          <strong>汇率风险</strong>：FY2026 指引基于 USD/JPY 154.0、EUR/JPY 182.0。日元显著升值会压低日元报表收入和利润。
+        </li>
+        <li>
+          <strong>监管和数据风险</strong>：招聘匹配涉及个人数据、算法公平性和劳动市场监管，欧美监管趋严可能限制产品能力或增加合规成本。
+        </li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout__label">撤回条件</div>
+        <p>
+          如果 FY2026 上半年 HR Technology 收入增长跌回中个位数，同时 EBITDA+S margin 低于 38%，且管理层不再强调 50%+ 中期 margin 目标，
+          应把基准合理价值下调到 <span class="kpi">¥9,000 – ¥10,000</span> 附近。若 ARPJ 提升开始导致客户流失或投放 ROI 明显恶化，平台重估逻辑需要暂停。
+        </p>
+      </div>
+    </section>
+
+    <section data-region="open-questions">
+      <h2>待验证问题</h2>
+
+      <ul>
+        <li>FY2026 Q1 和 Q2，美国 ARPJ 提升是否继续带来收入增长，还是开始影响客户续费和投放 ROI？</li>
+        <li>HR Technology 41.0% EBITDA+S margin 中，多少来自结构性效率提升，多少来自短期营销 / 人员费用控制？</li>
+        <li>Premium Sponsored Jobs 的渗透率和增量 ROI 是否足以支撑 FY2026 美国收入 +13.6% 的指引？</li>
+        <li>MMT 的 GMV-linked model 是否能带来 take rate 上行，而不仅是收入确认方式变化？</li>
+        <li>当前 3,500 亿日元回购计划结束后，公司是否继续大额回购，还是将现金优先用于 HR Technology 的 M&amp;A？</li>
+        <li>日元若从 154 附近升值至 140 – 145，FY2026 报表增长和市场估值会受到多大影响？</li>
+      </ul>
+
+      <h3>参考来源</h3>
+      <ul>
+        <li>Recruit Holdings, <a class="link-blue" href="https://file.recruit-holdings.com/files/en/Recruit_202603Q4_summary_en.pdf" rel="noopener" target="_blank">Q4 / FY2025 Financial Results Summary</a>，2026-05-15。</li>
+        <li>Recruit Holdings, <a class="link-blue" href="https://file.recruit-holdings.com/files/en/Recruit_202603Q4_earnings_en.pdf" rel="noopener" target="_blank">FY2025 Earnings Release</a>，2026-05-15。</li>
+        <li>Recruit Holdings, <a class="link-blue" href="https://file.recruit-holdings.com/files/en/Recruit_202603Q4_financialdata_en.xlsx" rel="noopener" target="_blank">FY2025 Q4 Financial Data Excel</a>，2026-05-15。</li>
+        <li>Recruit Holdings, <a class="link-blue" href="https://recruit-holdings.com/en/ir/" rel="noopener" target="_blank">Investor Relations</a>，accessed 2026-05-15。</li>
+        <li>Yahoo Finance Japan, <a class="link-blue" href="https://finance.yahoo.co.jp/quote/6098.T" rel="noopener" target="_blank">6098.T 股价</a>，accessed 2026-05-15。</li>
+        <li>yfinance：6098.T quote、analyst target、historical prices、peer multiples，accessed 2026-05-15。</li>
+      </ul>
+    </section>
+
+    <section data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </section>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="/assets/vendor/chart.umd.min.js"></script>
+  <script src="/assets/js/charts.js"></script>
+  <script>loadCompanyData('6098');</script>
+</body>
+</html>

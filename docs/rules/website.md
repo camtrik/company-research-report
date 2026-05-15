@@ -6,21 +6,22 @@
 
 ## UI 设计参考
 
-视觉系统的单一真实来源是 [`DESIGN.md`](../../DESIGN.md)（Airtable 风格的编辑型设计系统）。写任何 HTML 片段、CSS、组件样式前，先读 DESIGN.md 中对应章节。
+视觉系统的单一真实来源是 [`DESIGN.md`](../../DESIGN.md)（Mastercard 风格的编辑型设计系统）。写任何 HTML 片段、CSS、组件样式前，先读 DESIGN.md 中对应章节。
 
 关键约定（细节看 DESIGN.md）：
 
-- **基调**：白色画布 + 深墨色字体 + 大量留白；不要 hero 渐变、aurora、mesh 背景。品牌力量来自满版签名色卡（coral / forest / cream / dark navy），不是装饰底纹。
-- **颜色**：用 DESIGN.md 中的 token，不要自创色值。primary（CTA 背景）是近黑 `#181d26`，**不是**链接蓝 `#1b61c9`——这是最常踩的坑。
-- **字体**：Haas Grotesk 在显示尺寸只用 weight 400/500，绝不用 700。强调靠尺寸和颜色，不靠加粗。系统不可用时降级到 Inter Display。
-- **圆角**：分层使用——主 CTA 与签名卡 `12px`、内容卡 `10px`、输入 `6px`、图标按钮圆形、定价 pill `9999px`（**仅限定价页**）。
-- **间距**：所有段落垂直节奏统一为 `96px`（`{spacing.section}`）。
-- **按钮**：primary（近黑实心）+ secondary（白底细线）成对出现，每屏只用一个 primary。
-- **节奏**：白底 → 签名卡 → 白底 → cream → 深底 → 白底，避免连续两段白底。
-- **公司详情页**：内容区（`data-region`）的视觉表达可以使用签名色卡 / cream callout / demo-grid card 等 DESIGN.md 中定义的容器，但运行时数据区（market-data / charts）保持中性骨架，让 JS 渲染的数据成为视觉焦点。
-- **不做悬停态**：DESIGN.md 全局策略——只定义 Default 和 Active/Pressed。
+- **基调**：暖奶油画布（`#F3F0EE`）+ 暖近黑字体（`#141413`）+ 大量留白。**不用纯白**做页面底色；不要 hero 渐变 / aurora / mesh 背景；视觉力量来自卡片形状（pill / stadium / circle）与节制的橙色点缀。
+- **颜色**：用 DESIGN.md 的 token，写进 `site/assets/css/base.css` 的 CSS custom properties。primary（CTA 背景）是 Ink Black `#141413`，文字使用 Canvas Cream `#F3F0EE`（不是纯白）。Signal Orange `#CF4500` 仅用于合规 / 信号语境，**不要**作为营销 CTA。装饰性的 Light Signal Orange `#F37338` 仅用于 eyebrow 圆点和分隔弧线。
+- **字体**：主字体 MarkForMC 是商业字体，开源替代是 **Sofia Sans**（DESIGN.md 备用栈中列出）。已在 `site/partials/head.html` 通过 Google Fonts 加载 Sofia Sans 400/500/700。显示文字使用 weight 500 + 字距 -2%；正文使用 weight 450（变量字重，比 400 软、比 500 紧）；eyebrow 使用 14px / weight 700 / +4% tracking / 全大写。不混用第二款字体。
+- **圆角**：Mastercard 阶梯——`6px`（cookie 微元素）/ `20px`（按钮）/ `24px`（橙色合规 pill）/ `40px`（卡片、媒体框、签名容器）/ `999px`（导航 pill、价格 pill、tag）/ `50%`（头像、卫星 CTA）。**避免** 8–12px 的中间地带——会显得通用模板。
+- **间距**：基础单元 8px，常用阶梯 `8 / 16 / 24 / 32 / 48 / 64 / 96 / 128`。桌面 section 垂直内距 96–128px；移动 48–64px。
+- **按钮**：primary 为 Ink Pill（近黑实心 + 奶油字 + 20px 圆角）；secondary 为 Outlined Pill（白底 + 黑边）。每屏仅一个 primary。
+- **节奏**：白底（cream）→ lifted cream → 深底（ink footer）三档；不连续堆叠两段奶油底。
+- **公司详情页**：内容区（`data-region`）可以使用 `.callout` / `.callout--ink` / `.kv-grid` / `.scenario-grid` 这些已经在 `assets/css/company.css` 中定义的容器；运行时数据区（market-data / charts）保持中性骨架，让 JS 渲染的数字成为视觉焦点。
+- **阴影**：氛围式而非定向。Level 1 `0 4px 24px rgba(0,0,0,0.04)` 用于导航 pill；Level 2 `0 24px 48px rgba(0,0,0,0.08)` 用于卡片。**不要**硬阴影。
+- **hover 处理**：DESIGN.md 默认无 hover，只定义 default 与 active（按下时 `translateY(1px)`）。
 
-任何与 DESIGN.md 冲突的视觉决定都要先在该文件中确认或更新。不要在 HTML 里硬编码与 DESIGN.md 不一致的颜色 / 字号 / 圆角。
+任何与 DESIGN.md 冲突的视觉决定都要先在该文件中确认或更新。不要在 HTML 里硬编码与 DESIGN.md 不一致的颜色 / 字号 / 圆角；优先复用 `assets/css/base.css` 中已经声明好的 CSS custom properties（`--canvas`、`--ink`、`--signal-light`、`--r-md`、`--s-3` 等）。
 
 ## 站点目录
 

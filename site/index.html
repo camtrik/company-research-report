@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title>投资研究 — 公司分析与笔记</title>
+  <link rel="stylesheet" href="/assets/css/home.css">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="container">
+    <section class="home-hero">
+      <div class="eyebrow eyebrow--muted home-hero__eyebrow">研究 · NOTES</div>
+      <h1>投资研究</h1>
+      <p class="home-hero__lede">
+        围绕一组上市公司持续维护的分析底稿。每份报告记录核心观点、关键数据、估值方法与
+        待验证问题。下方表格的股价、估值快照与 10 年走势由脚本每日自动更新。
+      </p>
+      <div class="home-hero__meta">
+        数据截至 <strong data-global-updated>加载中…</strong>
+      </div>
+    </section>
+
+    <section aria-labelledby="companies-heading">
+      <div class="section-head">
+        <h2 id="companies-heading">公司</h2>
+        <span class="section-head__meta">点击卡片进入详细报告</span>
+      </div>
+
+      <div class="filter-bar">
+        <label class="filter-bar__search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M21 21l-4.3-4.3"></path>
+          </svg>
+          <input type="search" placeholder="搜索代码 / 公司名" data-filter="search" autocomplete="off">
+        </label>
+        <select class="filter-bar__select" data-filter="market" aria-label="市场">
+          <option value="all">全部市场</option>
+        </select>
+        <select class="filter-bar__select" data-filter="sector" aria-label="行业">
+          <option value="all">全部行业</option>
+        </select>
+      </div>
+
+      <div class="company-grid" data-company-grid></div>
+    </section>
+
+    <section class="articles-section" id="articles" aria-labelledby="articles-heading">
+      <div class="section-head">
+        <h2 id="articles-heading">文章</h2>
+        <span class="section-head__meta">研究笔记 · 行业观察 · 工具方法</span>
+      </div>
+
+      <div class="articles-grid">
+        <article class="article-card article-card--placeholder">
+          <span class="article-card__placeholder-note">Placeholder</span>
+          <span class="article-card__tag">研究笔记</span>
+          <h3 class="article-card__title">如何看一家公司的护城河</h3>
+          <p class="article-card__excerpt">
+            框架性的笔记，整理我在每份公司报告里反复使用的护城河检验问题。预计后续补全。
+          </p>
+          <div class="article-card__date">敬请期待</div>
+        </article>
+        <article class="article-card article-card--placeholder">
+          <span class="article-card__placeholder-note">Placeholder</span>
+          <span class="article-card__tag">行业观察</span>
+          <h3 class="article-card__title">日股招聘行业的结构性机会</h3>
+          <p class="article-card__excerpt">
+            关于 HR Technology 与传统派遣业务的估值分层。占位卡片，等真正写出文章后替换。
+          </p>
+          <div class="article-card__date">敬请期待</div>
+        </article>
+        <article class="article-card article-card--placeholder">
+          <span class="article-card__placeholder-note">Placeholder</span>
+          <span class="article-card__tag">工具方法</span>
+          <h3 class="article-card__title">SOTP 与 DCF 在多分部公司的取舍</h3>
+          <p class="article-card__excerpt">
+            为什么 SOTP 对 Recruit、阿里这类多分部公司更合适，何时应当回退到 DCF。
+          </p>
+          <div class="article-card__date">敬请期待</div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- include: footer.html -->
+
+  <script>window.COMPANIES = {{COMPANIES_JSON}};</script>
+  <script src="/assets/js/filters.js"></script>
+</body>
+</html>
