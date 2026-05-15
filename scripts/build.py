@@ -4,7 +4,8 @@ build.py — Mirror site/ into site/_dist/ with two transforms:
 
 1. Replace `<!-- include: NAME.html -->` markers with the content of
    `site/partials/NAME.html`.
-2. Replace `{{COMPANIES_JSON}}` and `{{BUILD_TIME}}` placeholders.
+2. Replace `{{COMPANIES_JSON}}`, `{{BUILD_TIME}}`, and
+   `{{SITE_BASE_PATH}}` placeholders.
 
 `site/partials/` and `site/_templates/` are excluded from the output.
 Non-HTML files (CSS, JS, JSON, fonts, images) are copied unchanged.
@@ -17,6 +18,7 @@ Then:
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 from datetime import datetime, timezone
@@ -90,7 +92,24 @@ def collect_companies() -> list[dict]:
     return rows
 
 
-def process_html(text: str, partials: dict[str, str], companies_json: str, build_time: str) -> str:
+def normalize_base_path(raw: str | None) -> str:
+    if not raw:
+        return ""
+    path = raw.strip()
+    if path in {"", "/"}:
+        return ""
+    if not path.startswith("/"):
+        path = "/" + path
+    return path.rstrip("/")
+
+
+def process_html(
+    text: str,
+    partials: dict[str, str],
+    companies_json: str,
+    build_time: str,
+    site_base_path: str,
+) -> str:
     def expand(match: re.Match[str]) -> str:
         name = match.group(1)
         return partials.get(name, match.group(0))
@@ -98,6 +117,7 @@ def process_html(text: str, partials: dict[str, str], companies_json: str, build
     text = INCLUDE_RE.sub(expand, text)
     text = text.replace("{{COMPANIES_JSON}}", companies_json)
     text = text.replace("{{BUILD_TIME}}", build_time)
+    text = text.replace("{{SITE_BASE_PATH}}", site_base_path)
     return text
 
 
@@ -109,13 +129,14 @@ def main() -> None:
     companies = collect_companies()
     companies_json = json.dumps(companies, ensure_ascii=False)
     build_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    site_base_path = normalize_base_path(os.environ.get("SITE_BASE_PATH", ""))
 
     mirror_site()
 
     html_files = list(DIST.rglob("*.html"))
     for html_path in html_files:
         original = html_path.read_text(encoding="utf-8")
-        processed = process_html(original, partials, companies_json, build_time)
+        processed = process_html(original, partials, companies_json, build_time, site_base_path)
         if processed != original:
             html_path.write_text(processed, encoding="utf-8")
 
@@ -124,6 +145,7 @@ def main() -> None:
     print(f"[build] companies indexed: {len(companies)}")
     print(f"[build] HTML files transformed: {len(html_files)}")
     print(f"[build] BUILD_TIME = {build_time}")
+    print(f"[build] SITE_BASE_PATH = {site_base_path or '/'}")
 
 
 if __name__ == "__main__":

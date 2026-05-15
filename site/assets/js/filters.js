@@ -7,12 +7,18 @@
 
 const CURRENCY_SYMBOL = { USD: "$", JPY: "¥", HKD: "HK$", CNY: "¥", EUR: "€" };
 const MARKET_LABEL = { US: "美股", JP: "日股", HK: "港股", CN: "A股", EU: "欧股" };
+const SITE_BASE_PATH = (window.SITE_BASE_PATH || "").replace(/\/+$/, "");
 
 const state = {
   query: "",
   market: "all",
   sector: "all",
 };
+
+function withBasePath(path) {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return `${SITE_BASE_PATH}${normalized}`;
+}
 
 function fmtCurrency(value, currency = "USD") {
   if (value == null || Number.isNaN(value)) return "—";
@@ -37,7 +43,7 @@ function renderCompanyCard(company) {
   a.dataset.market = company.market || "";
   a.dataset.sector = company.sector || "";
   a.dataset.view = company.view || "";
-  a.href = `/companies/${company.ticker}/`;
+  a.href = withBasePath(`/companies/${company.ticker}/`);
   a.innerHTML = `
     <div class="company-card__eyebrow">${MARKET_LABEL[company.market] || company.market || "—"}${company.view ? " · " + company.view : ""}</div>
     <div class="company-card__ticker">${company.ticker}</div>
@@ -103,7 +109,7 @@ async function hydrateCardPrice(card) {
   const ticker = card.dataset.ticker;
   if (!ticker) return null;
   try {
-    const res = await fetch(`/companies/${ticker}/data.json`, { cache: "no-cache" });
+    const res = await fetch(withBasePath(`/companies/${ticker}/data.json`), { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const snapshot = data.snapshot || {};

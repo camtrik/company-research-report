@@ -3,7 +3,7 @@
 <head>
   <!-- include: head.html -->
   <title data-region="title">TICKER — Company Name</title>
-  <link rel="stylesheet" href="/assets/css/company.css">
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
   <meta data-region="meta"
         data-ticker="TICKER"
         data-name="中文名"
@@ -114,8 +114,8 @@
   </main>
 
   <!-- include: footer.html -->
-  <script src="/assets/vendor/chart.umd.min.js"></script>
-  <script src="/assets/js/charts.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
   <script>loadCompanyData('TICKER');</script>
 </body>
 </html>
