@@ -42,12 +42,12 @@
 
 ### 三方编辑边界（清晰隔离）
 
-| 角色 | 编辑对象 | 触发时机 |
-| --- | --- | --- |
-| 用户 | `company-reports/*.md` | 写分析时 |
-| sync skill（AI） | `site/companies/{TICKER}/index.html`、`changelog.html` | 用户说"同步 X 到 HTML"时 |
-| build.py | `site/index.html` 注入、所有 HTML 的 partials 注入 | deploy workflow 中 |
-| update_market_data.py | `site/companies/{TICKER}/data.json` | cron 触发 |
+| 角色                  | 编辑对象                                                   | 触发时机                 |
+| --------------------- | ---------------------------------------------------------- | ------------------------ |
+| 用户                  | `company-reports/*.md`                                   | 写分析时                 |
+| sync skill（AI）      | `site/companies/{TICKER}/index.html`、`changelog.html` | 用户说"同步 X 到 HTML"时 |
+| build.py              | `site/index.html` 注入、所有 HTML 的 partials 注入       | deploy workflow 中       |
+| update_market_data.py | `site/companies/{TICKER}/data.json`                      | cron 触发                |
 
 **互不冲突的保证**：每个文件由唯一角色负责写，靠 `data-region` 标记和 partials include 注释划清边界。
 
@@ -102,8 +102,14 @@ push → deploy.yml  →  build.py（注入 partials + 首页 JSON）→ GitHub 
     </section>
 
     <section class="charts" data-region="charts">
-      <canvas data-chart="price-10y"></canvas>
-      <canvas data-chart="per-pbr-10y"></canvas>
+      <figure class="chart-row">
+        <figcaption>10 年股价走势</figcaption>
+        <canvas data-chart="price-10y"></canvas>
+      </figure>
+      <figure class="chart-row">
+        <figcaption>10 年 PER / PBR 走势</figcaption>
+        <canvas data-chart="per-pbr-10y"></canvas>
+      </figure>
     </section>
 
     <!-- 内容区（AI 通过 sync skill 维护） -->
@@ -133,12 +139,12 @@ push → deploy.yml  →  build.py（注入 partials + 首页 JSON）→ GitHub 
 
 ### 3.2 `data-region` 集合
 
-| 类别 | regions | 谁写 | 写法 |
-| --- | --- | --- | --- |
-| 内容区 | `thesis`、`company-overview`、`business-model`、`financials`、`moat`、`catalysts`、`valuation`、`risks`、`open-questions` | sync skill | 自由生成 HTML 片段 |
-| 元数据区 | `title`、`meta` | sync skill | 结构化更新属性 / 文本（不重写结构） |
-| 运行时数据区 | `market-data`、`charts` | 前端 JS（数据来自 data.json） | 不写，仅 DOM 操作填充 |
-| 固定结构区 | `changelog-link` | 一次写好，永不变 | 不写 |
+| 类别         | regions                                                                                                                                     | 谁写                          | 写法                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ----------------------------------- |
+| 内容区       | `thesis`、`company-overview`、`business-model`、`financials`、`moat`、`catalysts`、`valuation`、`risks`、`open-questions` | sync skill                    | 自由生成 HTML 片段                  |
+| 元数据区     | `title`、`meta`                                                                                                                         | sync skill                    | 结构化更新属性 / 文本（不重写结构） |
+| 运行时数据区 | `market-data`、`charts`                                                                                                                 | 前端 JS（数据来自 data.json） | 不写，仅 DOM 操作填充               |
+| 固定结构区   | `changelog-link`                                                                                                                          | 一次写好，永不变              | 不写                                |
 
 内容区 region 与 `docs/template.md` 的章节一一对应（命名一致，便于 sync skill 映射）。
 
@@ -280,10 +286,14 @@ jobs:
 async function loadCompanyData(ticker) {
   const data = await fetch('./data.json').then(r => r.json());
   fillMarketData(data.snapshot, data.updated_at);
-  renderChart('price-10y', buildPriceChart(data.charts.price_10y));
+  renderChart('price-10y',   buildPriceChart(data.charts.price_10y));
   renderChart('per-pbr-10y', buildPerPbrChart(data.charts.per_pbr_10y));
 }
 ```
+
+`buildPerPbrChart` 在一张图上用双 y 轴渲染 PER 和 PBR（共享 `years` 横轴），左轴 PER、右轴 PBR，两条线颜色区分。
+
+每张图独占一整行宽度，两张图垂直堆叠形成"股价 → PER/PBR"的阅读顺序。
 
 `fillMarketData` 把字段写入 `[data-bind="..."]` 元素，并把 `data-bind="updated-at"` 设为友好格式（`2026-05-15 16:30 EDT`）。
 
@@ -294,29 +304,28 @@ async function loadCompanyData(ticker) {
 ```text
 ┌────────────────────────────────────────────────────────────┐
 │ Header（partial）                                            │
-│ 投资研究                                                     │
+│ 投资研究                          数据截至 2026-05-15 16:30  │
 ├────────────────────────────────────────────────────────────┤
-│ 搜索栏 + 筛选器 [市场 ▾] [观点 ▾] [行业 ▾]                   │
+│ 搜索栏 + 筛选器 [市场 ▾] [行业 ▾]                            │
 ├────────────────────────────────────────────────────────────┤
 │ ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
 │ │ BABA 阿里巴巴 │  │ SOFI         │  │ ...          │       │
-│ │ 美股·互联网   │  │ 美股·金融科技 │  │              │       │
-│ │ [Watch]      │  │ [Long]       │  │              │       │
 │ │ $132.45      │  │ $14.20       │  │              │       │
-│ │ 52w:71.8-143 │  │ ...          │  │              │       │
-│ │ Fwd P/E 11.2x│  │              │  │              │       │
-│ │ 报告:5-14    │  │              │  │              │       │
-│ │ 数据:5-15 16 │  │              │  │              │       │
 │ └──────────────┘  └──────────────┘  └──────────────┘       │
 ├────────────────────────────────────────────────────────────┤
 │ Footer（partial）                                            │
 └────────────────────────────────────────────────────────────┘
 ```
 
-卡片内容来源：
+卡片只展示 ticker + 中文名 + 当前价格。其他元数据（market、sector、view、tags、last_updated）保留在 `<meta data-region="meta">` 和 `COMPANIES_JSON` 里，供筛选器使用，但不上卡片，避免视觉噪音。
 
-- 静态字段（ticker、name、market、sector、view、tags、last_updated）来自 `COMPANIES_JSON`
-- 动态字段（price、52w 区间、Fwd P/E、数据更新时间）来自每家公司的 `data.json`（JS 并行 fetch）
+"数据截至 …" 在页面顶部统一显示一次，取所有公司 `data.json` 中最近的 `updated_at`，避免每张卡片重复同一时间。
+
+数据来源：
+
+- 静态字段（ticker、name、market、sector、tags、last_updated）来自 `COMPANIES_JSON`，用于筛选和搜索（不一定全部上 DOM）
+- 动态字段（price）来自每家公司的 `data.json`（JS 并行 fetch）
+- 顶部"数据截至"取所有 `data.json` 中 `updated_at` 的最大值
 
 ### 6.2 `scripts/build.py` 的两个职责
 
