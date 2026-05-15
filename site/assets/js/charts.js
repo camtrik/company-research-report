@@ -98,6 +98,7 @@ function fillMeta() {
   setBind("market", meta.dataset.market || "");
   setBind("sector", meta.dataset.sector || "");
   setBind("view", meta.dataset.view || "");
+  setBind("last-updated", meta.dataset.lastUpdated || "");
 
   const tagsRow = document.querySelector('[data-bind="tags-row"]');
   if (tagsRow && meta.dataset.tags) {
