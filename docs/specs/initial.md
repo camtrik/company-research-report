@@ -11,7 +11,7 @@
 - 站点：GitHub Pages 静态托管
 - 内容来源：markdown 是分析底稿（人写），HTML 是展示层（AI 维护）
 - 通过一个 sync skill 把 markdown 的变更同步到 HTML，固化"分析 → 发布"流程
-- 动态数据（股价、估值快照、10 年走势图、PER/PBR 走势）每日自动更新
+- 动态数据分层更新：股价周线图每周五盘后更新，估值快照（snapshot）每日更新（尚未实现）
 - AI 操作的对象是直接的 HTML，所见即所得；不引入需要学习的模板引擎
 - 公司数量当前 < 10，预期增长到 50 量级；架构按这个规模设计，不为更大规模做超前设计
 
@@ -31,11 +31,10 @@
 │   └── assets/{css,js,vendor}/
 ├── scripts/
 │   ├── build.py                                             ← 注入 partials + 生成首页 JSON
-│   └── update_market_data.py                                ← 拉股价 → data.json
+│   └── update_market_data.py                                ← 拉周线股价 + 年度 PER/PBR → data.json
 ├── .github/workflows/
 │   ├── deploy.yml                                           ← push 触发：build + 部署
-│   ├── daily-data-us.yml                                    ← cron：美股盘后更新
-│   └── daily-data-jp.yml                                    ← cron：日股盘后更新
+│   └── weekly-data.yml                                      ← cron：每周五盘后更新（全市场合并）
 ├── .agents/skills/sync-md-to-html/SKILL.md                  ← markdown → HTML 同步 skill（.claude/skills 是 symlink）
 └── docs/template.md                                         ← 既有 markdown 写作模板
 ```
@@ -47,7 +46,7 @@
 | 用户                  | `company-reports/*.md`                                   | 写分析时                 |
 | sync skill（AI）      | `site/companies/{TICKER}/index.html`、`changelog.html` | 用户说"同步 X 到 HTML"时 |
 | build.py              | `site/index.html` 注入、所有 HTML 的 partials 注入       | deploy workflow 中       |
-| update_market_data.py | `site/companies/{TICKER}/data.json`                      | cron 触发                |
+| update_market_data.py | `site/companies/{TICKER}/data.json`                      | 每周五 cron 触发            |
 
 **互不冲突的保证**：每个文件由唯一角色负责写，靠 `data-region` 标记和 partials include 注释划清边界。
 
@@ -56,7 +55,7 @@
 ```text
 分析 → markdown                       sync skill        → HTML 详情页 + changelog
                                                                 ↓
-cron (daily, 按市场)  →  update_market_data.py            → data.json
+cron (weekly, 周五盘后) → update_market_data.py             → data.json
                                                                 ↓
 push → deploy.yml  →  build.py（注入 partials + 首页 JSON）→ GitHub Pages
 
@@ -212,7 +211,7 @@ skill 在写完公司 HTML 后，还应该更新 `site/companies.json`（增量�
   },
   "charts": {
     "price_10y": {
-      "dates": ["2016-05-15", "...", "2026-05-15"],
+      "dates": ["2016-06-13", "...", "2026-05-15"],
       "values": [80.2, "...", 132.45]
     },
     "per_pbr_10y": {
@@ -230,16 +229,18 @@ skill 在写完公司 HTML 后，还应该更新 `site/companies.json`（增量�
 ### 5.2 `scripts/update_market_data.py`
 
 ```text
-参数：--market US|JP|HK|CN
+参数：--ticker TICKER（可选，仅更新指定公司）| --dry-run
 
 流程：
-1. 扫描 site/companies/*/index.html，提取 <meta data-region="meta"> 中
-   data-market 等于 --market 的 ticker 列表
+1. 扫描 site/companies/*/index.html，提取 <meta data-region="meta"> 中的
+   data-ticker + data-market → 构建 yfinance symbol（JP→加 .T 后缀，US→原样）
 2. 对每个 ticker：
-   - yfinance 拉 snapshot（fast_info + info）
-   - yfinance 拉 10 年日线 → charts.price_10y
-   - yfinance 拉年度财报 → 取可得年份的 EPS / BPS / 年末股价 → charts.per_pbr_10y
-     - 注意：yfinance 的 `.income_stmt` / `.balance_sheet` 通常只覆盖最近 ~4 年；如需更长历史，需额外抓 `.history(period='10y')` 取年末价后与可得财务数据按年份对齐。缺失年份字段写 null，前端图表跳过 null 点
+   - yfinance 拉 10 年周线（interval="1wk"）→ charts.price_10y
+     - dates 取每周收盘日（如 "2016-06-13"），values 取 Close
+   - yfinance 拉年度财报 → 取可得年份的 EPS / BPS / 对应期末股价 → charts.per_pbr_10y
+     - 期末股价从周线数据中查找（≤财年期末日的最后一条周线收盘价）
+     - yfinance 财务报表通常只覆盖最近 ~4 年；缺失年份不填充，前端图表跳过 null
+   - snapshot 字段暂不更新（保留现有值）；日更 snapshot 为后续功能
    - 单个 ticker 失败 → 记日志，跳过，不阻断其他 ticker；保留原 data.json
 3. 仅当字段有实质变化时写 data.json（避免 git churn）
 4. 输出日志摘要：成功 N，失败 M（含 ticker 列表）
@@ -248,10 +249,10 @@ skill 在写完公司 HTML 后，还应该更新 `site/companies.json`（增量�
 ### 5.3 GitHub Actions
 
 ```yaml
-# .github/workflows/daily-data-us.yml
+# .github/workflows/weekly-data.yml
 on:
   schedule:
-    - cron: '0 21 * * 1-5'   # UTC 21:00 = 美东盘后半小时（夏令时 EDT 17:00）
+    - cron: '0 22 * * 5'   # UTC 22:00 每周五 = 美东盘后（EDT 18:00）/ 日本周六 07:00
   workflow_dispatch:
 jobs:
   update:
@@ -264,21 +265,17 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install yfinance pandas
-      - run: python scripts/update_market_data.py --market US
+      - run: python scripts/update_market_data.py
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site/companies/*/data.json
-          git diff --cached --quiet || git commit -m "data: daily US update"
+          git diff --cached --quiet || git commit -m "data: weekly price update"
           git push
 ```
 
-```yaml
-# .github/workflows/daily-data-jp.yml — 同上，cron 改为 '30 6 * * 1-5'（JST 15:30），参数改 --market JP
-```
-
-冬令时 / 夏令时偏移：US 在冬令时（EST）盘后是 UTC 22:00；选 UTC 21:00 在冬令时仍在收盘时间但与 yfinance 最后一根 K 线写入之间可能有 ~30 分钟延迟，可接受。如果发现数据滞后明显，把 cron 调到 UTC 22:00。
+周五 UTC 22:00 时，美股（16:00 ET 收盘）和日股（15:00 JST 收盘，即当日 UTC 06:00）均已收盘，数据可用。合并为一个 workflow，一次遍历所有市场。
 
 ### 5.4 前端渲染（`site/assets/js/charts.js`）
 
@@ -291,7 +288,9 @@ async function loadCompanyData(ticker) {
 }
 ```
 
-`buildPerPbrChart` 在一张图上用双 y 轴渲染 PER 和 PBR（共享 `years` 横轴），左轴 PER、右轴 PBR，两条线颜色区分。
+`buildPriceChart` 渲染 10 年周线图。x 轴刻度仅显示年份（如 `2017`、`2018`…），鼠标悬停 tooltip 显示完整日期 + 当时价格。约 520 个数据点，Chart.js category scale + autoSkip 处理。
+
+`buildPerPbrChart` 不变：在一张图上用双 y 轴渲染 PER 和 PBR（共享 `years` 横轴），左轴 PER、右轴 PBR。
 
 每张图独占一整行宽度，两张图垂直堆叠形成"股价 → PER/PBR"的阅读顺序。
 
@@ -468,8 +467,8 @@ jobs:
 
 ### 7.3 情景 C — 仅数据更新（无人参与）
 
-1. cron 触发 daily-data-us.yml / daily-data-jp.yml
-2. update_market_data.py 拉 yfinance → 写 data.json（仅当有变化）
+1. cron 触发 weekly-data.yml（每周五 UTC 22:00）
+2. update_market_data.py 拉 yfinance 周线 + 年度 PER/PBR → 写 data.json（仅当有变化）
 3. workflow 自动 commit + push
 4. 触发 deploy → Pages 部署
 
@@ -491,7 +490,7 @@ GitHub Actions 页面，每个 workflow 都有 "Run workflow" 按钮（`workflow
 
 - yfinance 偶发数据缺失或异常值 → update_market_data.py 必须对单个 ticker 失败容错，保留上次成功数据
 - HTML 详情页结构演化（新增 region）→ 用 git 管理 `site/_templates/template.html`；老公司页面手动补 region 或由 sync skill 检测并补齐
-- 港股 / A 股加入时 → 复制一个 daily-data-{hk,cn}.yml，调整 cron 时间和 `--market` 参数
+- 港股 / A 股加入时 → yfinance symbol 后缀映射在 update_market_data.py 中维护（HK→`.HK`，CN→`.SS`/`.SZ`）
 
 **留白（YAGNI）：**
 
@@ -509,8 +508,9 @@ GitHub Actions 页面，每个 workflow 都有 "Run workflow" 按钮（`workflow
 3. 写 `site/index.html`（带 `{{COMPANIES_JSON}}` 占位）和 `site/assets/css/base.css`、`site/assets/js/filters.js`
 4. 写 `site/assets/js/charts.js`（Chart.js 初始化、`loadCompanyData`、`fillMarketData`）
 5. 写 `scripts/build.py`
-6. 写 `scripts/update_market_data.py`
-7. 写 `.github/workflows/{deploy,daily-data-us,daily-data-jp}.yml`
+6. 写 `scripts/update_market_data.py`（周线股价 + 年度 PER/PBR）
+7. 写 `.github/workflows/weekly-data.yml`
+8. （后续）snapshot 日更：扩展 update_market_data.py 或新建 daily-snapshot.yml
 8. 写 `.agents/skills/sync-md-to-html/SKILL.md`（默认路径，`.claude/skills` 是它的 symlink）
 9. 把现有 6 家公司的 markdown 用 sync skill 转成 HTML，验证全流程
 10. 启用 GitHub Pages（Settings → Pages → Source: GitHub Actions）

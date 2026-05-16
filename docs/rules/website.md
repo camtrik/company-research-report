@@ -73,7 +73,7 @@ site/_dist/                             ← 构建输出（GitHub Pages 服务�
 
 ## 动态数据与图表
 
-- 动态数据（股价、估值快照、10 年走势）写入 `site/companies/{TICKER}/data.json`，由 `update_market_data.py` 通过 yfinance 每日抓取，GitHub Actions 按市场分时触发（US 盘后、JP 盘后等）。
+- 动态数据（股价周线、估值快照、10 年走势）写入 `site/companies/{TICKER}/data.json`，由 `update_market_data.py` 通过 yfinance 每周抓取周线股价 + 年度 PER/PBR，GitHub Actions 每周五盘后触发。snapshot 日更为后续功能。
 - 前端 JS（`assets/js/charts.js`）加载页面时 fetch `data.json`，把字段绑定到 `[data-bind="..."]` 元素，并用 Chart.js 在 `<canvas data-chart="...">` 上画图。
 - AI 不写 `data.json`，也不修改图表 canvas 区域。
 

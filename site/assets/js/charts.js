@@ -122,10 +122,11 @@ const FONT = "Sofia Sans, Arial, sans-serif";
 
 function buildPriceChart(series) {
   if (!series || !series.dates || !series.values) return null;
+  const fullDates = series.dates;
   return {
     type: "line",
     data: {
-      labels: series.dates,
+      labels: fullDates,
       datasets: [{
         label: "Price",
         data: series.values,
@@ -140,7 +141,52 @@ function buildPriceChart(series) {
         tension: 0.18,
       }],
     },
-    options: commonChartOptions({ yLeftTitle: "" }),
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: INK,
+          titleColor: "#F3F0EE",
+          bodyColor: "#F3F0EE",
+          cornerRadius: 8,
+          padding: 10,
+          callbacks: {
+            title: function(items) {
+              return fullDates[items[0].dataIndex];
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: TICK,
+            font: { family: FONT, size: 11 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 12,
+            callback: function(value, index) {
+              var label = this.getLabelForValue(value);
+              return label ? label.substring(0, 4) : "";
+            },
+          },
+          border: { display: false },
+        },
+        y: {
+          grid: { color: GRID, drawTicks: false },
+          ticks: {
+            color: TICK,
+            font: { family: FONT, size: 11 },
+            padding: 8,
+          },
+          border: { display: false },
+        },
+      },
+    },
   };
 }
 
