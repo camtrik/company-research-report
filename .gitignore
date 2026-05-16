@@ -4,7 +4,9 @@ template-by-user.md
 
 .DS_Store
 
-.claude/skills
+.claude/
+.codex/
+.opencode/
 
 site/_dist/
 __pycache__/
