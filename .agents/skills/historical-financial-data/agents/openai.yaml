@@ -1,0 +1,4 @@
+interface:
+  display_name: "Historical Financial Data"
+  short_description: "Fetch filing data and compute historical metrics"
+  default_prompt: "Use $historical-financial-data to fetch historical filing data, period-end prices, and compute requested financial metrics."
