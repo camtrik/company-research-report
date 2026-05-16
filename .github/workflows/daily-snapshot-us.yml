@@ -1,0 +1,31 @@
+# NOTE: Currently not in use. Snapshot data is read from markdown at HTML creation time.
+# Kept for potential future use; can be manually triggered via workflow_dispatch.
+name: Daily snapshot update (US)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install yfinance requests
+
+      - run: python scripts/update_snapshot_data.py --market US
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site/companies/*/data.json
+          git diff --cached --quiet || git commit -m "data: daily US snapshot update"
+          git push
