@@ -38,52 +38,52 @@
       </div>
     </header>
 
-    <!-- ============ Market data (runtime; AI 永远不动) ============ -->
+    <!-- ============ 关键数据快照（sync skill 维护） ============ -->
     <section class="section section--no-pad-top">
       <div class="section__inner">
-        <div class="market-data" data-region="market-data">
+        <div class="market-data" data-region="snapshot">
           <div class="market-data__tile">
             <span class="market-data__label">股价</span>
-            <span class="market-data__value" data-bind="price">—</span>
+            <span class="market-data__value">¥7,825</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">市值</span>
-            <span class="market-data__value" data-bind="market-cap">—</span>
+            <span class="market-data__value">¥10.93 万亿</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Forward P/E</span>
-            <span class="market-data__value" data-bind="pe-forward">—</span>
+            <span class="market-data__value">17.5x</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">P/B</span>
-            <span class="market-data__value" data-bind="pb">—</span>
+            <span class="market-data__value">6.9x</span>
           </div>
           <div class="market-data__tile">
-            <span class="market-data__label">Revenue Growth (FY26E)</span>
-            <span class="market-data__value" data-bind="revenue-growth-ttm">—</span>
+            <span class="market-data__label">Revenue Growth（FY25 / FY26E）</span>
+            <span class="market-data__value">+3.9% / +9.0%</span>
           </div>
           <div class="market-data__tile">
-            <span class="market-data__label">Operating Margin</span>
-            <span class="market-data__value" data-bind="operating-margin">—</span>
+            <span class="market-data__label">Operating Margin（FY25）</span>
+            <span class="market-data__value">17.1%</span>
           </div>
           <div class="market-data__tile">
-            <span class="market-data__label">Net Margin</span>
-            <span class="market-data__value" data-bind="net-margin">—</span>
+            <span class="market-data__label">Net Margin（FY25）</span>
+            <span class="market-data__value">13.4%</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
             <span class="market-data__label">52 周区间</span>
-            <span class="market-data__value" data-bind="week52-range">—</span>
+            <span class="market-data__value">6,040–9,563</span>
           </div>
           <div class="market-data__tile market-data__tile--accent">
             <span class="market-data__label">分析师目标价</span>
-            <span class="market-data__value" data-bind="analyst-target">—</span>
+            <span class="market-data__value">¥9,900</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
-            <span class="market-data__label">Updated At</span>
-            <span class="market-data__value" data-bind="updated-at">—</span>
-            <span class="market-data__mock-badge" data-bind-mock-badge hidden>MOCK</span>
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-05-15</span>
           </div>
         </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-15</p>
       </div>
     </section>
 
@@ -137,6 +137,7 @@
           </div>
           <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / 财务数据来自 Recruit 官方 financial data；BPS 以归母权益和对应流通股数估算。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
         </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">2026-05-15</span></p>
       </div>
     </section>
 

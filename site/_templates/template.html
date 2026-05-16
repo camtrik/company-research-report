@@ -38,52 +38,52 @@
       </div>
     </header>
 
-    <!-- ↓ 运行时数据区：AI 与 sync skill 永远不动 ↓ -->
+    <!-- ↓ 关键数据快照（sync skill 维护）↓ -->
     <section class="section section--no-pad-top">
       <div class="section__inner">
-        <div class="market-data" data-region="market-data">
+        <div class="market-data" data-region="snapshot">
           <div class="market-data__tile">
             <span class="market-data__label">股价</span>
-            <span class="market-data__value" data-bind="price">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">市值</span>
-            <span class="market-data__value" data-bind="market-cap">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Forward P/E</span>
-            <span class="market-data__value" data-bind="pe-forward">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">P/B</span>
-            <span class="market-data__value" data-bind="pb">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile">
-            <span class="market-data__label">Revenue Growth (TTM)</span>
-            <span class="market-data__value" data-bind="revenue-growth-ttm">—</span>
+            <span class="market-data__label">Revenue Growth</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Operating Margin</span>
-            <span class="market-data__value" data-bind="operating-margin">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Net Margin</span>
-            <span class="market-data__value" data-bind="net-margin">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
             <span class="market-data__label">52 周区间</span>
-            <span class="market-data__value" data-bind="week52-range">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile market-data__tile--accent">
             <span class="market-data__label">分析师目标价</span>
-            <span class="market-data__value" data-bind="analyst-target">—</span>
+            <span class="market-data__value">—</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
-            <span class="market-data__label">Updated At</span>
-            <span class="market-data__value" data-bind="updated-at">—</span>
-            <span class="market-data__mock-badge" data-bind-mock-badge hidden>MOCK</span>
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">—</span>
           </div>
         </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 —</p>
       </div>
     </section>
 
@@ -112,9 +112,10 @@
 
         <!-- PER / PBR 历史数据表（sync skill 维护；位于 PER/PBR 折线图下方） -->
         <div class="per-pbr-history"></div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
       </div>
     </section>
-    <!-- ↑ 运行时数据区结束 ↑ -->
+    <!-- ↑ 关键数据 / 图表区结束 ↑ -->
 
     <!-- ↓ 内容区（sync skill 维护，AI 可自由生成 HTML 片段） ↓ -->
     <!-- 公司概要 — section-plain，作为第一个内容 section -->

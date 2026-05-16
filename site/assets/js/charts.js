@@ -1,57 +1,9 @@
 /* ============================================================
    charts.js — Company detail page runtime
-   - fetch data.json → fill [data-bind] + render charts
+   - fetch data.json → render price chart
+   - fetch per_pbr.json → render PER/PBR chart + update timestamp
    - Chart.js is loaded via /assets/vendor/chart.umd.min.js
    ============================================================ */
-
-const CURRENCY_SYMBOL = { USD: "$", JPY: "¥", HKD: "HK$", CNY: "¥", EUR: "€" };
-const COMPACT = { USD: { div: 1e9, suffix: "B" },
-                  JPY: { div: 1e12, suffix: "兆" },
-                  HKD: { div: 1e9, suffix: "B" },
-                  CNY: { div: 1e9, suffix: "B" },
-                  EUR: { div: 1e9, suffix: "B" } };
-
-function fmtCurrency(value, currency = "USD", maxFractionDigits = 2) {
-  if (value == null || Number.isNaN(value)) return "—";
-  const symbol = CURRENCY_SYMBOL[currency] || currency + " ";
-  return symbol + Number(value).toLocaleString("en-US", {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: maxFractionDigits,
-  });
-}
-
-function fmtCompactCurrency(value, currency = "USD") {
-  if (value == null) return "—";
-  const c = COMPACT[currency] || COMPACT.USD;
-  const v = Number(value) / c.div;
-  const symbol = CURRENCY_SYMBOL[currency] || currency + " ";
-  return symbol + v.toLocaleString("en-US", {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  }) + " " + c.suffix;
-}
-
-function fmtPercent(value, digits = 1) {
-  if (value == null || Number.isNaN(value)) return "—";
-  return (Number(value) * 100).toFixed(digits) + "%";
-}
-
-function fmtMultiple(value, digits = 1) {
-  if (value == null || Number.isNaN(value)) return "—";
-  return Number(value).toFixed(digits) + "x";
-}
-
-function fmtRange(low, high, currency = "USD") {
-  if (low == null || high == null) return "—";
-  return `${fmtCurrency(low, currency, 0)} – ${fmtCurrency(high, currency, 0)}`;
-}
-
-function fmtUpdatedAt(iso) {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  const pad = (n) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
 
 /* ---- DOM helpers ---- */
 function setBind(name, value) {
@@ -62,30 +14,6 @@ function setBind(name, value) {
       el.textContent = value;
     }
   });
-}
-
-/* ---- Market data fill ---- */
-function fillMarketData(snapshot, updatedAt, mockMode = false) {
-  if (!snapshot) return;
-  const c = snapshot.currency || "USD";
-
-  setBind("price", fmtCurrency(snapshot.price, c, 2));
-  setBind("market-cap", fmtCompactCurrency((snapshot.market_cap_b || 0) * 1e9, c));
-  setBind("ev", fmtCompactCurrency((snapshot.ev_b || 0) * 1e9, c));
-  setBind("pe-forward", fmtMultiple(snapshot.pe_forward));
-  setBind("pb", fmtMultiple(snapshot.pb));
-  setBind("revenue-growth-ttm", fmtPercent(snapshot.revenue_growth_ttm));
-  setBind("operating-margin", fmtPercent(snapshot.operating_margin));
-  setBind("net-margin", fmtPercent(snapshot.net_margin));
-  setBind("week52-range", fmtRange(snapshot.week52_low, snapshot.week52_high, c));
-  setBind("analyst-target", fmtCurrency(snapshot.analyst_target_median, c, 0));
-  setBind("updated-at", fmtUpdatedAt(updatedAt));
-
-  if (mockMode) {
-    document.querySelectorAll("[data-bind-mock-badge]").forEach((el) => {
-      el.removeAttribute("hidden");
-    });
-  }
 }
 
 /* ---- Header meta fill (from <meta data-region="meta">) ---- */
@@ -228,47 +156,6 @@ function buildPerPbrChart(series) {
   };
 }
 
-function commonChartOptions({ yLeftTitle = "" } = {}) {
-  return {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: { mode: "index", intersect: false },
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: INK,
-        titleColor: "#F3F0EE",
-        bodyColor: "#F3F0EE",
-        cornerRadius: 8,
-        padding: 10,
-      },
-    },
-    scales: {
-      x: {
-        grid: { display: false },
-        ticks: {
-          color: TICK,
-          font: { family: FONT, size: 11 },
-          maxRotation: 0,
-          autoSkip: true,
-          autoSkipPadding: 32,
-        },
-        border: { display: false },
-      },
-      y: {
-        grid: { color: GRID, drawTicks: false },
-        ticks: {
-          color: TICK,
-          font: { family: FONT, size: 11 },
-          padding: 8,
-        },
-        border: { display: false },
-        title: { display: !!yLeftTitle, text: yLeftTitle, color: TICK },
-      },
-    },
-  };
-}
-
 function dualAxisChartOptions() {
   return {
     responsive: true,
@@ -301,6 +188,7 @@ function dualAxisChartOptions() {
         border: { display: false },
       },
       yPer: {
+        type: "linear",
         position: "left",
         grid: { color: GRID, drawTicks: false },
         ticks: {
@@ -312,6 +200,7 @@ function dualAxisChartOptions() {
         title: { display: true, text: "PER", color: TICK, font: { family: FONT, size: 11 } },
       },
       yPbr: {
+        type: "linear",
         position: "right",
         grid: { display: false },
         ticks: {
@@ -345,12 +234,20 @@ async function loadCompanyData(ticker) {
     const res = await fetch("./data.json", { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    fillMarketData(data.snapshot, data.updated_at, !!data.mock_data);
     renderChart("price-10y", buildPriceChart(data.charts && data.charts.price_10y));
-    renderChart("per-pbr-10y", buildPerPbrChart(data.charts && data.charts.per_pbr_10y));
   } catch (err) {
-    console.error("loadCompanyData failed for", ticker, err);
-    setBind("updated-at", "数据加载失败");
+    console.error("data.json load failed for", ticker, err);
+  }
+  try {
+    const res = await fetch("./per_pbr.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    renderChart("per-pbr-10y", buildPerPbrChart(data.per_pbr_10y));
+    if (data.updated_at) {
+      setBind("per-pbr-updated", data.updated_at.substring(0, 10));
+    }
+  } catch (err) {
+    console.warn("per_pbr.json not available for", ticker);
   }
 }
 

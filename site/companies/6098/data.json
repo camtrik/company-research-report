@@ -1,22 +1,6 @@
 {
   "ticker": "6098",
-  "updated_at": "2026-05-16T16:44:48Z",
-  "snapshot": {
-    "price": 7825,
-    "currency": "JPY",
-    "market_cap_b": 10930,
-    "ev_b": 10160,
-    "pe_forward": 17.5,
-    "pb": 6.9,
-    "pb_tbv": 12.6,
-    "revenue_growth_ttm": 0.09,
-    "operating_margin": 0.171,
-    "net_margin": 0.134,
-    "net_debt_to_ebitda": -0.96,
-    "week52_low": 6040,
-    "week52_high": 9563,
-    "analyst_target_median": 9900
-  },
+  "updated_at": "2026-05-16T17:51:59Z",
   "charts": {
     "price_10y": {
       "dates": [
@@ -1066,44 +1050,6 @@
         7361.0,
         7822.0,
         7825.0
-      ]
-    },
-    "per_pbr_10y": {
-      "years": [
-        2025,
-        2024,
-        2023,
-        2022
-      ],
-      "per": [
-        27.69,
-        29.97,
-        21.8,
-        30.21
-      ],
-      "pbr": [
-        6.74,
-        5.16,
-        3.54,
-        6.45
-      ],
-      "year_end_price": [
-        7430.0,
-        6680.0,
-        3650.0,
-        5463.0
-      ],
-      "eps": [
-        268.32,
-        222.9,
-        167.44,
-        180.83
-      ],
-      "bps": [
-        1102.86,
-        1295.4,
-        1030.33,
-        847.45
       ]
     }
   }
