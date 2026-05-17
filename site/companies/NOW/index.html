@@ -76,7 +76,7 @@
           </div>
           <div class="market-data__tile market-data__tile--accent">
             <span class="market-data__label">分析师目标价</span>
-            <span class="market-data__value">$143 / $140（均/中）</span>
+            <span class="market-data__value">$143</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
             <span class="market-data__label">分析截至</span>
@@ -122,11 +122,17 @@
                 <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
               </thead>
               <tbody>
-                <tr><td colspan="6">暂无历史 PER / PBR 数据，待后续更新补充。</td></tr>
+                <tr><td>FY2019</td><td class="num">$282.32</td><td class="num">$3.18</td><td class="num">$11.21</td><td class="num">88.8</td><td class="num">25.2</td></tr>
+                <tr><td>FY2020</td><td class="num">$550.43</td><td class="num">$0.59</td><td class="num">$14.45</td><td class="num">932.9</td><td class="num">38.1</td></tr>
+                <tr><td>FY2021</td><td class="num">$649.11</td><td class="num">$1.13</td><td class="num">$18.48</td><td class="num">574.4</td><td class="num">35.1</td></tr>
+                <tr><td>FY2022</td><td class="num">$388.27</td><td class="num">$1.60</td><td class="num">$24.79</td><td class="num">242.7</td><td class="num">15.7</td></tr>
+                <tr><td>FY2023</td><td class="num">$706.49</td><td class="num">$8.42</td><td class="num">$37.21</td><td class="num">83.9</td><td class="num">19.0</td></tr>
+                <tr><td>FY2024</td><td class="num">$1,060.12</td><td class="num">$6.84</td><td class="num">$46.65</td><td class="num">155.0</td><td class="num">22.7</td></tr>
+                <tr><td>FY2025</td><td class="num">$153.19</td><td class="num">$1.67</td><td class="num">$12.39</td><td class="num">91.7</td><td class="num">12.4</td></tr>
               </tbody>
             </table>
           </div>
-          <blockquote>ServiceNow 为美国上市 SaaS 公司，历史 PER / PBR 数据待 yfinance 拉取后填充。</blockquote>
+          <blockquote>期末股价使用 yfinance 后复权收盘价（按报告期股价基准调整至当前股数口径）；EPS / BPS 来自 SEC EDGAR XBRL 公司事实数据。FY2025 价格为 2025-12-31 收盘价，已包含 2025-2026 年股价拆分调整。</blockquote>
         </div>
         <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
       </div>
