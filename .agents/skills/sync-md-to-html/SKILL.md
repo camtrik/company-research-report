@@ -121,6 +121,7 @@ python scripts/build.py
 | `## 业务模式` | `data-region="business-model"` | `.feature-card` 正文 + `.section-plain__body`；无副标题 |
 | `## 财务表现` | `data-region="financials"` | 整个 `.section-plain__body`；副标题动态填写（如 `FY2021 – FY2026E · 单位：十亿日元`） |
 | `## 竞争与护城河` | `data-region="moat"` | `.feature-card` 正文 + `.section-plain__body`；无副标题 |
+| `## 近期动态` | `data-region="recent-developments"` | 整个 `.section-plain__body`；无副标题 |
 | `## 催化剂 / 关注点` | `data-region="catalysts"` | 整个 `.section-plain__body`；无副标题 |
 | `## 风险 / 反向论证` | `data-region="risks"` | 整个 `.section-plain__body`；副标题固定为 `按可能性 × 影响排序` |
 | `## 管理层与资本配置`（可选） | 合并进 `data-region="valuation"` | 作为末尾 `<h3>` 块追加到 `.section-plain__body` |
@@ -271,6 +272,22 @@ python scripts/build.py
 <div class="table-wrap table-wrap--dense"><table>…同业表…</table></div>
 <blockquote>…</blockquote>
 <p>定位分析。</p>
+```
+
+### recent-developments（近期动态）
+
+财报子节用 `<h3>`，其余事件用带日期的 `<ul>`：
+
+```html
+<h3>最近财报（YYYY-QN）</h3>
+<p class="lede">核心观察：营收 / 利润 vs 预期，关键 KPI，管理层指引变化。</p>
+<p>补充分析。</p>
+
+<h3>其他近期事件</h3>
+<ul>
+  <li><strong>YYYY-MM-DD</strong>　事件简述。<em>简短评论。</em></li>
+  <li><strong>YYYY-MM-DD</strong>　事件简述。<em>简短评论。</em></li>
+</ul>
 ```
 
 ### catalysts（催化剂 / 关注点）

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title>{{NOTE_TITLE}} — 投资研究</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/notes.css">
+</head>
+<body class="notes-page">
+  <!-- include: header.html -->
+  <main class="notes-main">
+    <div class="notes-layout" id="notes-layout">
+
+      <aside class="notes-toc" id="notes-toc">
+        <div class="notes-toc__head">
+          <span class="notes-toc__label">目录</span>
+          <button class="notes-toc__toggle" id="toc-toggle" aria-label="收起目录">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+        </div>
+        <nav class="notes-toc__nav" aria-label="文章目录">
+          {{NOTE_TOC}}
+        </nav>
+      </aside>
+
+      <div class="notes-content">
+        <header class="notes-header">
+          <div class="eyebrow eyebrow--with-dot">NOTES</div>
+          <h1 class="notes-header__title">{{NOTE_TITLE}}</h1>
+          <p class="notes-header__meta">{{NOTE_META}}</p>
+          <a href="{{SITE_BASE_PATH}}/#articles" class="link-blue">← 返回 Notes</a>
+        </header>
+        <article class="notes-body">
+          {{NOTE_CONTENT}}
+        </article>
+      </div>
+
+    </div>
+  </main>
+  <!-- include: footer.html -->
+  <script>
+  (function(){
+    var layout = document.getElementById('notes-layout');
+    var btn    = document.getElementById('toc-toggle');
+    var icon   = btn.querySelector('.material-symbols-outlined');
+    var KEY    = 'notes-toc-collapsed';
+
+    function apply(collapsed) {
+      layout.classList.toggle('toc-collapsed', collapsed);
+      icon.textContent = collapsed ? 'chevron_right' : 'chevron_left';
+      btn.setAttribute('aria-label', collapsed ? '展开目录' : '收起目录');
+    }
+
+    apply(localStorage.getItem(KEY) === '1');
+
+    btn.addEventListener('click', function() {
+      var next = !layout.classList.contains('toc-collapsed');
+      apply(next);
+      localStorage.setItem(KEY, next ? '1' : '0');
+    });
+  })();
+  </script>
+</body>
+</html>
