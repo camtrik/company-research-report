@@ -139,6 +139,16 @@
   font-size: 12px;
   color: var(--slate);
 }
+.company-card__target {
+  font-size: 12px;
+  color: var(--slate);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.company-card__target strong {
+  font-weight: 500;
+  color: var(--ink);
+}
 
 .company-card__satellite {
   position: absolute;

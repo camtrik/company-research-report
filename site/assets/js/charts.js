@@ -227,6 +227,37 @@ function renderChart(chartKey, config) {
   canvas._chartInstance = new Chart(canvas, config);
 }
 
+/* ---- PER/PBR history table (rendered from per_pbr.json) ---- */
+function renderPerPbrTable(series) {
+  const tbody = document.querySelector('[data-bind="per-pbr-table"]');
+  if (!tbody || !series || !Array.isArray(series.years)) return;
+  const {
+    years,
+    year_end_price = [],
+    eps = [],
+    bps = [],
+    per = [],
+    pbr = [],
+  } = series;
+
+  const fmt = (v, digits) => {
+    if (v == null || Number.isNaN(v)) return "—";
+    if (digits != null) return Number(v).toFixed(digits);
+    return Number(v).toLocaleString(undefined, { maximumFractionDigits: 2 });
+  };
+
+  tbody.innerHTML = years.map((y, i) => `
+    <tr>
+      <td>FY${y}</td>
+      <td class="num">${fmt(year_end_price[i])}</td>
+      <td class="num">${fmt(eps[i], 2)}</td>
+      <td class="num">${fmt(bps[i])}</td>
+      <td class="num">${fmt(per[i], 1)}</td>
+      <td class="num">${fmt(pbr[i], 1)}</td>
+    </tr>
+  `).join("");
+}
+
 /* ---- Entry point ---- */
 async function loadCompanyData(ticker) {
   fillMeta();
@@ -243,6 +274,7 @@ async function loadCompanyData(ticker) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     renderChart("per-pbr-10y", buildPerPbrChart(data.per_pbr_10y));
+    renderPerPbrTable(data.per_pbr_10y);
     if (data.updated_at) {
       setBind("per-pbr-updated", data.updated_at.substring(0, 10));
     }

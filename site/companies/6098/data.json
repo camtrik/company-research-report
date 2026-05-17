@@ -1,6 +1,12 @@
 {
   "ticker": "6098",
   "updated_at": "2026-05-16T17:51:59Z",
+  "snapshot": {
+    "price": 7825,
+    "currency": "JPY",
+    "analyst_target_mean": 9710,
+    "analyst_target_median": 9900
+  },
   "charts": {
     "price_10y": {
       "dates": [

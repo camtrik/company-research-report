@@ -51,6 +51,7 @@ function renderCompanyCard(company) {
     <div class="company-card__price-row">
       <span class="company-card__price" data-card-price>——</span>
       <span class="company-card__price-meta" data-card-price-meta>加载中</span>
+      <span class="company-card__target" data-card-target hidden></span>
     </div>
     <span class="company-card__satellite" aria-hidden="true">→</span>
   `;
@@ -114,12 +115,23 @@ async function hydrateCardPrice(card) {
     const snapshot = data.snapshot || {};
     const priceEl = card.querySelector("[data-card-price]");
     const metaEl = card.querySelector("[data-card-price-meta]");
+    const targetEl = card.querySelector("[data-card-target]");
     if (priceEl) priceEl.textContent = fmtCurrency(snapshot.price, snapshot.currency);
     if (metaEl) {
       const parts = [];
       if (data.mock_data) parts.push("mock");
       if (data.updated_at) parts.push(fmtDate(data.updated_at));
       metaEl.textContent = parts.join(" · ") || "—";
+    }
+    if (targetEl) {
+      // 有 mean 取 mean；否则 fallback median；都没有就隐藏
+      const target = snapshot.analyst_target_mean ?? snapshot.analyst_target_median;
+      if (target != null) {
+        targetEl.innerHTML = `分析师目标价 <strong>${fmtCurrency(target, snapshot.currency)}</strong>`;
+        targetEl.hidden = false;
+      } else {
+        targetEl.hidden = true;
+      }
     }
     return data.updated_at;
   } catch (err) {

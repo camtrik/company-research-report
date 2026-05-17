@@ -121,18 +121,7 @@
               <thead>
                 <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
               </thead>
-              <tbody>
-                <tr><td>FY2016</td><td class="num">1,800</td><td class="num">81.33</td><td class="num">441</td><td class="num">22.1</td><td class="num">4.1</td></tr>
-                <tr><td>FY2017</td><td class="num">2,537</td><td class="num">90.79</td><td class="num">500</td><td class="num">28.0</td><td class="num">5.1</td></tr>
-                <tr><td>FY2018</td><td class="num">3,058</td><td class="num">104.31</td><td class="num">578</td><td class="num">29.3</td><td class="num">5.3</td></tr>
-                <tr><td>FY2019</td><td class="num">2,731</td><td class="num">108.27</td><td class="num">600</td><td class="num">25.2</td><td class="num">4.6</td></tr>
-                <tr><td>FY2020</td><td class="num">5,298</td><td class="num">79.83</td><td class="num">668</td><td class="num">66.4</td><td class="num">7.9</td></tr>
-                <tr><td>FY2021</td><td class="num">5,328</td><td class="num">181.68</td><td class="num">827</td><td class="num">29.3</td><td class="num">6.4</td></tr>
-                <tr><td>FY2022</td><td class="num">3,613</td><td class="num">168.59</td><td class="num">1,023</td><td class="num">21.4</td><td class="num">3.5</td></tr>
-                <tr><td>FY2023</td><td class="num">6,639</td><td class="num">225.99</td><td class="num">1,293</td><td class="num">29.4</td><td class="num">5.1</td></tr>
-                <tr><td>FY2024</td><td class="num">7,631</td><td class="num">271.44</td><td class="num">1,102.86</td><td class="num">28.1</td><td class="num">6.9</td></tr>
-                <tr><td>FY2025</td><td class="num">6,526</td><td class="num">349.78</td><td class="num">1,134.01</td><td class="num">18.7</td><td class="num">5.8</td></tr>
-              </tbody>
+              <tbody data-bind="per-pbr-table"></tbody>
             </table>
           </div>
           <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / 财务数据来自 Recruit 官方 financial data；BPS 以归母权益和对应流通股数估算。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
