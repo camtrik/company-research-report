@@ -6,6 +6,7 @@ build.py — Mirror site/ into site/_dist/ with two transforms:
    `site/partials/NAME.html`.
 2. Replace `{{COMPANIES_JSON}}`, `{{BUILD_TIME}}`, and
    `{{SITE_BASE_PATH}}` placeholders.
+3. Convert `site/notes/**/*.md` to HTML using notes-template.html.
 
 `site/partials/` and `site/_templates/` are excluded from the output.
 Non-HTML files (CSS, JS, JSON, fonts, images) are copied unchanged.
@@ -29,6 +30,7 @@ SITE = ROOT / "site"
 DIST = SITE / "_dist"
 PARTIALS_DIR = SITE / "partials"
 COMPANIES_DIR = SITE / "companies"
+NOTES_TEMPLATE = SITE / "_templates" / "notes-template.html"
 
 EXCLUDED_DIR_NAMES = {"partials", "_templates", "_dist"}
 
@@ -121,6 +123,70 @@ def process_html(
     return text
 
 
+def build_notes(
+    dist: Path,
+    template_path: Path,
+    partials: dict[str, str],
+    companies_json: str,
+    build_time: str,
+    site_base_path: str,
+) -> int:
+    try:
+        import markdown as md_lib
+    except ImportError:
+        print("[build] WARNING: 'markdown' package not installed; skipping notes build. Run: pip install markdown")
+        return 0
+
+    if not template_path.exists():
+        print(f"[build] WARNING: notes template not found at {template_path}")
+        return 0
+
+    template = template_path.read_text(encoding="utf-8")
+    notes_dist = dist / "notes"
+    if not notes_dist.exists():
+        return 0
+
+    count = 0
+    for md_path in sorted(notes_dist.rglob("*.md")):
+        text = md_path.read_text(encoding="utf-8")
+
+        # extract title from first # heading and strip it from content
+        title = md_path.parent.name.replace("-", " ").title()
+        lines = text.splitlines()
+        content_lines: list[str] = []
+        title_extracted = False
+        for line in lines:
+            if not title_extracted and line.startswith("# "):
+                title = line[2:].strip()
+                title_extracted = True
+            else:
+                content_lines.append(line)
+        # drop leading blank lines after the title
+        while content_lines and not content_lines[0].strip():
+            content_lines.pop(0)
+
+        md = md_lib.Markdown(
+            extensions=["tables", "fenced_code", "toc"],
+            extension_configs={"toc": {"toc_depth": "2-3"}},
+        )
+        content_html = md.convert("\n".join(content_lines))
+        toc_html = md.toc  # empty string if no headings
+
+        html = template
+        html = html.replace("{{NOTE_TITLE}}", title)
+        html = html.replace("{{NOTE_CONTENT}}", content_html)
+        html = html.replace("{{NOTE_TOC}}", toc_html)
+        html = html.replace("{{NOTE_META}}", "")
+        html = process_html(html, partials, companies_json, build_time, site_base_path)
+
+        out_path = md_path.parent / "index.html"
+        out_path.write_text(html, encoding="utf-8")
+        md_path.unlink()
+        count += 1
+
+    return count
+
+
 def main() -> None:
     if not SITE.exists():
         raise SystemExit(f"site/ not found at {SITE}")
@@ -133,6 +199,8 @@ def main() -> None:
 
     mirror_site()
 
+    notes_count = build_notes(DIST, NOTES_TEMPLATE, partials, companies_json, build_time, site_base_path)
+
     html_files = list(DIST.rglob("*.html"))
     for html_path in html_files:
         original = html_path.read_text(encoding="utf-8")
@@ -143,6 +211,7 @@ def main() -> None:
     print(f"[build] mirrored to {DIST.relative_to(ROOT)}")
     print(f"[build] partials processed: {len(partials)}")
     print(f"[build] companies indexed: {len(companies)}")
+    print(f"[build] notes built: {notes_count}")
     print(f"[build] HTML files transformed: {len(html_files)}")
     print(f"[build] BUILD_TIME = {build_time}")
     print(f"[build] SITE_BASE_PATH = {site_base_path or '/'}")

@@ -1,0 +1,316 @@
+/* ============================================================
+   notes.css — Long-form reading layout with collapsible TOC
+   ============================================================ */
+
+/* ---- Outer layout ---- */
+.notes-main {
+  padding: var(--s-7) 0 var(--s-8);
+}
+
+.notes-layout {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  gap: var(--gutter);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--margin-container);
+  align-items: start;
+  transition: grid-template-columns 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notes-layout.toc-collapsed {
+  grid-template-columns: 40px 1fr;
+}
+
+/* ============================================================
+   TOC sidebar
+   ============================================================ */
+.notes-toc {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header row: label + toggle button */
+.notes-toc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-2);
+  flex-shrink: 0;
+  min-height: 32px;
+}
+
+.notes-toc__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--slate);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.2s ease, width 0.25s ease;
+}
+
+.toc-collapsed .notes-toc__label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.notes-toc__toggle {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--dust);
+  border-radius: var(--r-xs);
+  background: var(--surface-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slate);
+  transition: color 0.15s, background 0.15s, transform 0.15s;
+  padding: 0;
+}
+.notes-toc__toggle:hover {
+  color: var(--ink);
+  background: var(--bone);
+}
+.notes-toc__toggle:active {
+  transform: translateY(1px);
+}
+.notes-toc__toggle .material-symbols-outlined {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Nav list */
+.notes-toc__nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.toc-collapsed .notes-toc__nav {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* python-markdown toc extension generates .toc > ul */
+.notes-toc__nav .toc {
+  margin: 0;
+  padding: 0;
+}
+.notes-toc__nav .toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.notes-toc__nav .toc > ul > li {
+  margin-bottom: var(--s-1);
+}
+.notes-toc__nav .toc > ul > li > a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  padding: 4px 0;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notes-toc__nav .toc > ul > li > a:hover {
+  color: var(--link);
+  text-decoration: none;
+}
+
+/* nested h3 items */
+.notes-toc__nav .toc ul ul {
+  padding-left: 12px;
+  margin-top: 2px;
+  border-left: 1px solid var(--bone);
+}
+.notes-toc__nav .toc ul ul li a {
+  font-size: 12px;
+  font-weight: 450;
+  color: var(--slate);
+  display: block;
+  padding: 3px 0 3px 8px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notes-toc__nav .toc ul ul li a:hover {
+  color: var(--link);
+  text-decoration: none;
+}
+
+/* ============================================================
+   Article content
+   ============================================================ */
+.notes-content {
+  min-width: 0;
+}
+
+/* ---- Header ---- */
+.notes-header {
+  margin-bottom: var(--s-6);
+  padding-bottom: var(--s-5);
+  border-bottom: 1px solid var(--dust);
+}
+.notes-header .eyebrow {
+  margin-bottom: var(--s-3);
+}
+.notes-header__title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+  margin: var(--s-3) 0 var(--s-2);
+}
+.notes-header__meta {
+  color: var(--slate);
+  font-size: 14px;
+  margin: 0 0 var(--s-3);
+}
+.notes-header__meta:empty {
+  display: none;
+}
+
+/* ---- Body typography ---- */
+.notes-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.notes-body h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  margin: var(--s-3) 0 var(--s-3);
+  color: var(--charcoal);
+}
+
+.notes-body h3 {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  margin: var(--s-4) 0 var(--s-1);
+  color: var(--ink);
+}
+
+.notes-body p {
+  margin: 0 0 var(--s-2);
+}
+
+.notes-body ul,
+.notes-body ol {
+  margin: 0 0 var(--s-2);
+  padding-left: var(--s-4);
+}
+.notes-body li {
+  margin-bottom: 6px;
+}
+.notes-body li p {
+  margin-bottom: 4px;
+}
+
+.notes-body hr {
+  border: none;
+  border-top: 1px solid var(--dust);
+  margin: var(--s-5) 0 var(--s-4);
+}
+
+/* ---- Blockquote — 例 blocks ---- */
+.notes-body blockquote {
+  background: var(--surface-low);
+  border-left: 3px solid var(--signal-light);
+  border-radius: 0 var(--r-xs) var(--r-xs) 0;
+  margin: var(--s-3) 0;
+  padding: var(--s-3) var(--s-4);
+  color: var(--granite);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.notes-body blockquote p {
+  margin-bottom: var(--s-1);
+}
+.notes-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+.notes-body blockquote strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---- Tables ---- */
+.notes-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: var(--s-3);
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.notes-body th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--slate);
+  padding: var(--s-2) var(--s-2) var(--s-1);
+  border-bottom: 2px solid var(--dust);
+  white-space: nowrap;
+}
+.notes-body td {
+  padding: 10px var(--s-2);
+  border-bottom: 1px solid var(--bone);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.notes-body tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---- Inline code ---- */
+.notes-body code {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 0.875em;
+  background: var(--surface-low);
+  border-radius: var(--r-xs);
+  padding: 2px 6px;
+  color: var(--charcoal);
+}
+
+.notes-body strong {
+  font-weight: 600;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .notes-layout {
+    grid-template-columns: 1fr;
+  }
+  .notes-toc {
+    display: none;
+  }
+  .notes-layout.toc-collapsed {
+    grid-template-columns: 1fr;
+  }
+  .notes-main {
+    padding: var(--s-5) 0 var(--s-7);
+  }
+}

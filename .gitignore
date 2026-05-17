@@ -11,3 +11,5 @@ template-by-user.md
 site/_dist/
 __pycache__/
 .superpowers/
+
+references/
