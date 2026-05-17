@@ -7,6 +7,7 @@
 
 const CURRENCY_SYMBOL = { USD: "$", JPY: "¥", HKD: "HK$", CNY: "¥", EUR: "€" };
 const MARKET_LABEL = { US: "美股", JP: "日股", HK: "港股", CN: "A股", EU: "欧股" };
+const MARKET_CURRENCY = { US: "USD", JP: "JPY", HK: "HKD", CN: "CNY" };
 const SITE_BASE_PATH = (window.SITE_BASE_PATH || "").replace(/\/+$/, "");
 
 const state = {
@@ -112,27 +113,26 @@ async function hydrateCardPrice(card) {
     const res = await fetch(withBasePath(`/companies/${ticker}/data.json`), { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const snapshot = data.snapshot || {};
+    const series = data.charts?.price_10y;
     const priceEl = card.querySelector("[data-card-price]");
     const metaEl = card.querySelector("[data-card-price-meta]");
     const targetEl = card.querySelector("[data-card-target]");
-    if (priceEl) priceEl.textContent = fmtCurrency(snapshot.price, snapshot.currency);
-    if (metaEl) {
-      const parts = [];
-      if (data.mock_data) parts.push("mock");
-      if (data.updated_at) parts.push(fmtDate(data.updated_at));
-      metaEl.textContent = parts.join(" · ") || "—";
-    }
-    if (targetEl) {
-      // 有 mean 取 mean；否则 fallback median；都没有就隐藏
-      const target = snapshot.analyst_target_mean ?? snapshot.analyst_target_median;
-      if (target != null) {
-        targetEl.innerHTML = `分析师目标价 <strong>${fmtCurrency(target, snapshot.currency)}</strong>`;
-        targetEl.hidden = false;
-      } else {
-        targetEl.hidden = true;
+    if (series?.values?.length) {
+      const price = series.values[series.values.length - 1];
+      const priceDate = series.dates?.[series.dates.length - 1];
+      const currency = MARKET_CURRENCY[card.dataset.market] || "USD";
+      if (priceEl) priceEl.textContent = fmtCurrency(price, currency);
+      if (metaEl) {
+        const parts = [];
+        if (data.mock_data) parts.push("mock");
+        if (priceDate) parts.push(fmtDate(priceDate));
+        metaEl.textContent = parts.join(" · ") || "—";
       }
+    } else {
+      if (priceEl) priceEl.textContent = "—";
+      if (metaEl) metaEl.textContent = "—";
     }
+    if (targetEl) targetEl.hidden = true;
     return data.updated_at;
   } catch (err) {
     console.warn("price fetch failed for", ticker, err);
