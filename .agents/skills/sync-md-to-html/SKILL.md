@@ -7,6 +7,50 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
 
 将 `company-reports/{ticker}-{name}/YYYY-MM-DD-reports.md` 转换为 `site/companies/{TICKER}/index.html` 公司详情页，并维护 `changelog.html`。动手改 HTML 之前必须先读 `docs/rules/website.md`。
 
+## 新公司初始化：数据脚本
+
+新增公司时，除同步 HTML 外还需要准备两个 JSON 文件。脚本均有两份内容一致的副本：
+
+```
+.agents/skills/sync-md-to-html/scripts/  ← 权威副本
+scripts/                                  ← 镜像副本（修改时两处同步）
+```
+
+### 1. 股价数据（data.json · price_10y）
+
+```bash
+python .agents/skills/sync-md-to-html/scripts/fetch_price_data.py \
+  --ticker 6098 --market JP
+
+# 美股（market 可省略，从 ticker 自动推断）
+python .agents/skills/sync-md-to-html/scripts/fetch_price_data.py \
+  --ticker AMZN
+```
+
+写入 `site/companies/{TICKER}/data.json`，包含 10 年周线收盘价。之后由 GitHub Actions（`update_market_data.py`）每周自动更新，无需手动再跑。
+
+### 2. PER / PBR 历史数据（per_pbr.json）
+
+```bash
+# 日股（需 EDINETDB_API_KEY 环境变量）
+python .agents/skills/sync-md-to-html/scripts/per_pbr_10y.py \
+  --ticker 6098.T \
+  --output site/companies/6098/per_pbr.json
+
+# 美股（无需 API Key）
+python .agents/skills/sync-md-to-html/scripts/per_pbr_10y.py \
+  --ticker AMZN \
+  --output site/companies/AMZN/per_pbr.json
+```
+
+写入 `site/companies/{TICKER}/per_pbr.json`，包含 10 年 PER / PBR 历史数据。之后需要手动重跑更新（无自动化）。
+
+### 完成后重建
+
+```bash
+python scripts/build.py
+```
+
 ## 输入参数
 
 | 参数 | 必填 | 默认值 |
@@ -49,13 +93,13 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
      `<p class="eyebrow eyebrow--muted" ...>数据截至 YYYY-MM-DD</p>`
      同步时将日期替换为 `## 关键数据` 表格第一行的股价日期（或 frontmatter `data-last-updated`）
 
-5. 填充 per-pbr-history div（它是 [data-region="charts"] 的兄弟节点，不在其内部）：
-   - 数据来源：markdown ## 图表区 中的 PER/PBR 表格
-   - 目标：<div class="per-pbr-history">
-   - 格式：见下方「HTML 组件模式 → per-pbr-history」
-   - 注意：per-pbr-history div **之后**（同一 `section__inner` 内）还有
+5. per-pbr-history div（它是 [data-region="charts"] 的兄弟节点，不在其内部）：
+   - **`<tbody data-bind="per-pbr-table">` 由 JS 从 per_pbr.json 渲染，sync skill 不要填行数据**
+   - sync skill 只维护该 div 末尾的 `<blockquote>`——把 markdown ## 图表区 的数据来源说明（"注：期末股价使用 yfinance ..."）抄进去
+   - 格式见下方「HTML 组件模式 → per-pbr-history」
+   - 注意：div **之后**（同一 `section__inner` 内）的
      `<p class="eyebrow eyebrow--muted" ...>图表 / 表格数据截至 <span data-bind="per-pbr-updated">YYYY-MM-DD</span></p>`
-     该 span 内的日期由 JS 从 per_pbr.json 动态覆盖，**不要修改该行**
+     由 JS 从 per_pbr.json 的 `updated_at` 覆盖，**不要修改**
 
 6. 按 markdown 章节逐一填充各内容 data-region：
    - 只替换每个 region 可编辑容器的内部 HTML
@@ -73,7 +117,7 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
 | `## 关键数据` | `data-region="snapshot"` | 整个 `.market-data` 内所有 `.market-data__tile`；见下方「HTML 组件模式 → snapshot」 |
 | `## 核心结论` | `data-region="thesis"` | 整个 `.section-plain__body`；无副标题 |
 | `## 公司概要` | `data-region="company-overview"` | 整个 `.section-plain__body`；副标题固定为 `基本面 · 业务定位` |
-| `## 图表区`（仅 PER/PBR 表格） | `<div class="per-pbr-history">` | 整个 div |
+| `## 图表区`（数据来源说明） | `<div class="per-pbr-history">` 内的 `<blockquote>` | 只更新数据来源说明文字；表格 `<tbody>` 由 JS 从 per_pbr.json 渲染，不要手填 |
 | `## 业务模式` | `data-region="business-model"` | `.feature-card` 正文 + `.section-plain__body`；无副标题 |
 | `## 财务表现` | `data-region="financials"` | 整个 `.section-plain__body`；副标题动态填写（如 `FY2021 – FY2026E · 单位：十亿日元`） |
 | `## 竞争与护城河` | `data-region="moat"` | `.feature-card` 正文 + `.section-plain__body`；无副标题 |
@@ -161,6 +205,8 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
 
 ### per-pbr-history
 
+`<tbody>` 留空 + 加 `data-bind="per-pbr-table"`，由 `charts.js` 从 `per_pbr.json` 渲染。sync skill 只动 `<blockquote>` 的文字。
+
 ```html
 <div class="per-pbr-history">
   <div class="per-pbr-history__head">
@@ -172,9 +218,7 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
       <thead>
         <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
       </thead>
-      <tbody>
-        <tr><td>FY20XX</td><td class="num">…</td>…</tr>
-      </tbody>
+      <tbody data-bind="per-pbr-table"></tbody>
     </table>
   </div>
   <blockquote>来自 markdown 的数据来源说明。</blockquote>
@@ -314,6 +358,7 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
 | `[data-region="changelog-link"]` | 固定结构 |
 | 所有 `<!-- include: ... -->` 注释行 | build.py 在构建时替换 |
 | 所有 `<script>` 标签 | 构建管道，不属于 sync skill 管辖 |
+| `<tbody data-bind="per-pbr-table">` | JS 从 per_pbr.json 渲染整张 PER/PBR 表格；保持 `<tbody>` 为空 |
 | `data-bind="per-pbr-updated"` 元素（图表区下方小字） | JS 从 per_pbr.json 覆盖；HTML 内有硬编码日期作兜底，不改该元素 |
 | 所有其他 `data-bind="..."` 元素 | 由 JS 在运行时填充 |
 | 所有 `<canvas data-chart="...">` 元素 | Chart.js 渲染目标 |
@@ -373,51 +418,6 @@ description: Use when the user says "同步 TICKER 到 HTML", "sync TICKER", or 
 ```
 
 摘要从新旧 markdown 的差异中提炼——例如合理价值调整、观点变化、重大 thesis 更新。
-
-## 新公司初始化：数据脚本
-
-新增公司时，除同步 HTML 外还需要准备两个 JSON 文件。脚本均有两份内容一致的副本：
-
-```
-.agents/skills/sync-md-to-html/scripts/  ← 权威副本
-scripts/                                  ← 镜像副本（修改时两处同步）
-```
-
-### 1. 股价数据（data.json · price_10y）
-
-```bash
-python .agents/skills/sync-md-to-html/scripts/fetch_price_data.py \
-  --ticker 6098 --market JP
-
-# 美股（market 可省略，从 ticker 自动推断）
-python .agents/skills/sync-md-to-html/scripts/fetch_price_data.py \
-  --ticker AMZN
-```
-
-写入 `site/companies/{TICKER}/data.json`，包含 10 年周线收盘价。之后由 GitHub Actions（`update_market_data.py`）每周自动更新，无需手动再跑。
-
-### 2. PER / PBR 历史数据（per_pbr.json）
-
-```bash
-# 日股（需 EDINETDB_API_KEY 环境变量）
-python .agents/skills/sync-md-to-html/scripts/per_pbr_10y.py \
-  --ticker 6098.T \
-  --output site/companies/6098/per_pbr.json
-
-# 美股（无需 API Key）
-python .agents/skills/sync-md-to-html/scripts/per_pbr_10y.py \
-  --ticker AMZN \
-  --output site/companies/AMZN/per_pbr.json
-```
-
-写入 `site/companies/{TICKER}/per_pbr.json`，包含 10 年 PER / PBR 历史数据。之后需要手动重跑更新（无自动化）。
-
-### 完成后重建
-
-```bash
-python scripts/build.py
-```
-
 ---
 
 > **每次写入任何 HTML / JSON 文件后，都必须运行 `python scripts/build.py` 才能在本地预览中看到改动。**
