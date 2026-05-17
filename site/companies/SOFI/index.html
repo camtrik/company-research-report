@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">SOFI — SoFi Technologies</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="SOFI"
+        data-name="SoFi Technologies"
+        data-name-en="SoFi Technologies, Inc."
+        data-market="US"
+        data-sector="Financial Services"
+        data-view="Watch"
+        data-tags="fintech,digital-bank,consumer-finance,growth"
+        data-last-updated="2026-05-18">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market"></span>
+          <span class="sep">·</span>
+          <span data-bind="sector"></span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated"></span>
+        </div>
+        <h1 class="company-header__title" data-bind="name"></h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker"></span>
+          <span class="sep">·</span>
+          <span data-bind="name-en"></span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ↓ 关键数据快照（sync skill 维护）↓ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">$15.61</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值 / EV</span>
+            <span class="market-data__value">$20.0B / $18.4B</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">19.9x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">P/B / P/TBV</span>
+            <span class="market-data__value">1.85x / 2.17x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth</span>
+            <span class="market-data__value">42.5%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">EV / Revenue TTM</span>
+            <span class="market-data__value">4.70x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Net Margin / ROE</span>
+            <span class="market-data__value">14.8% / 6.6%</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">$12.74 – $32.73</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">分析师目标价（均 / 中）</span>
+            <span class="market-data__value">$21.10 / $18.50</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-05-15</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-15</p>
+      </div>
+    </section>
+
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <!-- PER / PBR 历史数据表（sync skill 维护；位于 PER/PBR 折线图下方） -->
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / BPS 来自 SEC EDGAR XBRL 公司事实数据。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
+      </div>
+    </section>
+    <!-- ↑ 关键数据 / 图表区结束 ↑ -->
+
+    <!-- ↓ 内容区（sync skill 维护，AI 可自由生成 HTML 片段） ↓ -->
+    <!-- 公司概要 — section-plain，作为第一个内容 section -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">NASDAQ · SOFI</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">San Francisco, California</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">Q1 2026 季度收入</div>
+              <div class="kv-grid__value">$1.100B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总会员数</div>
+              <div class="kv-grid__value">14.7M（+35% YoY）</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总存款</div>
+              <div class="kv-grid__value">$40.2B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业</div>
+              <div class="kv-grid__value">Financial Services · Fintech / Digital Bank</div>
+            </div>
+          </div>
+
+          <p>
+            SoFi Technologies 是一家面向个人用户的数字金融服务平台，业务分为三块：Lending、Financial Services 和 Technology Platform。
+            公司通过贷款、存款、投资、信用卡、支付、加密资产、推荐业务和金融基础设施服务赚钱，同时拥有银行牌照，
+            这让它相对纯 marketplace lender 有更稳定的资金来源。
+          </p>
+          <p>
+            SoFi 的估值不能简单套软件公司收入倍数，也不能完全按传统银行估值。
+            它同时具备银行、消费金融、fintech app 和金融基础设施平台特征；
+            当前最合理的估值方式是交叉使用 P/TBV、前瞻 P/E 和 EV / Adjusted EBITDA。
+          </p>
+
+          <h3>护城河来源（速览）</h3>
+          <ul>
+            <li>银行牌照和存款基础——Q1 2026 total deposits <span class="kpi">$40.2B</span>，提供相对稳定的资金来源</li>
+            <li>会员增长和交叉销售——总会员 14.7M，总产品 22.2M，为多产品转化提供基础</li>
+            <li>数据和风控闭环——高收入、高 FICO 用户画像有助于控制消费信贷风险</li>
+            <li>品牌和 app 分发——存款、贷款、投资、信用卡和金融服务集中在一个用户入口</li>
+            <li>资本轻业务期权——Loan Platform Business、推荐业务、fee income 若扩大，可改善估值结构</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心结论 — section-plain -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch · 基准合理价值 $16</div>
+            <p>
+              SoFi Technologies（SOFI）已经从"亏损型 fintech 成长股"进入"盈利型高增长数字金融平台"的阶段。
+              基于 2026-05-15 收盘价 <span class="kpi">$15.61</span>，基准合理价值约为 <span class="kpi">$16/股</span>，
+              相对当前价格只有约 3% 上行，属于接近合理估值、略有低估但安全边际不厚。
+            </p>
+            <p>
+              当前股票的本质不是传统深度价值，而是"高增长数字银行/消费金融平台"的兑现题。
+              看多的核心是会员、存款、贷款发放量和 EPS 继续快速复合；
+              看空的核心是信贷周期、贷款 fair-value 假设、资产负债表扩张和估值倍数压缩。
+            </p>
+          </div>
+
+          <p class="lede">
+            更有吸引力的左侧价格在 $13–14 附近；右侧确认来自 Q2/Q3 继续证明 2026 指引偏保守、信贷损失稳定、Technology Platform 企稳。
+          </p>
+          <p>
+            我会把 SOFI 放在 <strong>Watch / 小仓位成长兑现跟踪</strong>，而不是"显著低估可重仓"的类别。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 业务模式 — 浅灰底 + feature-card 仅含核心，扩展内容（如分部表）放在 section-plain__body -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">SoFi 的商业模式可以拆成三大板块，共同支撑一个全栈个人金融平台：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>Lending</strong> — 个人贷款、学生贷款、房贷、贷款销售、证券化和 Loan Platform Business。
+                Q1 2026 发放量 $12.18B（+68% YoY），是最大利润来源，也是最大风险来源。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>Financial Services</strong> — Money、Invest、Credit Card、Relay、Crypto、At Work、存款和推荐贷款。
+                Q1 2026 revenue $428.5M（+41% YoY），是多元化和交叉销售的关键载体。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">03</span>
+              <div class="numbered-list__body">
+                <strong>Technology Platform</strong> — Galileo / Technisys 金融基础设施，正重组为 SoFi Technology Solutions。
+                Q1 2026 revenue $75.1M（-27% YoY），当前最弱板块，需要等待收入恢复增长。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>Business Segments</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>板块</th>
+                  <th class="num">Q1 2026 Revenue</th>
+                  <th class="num">Contribution Profit</th>
+                  <th>增长状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Lending</td><td class="num">$642.4M</td><td class="num">$382.4M</td><td>强（+55% YoY）</td></tr>
+                <tr><td>Financial Services</td><td class="num">$428.5M</td><td class="num">$195.6M</td><td>强（+41% YoY）</td></tr>
+                <tr><td>Technology Platform</td><td class="num">$75.1M</td><td class="num">$12.0M</td><td>弱（-27% YoY）</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Lending 发放量明细</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>贷款类型</th>
+                  <th class="num">Q1 2026 发放量</th>
+                  <th class="num">同比增长</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Personal loans</td><td class="num">$8.34B</td><td class="num pos">+51%</td></tr>
+                <tr><td>Student loans</td><td class="num">$2.61B</td><td class="num pos">+119%</td></tr>
+                <tr><td>Home loans</td><td class="num">$1.22B</td><td class="num pos">+137%</td></tr>
+                <tr class="row--total"><td>合计</td><td class="num">$12.18B</td><td class="num pos">+68%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Financial Services 关键 KPI（Q1 2026）</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>指标</th>
+                  <th class="num">Q1 2026</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Financial Services products</td><td class="num">19.3M</td></tr>
+                <tr><td>Total deposits</td><td class="num">$40.2B</td></tr>
+                <tr><td>Money products</td><td class="num">7.3M</td></tr>
+                <tr><td>Invest products</td><td class="num">3.7M</td></tr>
+                <tr><td>Relay products</td><td class="num">7.3M</td></tr>
+                <tr><td>Credit Card products</td><td class="num">436K</td></tr>
+                <tr><td>Crypto products</td><td class="num">240K</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>
+            Technology Platform（Galileo / Technisys）账户数同比下降 16% 至 133M，但环比增加 4M。
+            大客户迁出造成收入下滑，正以 SoFi Technology Solutions 重新定位。在看到收入恢复增长前，不应给这一板块过高的软件公司倍数。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 财务表现 — section-plain（含宽表格） -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">Q1 2026 实绩 · 2026 全年管理层指引 · 单位：十亿美元</span>
+        </div>
+        <div class="section-plain__body">
+          <h3>Q1 2026 财报关键指标</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>指标</th>
+                  <th class="num">Q1 2026</th>
+                  <th>说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>GAAP total net revenue</td><td class="num">$1.100B</td><td>同比 +43%</td></tr>
+                <tr><td>Adjusted net revenue</td><td class="num">$1.087B</td><td>同比 +41%</td></tr>
+                <tr><td>GAAP net income</td><td class="num">$166.7M</td><td>同比 +134%</td></tr>
+                <tr><td>Diluted EPS</td><td class="num">$0.12</td><td>同比翻倍</td></tr>
+                <tr><td>Adjusted EBITDA</td><td class="num">$339.9M</td><td>同比 +62%</td></tr>
+                <tr><td>Adjusted EBITDA margin</td><td class="num">31%</td><td>上年同期 27%</td></tr>
+                <tr><td>Total members</td><td class="num">14.7M</td><td>同比 +35%</td></tr>
+                <tr><td>Total products</td><td class="num">22.2M</td><td>同比 +39%</td></tr>
+                <tr><td>Tangible book value / share</td><td class="num">$7.21</td><td>同比 +57%</td></tr>
+                <tr><td>Total assets</td><td class="num">$53.7B</td><td>较 2025 年末 +6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>Q1 2026 SBC 为 $72.0M；普通股东需关注每股价值是否被稀释。</blockquote>
+
+          <h3>2026 全年管理层指引</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>指标</th>
+                  <th class="num">管理层指引</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Adjusted net revenue</td><td class="num">~$4.655B</td></tr>
+                <tr><td>Revenue growth</td><td class="num">~30%</td></tr>
+                <tr><td>Adjusted EBITDA</td><td class="num">~$1.6B</td></tr>
+                <tr><td>Adjusted EBITDA margin</td><td class="num">~34%</td></tr>
+                <tr><td>Adjusted net income</td><td class="num">~$825M</td></tr>
+                <tr><td>Adjusted net income margin</td><td class="num">~18%</td></tr>
+                <tr><td>Adjusted EPS</td><td class="num">~$0.60</td></tr>
+                <tr><td>Member growth</td><td class="num">至少 +30% YoY</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Q1 业绩本身很强，但管理层维持而非上调 2026 全年指引，可能是股价在财报后承压的重要原因之一。
+            市场的分歧点在于：Q1 的强劲表现能否转化为全年上调，以及信贷和 fair-value 假设是否足够稳健。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 护城河 — 浅灰底 + feature-card 仅含核心，对比表放在 section-plain__body -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">当前评估：<strong>Narrow and Evolving</strong>。护城河来自五个方向，但每一项均面临验证风险：</p>
+
+          <div class="moat-block">
+            <h4>银行牌照和存款基础</h4>
+            <p>持有银行牌照，Q1 2026 total deposits 达 $40.2B，资金来源比纯 marketplace lender 更稳定，利差结构更具弹性。</p>
+          </div>
+          <div class="moat-block">
+            <h4>会员增长和交叉销售</h4>
+            <p>总会员 14.7M、总产品 22.2M，多产品覆盖同一用户，单客收益有望随存量加深而提升。</p>
+          </div>
+          <div class="moat-block">
+            <h4>数据和风控闭环</h4>
+            <p>高收入、高 FICO 用户画像有助于控制消费信贷风险，但周期压力和 fair-value 会计假设仍需验证。</p>
+          </div>
+          <div class="moat-block">
+            <h4>品牌和 app 分发</h4>
+            <p>SoFi 把存款、贷款、投资、信用卡和金融服务集中在一个入口，降低获客成本，提高用户留存。</p>
+          </div>
+          <div class="moat-block">
+            <h4>资本轻业务期权</h4>
+            <p>Loan Platform Business、推荐业务、fee income 和 Technology Platform 若修复，可降低对资产负债表扩张的依赖，改善估值结构。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">市值</th>
+                  <th class="num">Fwd P/E</th>
+                  <th class="num">P/S TTM</th>
+                  <th class="num">Rev Growth</th>
+                  <th class="num">P/B</th>
+                  <th class="num">ROE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>SoFi</td><td>SOFI</td><td class="num">$20.0B</td><td class="num">19.9x</td><td class="num">5.1x</td><td class="num pos">42.5%</td><td class="num">1.85x</td><td class="num">6.6%</td></tr>
+                <tr><td>LendingClub</td><td>LC</td><td class="num">$1.8B</td><td class="num">6.8x</td><td class="num">1.3x</td><td class="num pos">12.5%</td><td class="num">1.18x</td><td class="num">12.2%</td></tr>
+                <tr><td>Ally Financial</td><td>ALLY</td><td class="num">$12.9B</td><td class="num">6.5x</td><td class="num">1.7x</td><td class="num pos">19.7%</td><td class="num">0.97x</td><td class="num">9.4%</td></tr>
+                <tr><td>Capital One</td><td>COF</td><td class="num">$116.5B</td><td class="num">7.8x</td><td class="num">3.2x</td><td class="num pos">46.3%</td><td class="num">1.08x</td><td class="num">3.3%</td></tr>
+                <tr><td>Synchrony</td><td>SYF</td><td class="num">$24.0B</td><td class="num">6.8x</td><td class="num">2.4x</td><td class="num pos">6.1%</td><td class="num">1.58x</td><td class="num">21.8%</td></tr>
+                <tr><td>Affirm</td><td>AFRM</td><td class="num">$22.0B</td><td class="num">17.3x</td><td class="num">5.6x</td><td class="num pos">32.6%</td><td class="num">5.83x</td><td class="num">11.5%</td></tr>
+                <tr><td>Upstart</td><td>UPST</td><td class="num">$2.8B</td><td class="num">8.8x</td><td class="num">2.4x</td><td class="num pos">44.6%</td><td class="num">3.62x</td><td class="num">7.0%</td></tr>
+                <tr><td>Nu Holdings</td><td>NU</td><td class="num">$59.3B</td><td class="num">10.5x</td><td class="num">7.8x</td><td class="num pos">43.7%</td><td class="num">5.24x</td><td class="num">30.1%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>同业倍数来自 Yahoo Finance / yfinance，2026-05-18 JST 检查。</blockquote>
+          <p>
+            SOFI 的估值明显高于传统消费金融公司，但低于最强数字银行（如 Nu Holdings）叙事能支撑的高倍数。
+            关键不是"增长快不快"，而是增长能否转换成 ROE 和每股 EPS，而不是靠资产负债表规模和股本稀释推动。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 近期动态 — section-plain -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+          <h3>最近财报（2026-Q1，2026-04-29）</h3>
+          <p class="lede">
+            核心观察：SoFi Q1 2026 创下 $1.1B quarterly net revenue，净利润 $166.7M，adjusted EBITDA $339.9M，
+            成员数、产品数、贷款发放量、存款和 TBVPS 均保持高增；管理层维持全年指引而非上调。
+          </p>
+          <p>
+            Technology Platform 同比下滑 27% 是报告中最明显的瑕疵。市场分歧点在于 Q1 强劲表现能否转化为全年上调，
+            以及信贷和 fair-value 假设是否足够稳健。
+          </p>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-05-07</strong>　SoFi 提交 2026 Q1 Form 10-Q，披露总资产、贷款、存款、fair-value loans 和信用指标。<em>数据透明度良好，无重大重述。</em></li>
+            <li><strong>2026-05</strong>　公司继续回应空头报告对贷款会计和 fair-value 的质疑。<em>该争议提高了市场对信用质量和会计假设的折现率，短期压制估值倍数。</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 催化剂 — section-plain + 短期/中期两张白卡 -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>Q2 / Q3 财报是否上调 2026 adjusted EPS、adjusted net revenue 或 adjusted EBITDA 指引。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>Personal loan charge-off、delinquency、fair-value marks 和贷款销售价差的变化。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>Technology Platform 是否恢复环比 / 同比增长。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>存款增长与资金成本变化，尤其在利率下行或信用压力出现时的稳定性。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>ROE 是否能从约 6.6% 持续抬升至中双位数水平。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Fee-based revenue 和 capital-light 业务占比是否持续提高。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>股本稀释和 stock-based compensation 是否放缓，使 EPS 增长真正传导到普通股东。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>市场最终把 SOFI 归类为高增长银行、fintech 平台，还是周期性消费金融公司——决定估值倍数中枢。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 估值 — section-plain（含宽表格） -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值</h2>
+          <span class="section-plain__meta">P/TBV · EV/EBITDA · EPS 折现 · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>方法一：P/TBV</h3>
+          <p>SoFi 是金融资产驱动型平台，P/TBV 是估值底层锚。Q1 2026 tangible book value per share 为 <span class="kpi">$7.21</span>。</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th class="num">P/TBV 倍数</th>
+                  <th class="num">隐含股价</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">1.5x</td><td class="num">$10.8</td></tr>
+                <tr><td class="num">1.8x</td><td class="num">$13.0</td></tr>
+                <tr><td class="num">2.0x</td><td class="num">$14.4</td></tr>
+                <tr class="row--highlight"><td class="num">2.2x（基准）</td><td class="num">$15.9</td></tr>
+                <tr><td class="num">2.5x</td><td class="num">$18.0</td></tr>
+                <tr><td class="num">3.0x</td><td class="num">$21.6</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>基准 2.2x P/TBV 对应 <span class="kpi">$15.9/股</span>，已假设 SoFi 优于传统消费金融公司，但尚未给予 Nu Holdings 式高 ROE 数字银行溢价。</p>
+
+          <h3>方法二：EV / Adjusted EBITDA</h3>
+          <p>管理层 2026 adjusted EBITDA 指引约 $1.6B。以企业价值 $18.4B 计，当前 EV / 2026E adjusted EBITDA 约 <span class="kpi">11.5x</span>。</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th class="num">EV / 2026E EBITDA</th>
+                  <th class="num">隐含股价</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">9x</td><td class="num">$12.6</td></tr>
+                <tr><td class="num">10x</td><td class="num">$13.8</td></tr>
+                <tr class="row--highlight"><td class="num">12x（基准）</td><td class="num">$16.3</td></tr>
+                <tr><td class="num">15x</td><td class="num">$22.4</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>基准 12x 对应 <span class="kpi">$16.3/股</span>。该方法对净现金、股数和 adjusted EBITDA 口径敏感，只作为交叉验证。</p>
+
+          <h3>方法三：2027 EPS 折现</h3>
+          <p>传统 FCFF DCF 不适合作为 SOFI 主估值口径，因为贷款增长会扭曲经营现金流。此处用 2027E EPS 折现来近似盈利兑现价值。</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>2027E EPS \ 退出 P/E</th>
+                  <th class="num">16x</th>
+                  <th class="num">20x</th>
+                  <th class="num">24x</th>
+                  <th class="num">28x</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>$0.60</td><td class="num">$8.5</td><td class="num">$10.6</td><td class="num">$12.7</td><td class="num">$14.8</td></tr>
+                <tr><td>$0.70</td><td class="num">$9.9</td><td class="num">$12.3</td><td class="num">$14.8</td><td class="num">$17.3</td></tr>
+                <tr class="row--highlight"><td>$0.82（基准）</td><td class="num">$11.6</td><td class="num">$14.4</td><td class="num">$17.3</td><td class="num">$20.2</td></tr>
+                <tr><td>$0.95</td><td class="num">$13.4</td><td class="num">$16.7</td><td class="num">$20.1</td><td class="num">$23.4</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>基准组合（$0.82 EPS、22x P/E、13.5% 折现）对应 <span class="kpi">$15.9/股</span>。</p>
+
+          <h3>估值结论</h3>
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">保守</div>
+              <div class="scenario-card__value">$9 – $11</div>
+              <div class="scenario-card__trigger">信贷恶化、EPS 路径下修、市场按普通 specialty finance 估值。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">基准</div>
+              <div class="scenario-card__value">$16</div>
+              <div class="scenario-card__trigger">2026 指引实现，ROE 逐步抬升，信贷损失维持在管理层容忍范围。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">乐观</div>
+              <div class="scenario-card__value">$22 – $23</div>
+              <div class="scenario-card__trigger">2027E EPS 接近 $0.95，P/TBV 接近 3x，fee-based revenue 和 Technology Platform 修复。</div>
+            </div>
+          </div>
+          <p>
+            <strong>当前 vs 合理价值：</strong>
+            当前 $15.61 相对基准 <span class="kpi">$16.0</span>，折价约 2.6%。这不是深度低估，更像市场在等待后续财报确认：
+            SoFi 是否能把高增长稳定转成更高 ROE 和每股利润。
+          </p>
+
+          <h3>管理层与资本配置</h3>
+          <ul>
+            <li><strong>CEO</strong>：Anthony Noto 任 CEO，前期以扭亏为盈和会员增长为核心目标，管理执行力较强。</li>
+            <li><strong>SBC</strong>：Q1 2026 stock-based compensation 为 $72.0M，是需要持续关注的稀释来源。</li>
+            <li><strong>资本配置</strong>：公司目前聚焦有机增长，以贷款发放量、存款和产品扩张为主，未大规模并购。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 风险 — section-plain + risk-grid 2 列卡片网格 -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. 信贷质量恶化</h4>
+              <p>Personal loan charge-off 或 delinquency 连续恶化会直接压缩 P/TBV 和 P/E 倍数。信贷损失是 Lending 段利润最敏感变量。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. Fair-value 会计信任风险</h4>
+              <p>贷款 fair-value 假设若被市场质疑，即使没有重述，也会抬高股权成本、压低估值倍数。空头报告已引发部分市场关注。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. Technology Platform 持续疲弱</h4>
+              <p>收入同比下降 27%，在恢复增长前难以获得高软件倍数。大客户迁出损害了该平台的定价能力和规模效益。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. 股本稀释</h4>
+              <p>Q1 2026 SBC 为 $72.0M。若 EPS 增长大部分被稀释抵消，普通股东的每股价值增长将低于公司层面利润增长。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>05. 资产负债表扩张与宏观敏感性</h4>
+              <p>总资产 $53.7B，fair-value loans 规模大；扩张提高盈利弹性，也放大宏观和资本市场风险敞口。利率、信用利差和流动性环境变化均可能影响盈利和股价。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              如果 personal loan 信用指标连续两季明显恶化，或 2026 adjusted EPS 指引下调至 <span class="kpi">$0.50</span> 以下，
+              同时 Technology Platform 仍不能企稳，我会把基准价值从 $16 下调到 $12–14 区间，
+              并把股票从 Watch 调为 Pass。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 待验证问题 — section-plain + tinted Q-badge 卡片 -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Q2/Q3 是否会上调 2026 指引，还是 Q1 强劲表现已经完全包含在全年预期中？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Technology Platform 在大客户迁出后能否重新恢复增长？SoFi Technology Solutions 的重定位是否有效？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Personal loan charge-off、delinquency 和 fair-value marks 是否继续符合管理层预期？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>2026 年增长有多少来自 fee-based 或 capital-light 渠道，而不是资产负债表继续扩张？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Stock-based compensation 和摊薄股数增长能否放缓，使 EPS 增长真正传导到普通股东？</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>SoFi Q1 2026 Earnings Release，2026-04-29。<a class="link-blue" href="https://investors.sofi.com/news/news-details/2026/SoFi-Reports-First-Quarter-2026-with-Record-Net-Revenue-of-1-1-Billion-Record-Member-and-Product-Growth-Net-Income-of-167-Million/default.aspx" rel="noopener" target="_blank">SoFi Q1 2026 Earnings Release</a></li>
+            <li>SoFi Q1 2026 Investor Presentation，2026-04-29。<a class="link-blue" href="https://s27.q4cdn.com/749715820/files/doc_presentations/2026/Apr/29/2026-Q1-Investor-Presentation.pdf" rel="noopener" target="_blank">Investor Presentation PDF</a></li>
+            <li>SoFi 2026 Q1 Form 10-Q，filed 2026-05-07。<a class="link-blue" href="https://www.sec.gov/Archives/edgar/data/1818874/000181887426000037/0001818874-26-000037-index.htm" rel="noopener" target="_blank">SEC EDGAR 10-Q Index</a></li>
+            <li>Yahoo Finance / yfinance market data，checked 2026-05-18 JST。<a class="link-blue" href="https://finance.yahoo.com/quote/SOFI/" rel="noopener" target="_blank">Yahoo Finance SOFI</a></li>
+            <li>StockAnalysis SOFI quote and statistics pages，checked 2026-05-18 JST。<a class="link-blue" href="https://stockanalysis.com/stocks/sofi/" rel="noopener" target="_blank">StockAnalysis SOFI</a></li>
+          </ul>
+          <blockquote>本报告仅用于研究和教育目的，不构成投资建议。</blockquote>
+        </div>
+      </div>
+    </section>
+    <!-- ↑ 内容区结束 ↑ -->
+
+    <!-- 变更日志入口（固定结构，AI 不动） -->
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('SOFI');</script>
+</body>
+</html>
