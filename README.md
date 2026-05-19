@@ -10,13 +10,13 @@
 - **主页** — 所有已收录公司的卡片列表，含实时股价，支持按市场/行业筛选。
 - **更新记录** — 每家公司的 `changelog.html`，追踪历次分析更新。
 
-股价数据由 GitHub Actions 每周自动更新；PER/PBR 历史数据手动维护。
+股价数据由 GitHub Actions 每周自动更新；PER/PBR 历史数据在报告生成/更新时自动取得。
 
 ---
 
 ## How to Use
 
-本项目配合 [Claude Code](https://claude.ai/code) 的 skill 系统使用。核心 skill：
+本项目配合skill 系统使用。核心 skill：
 
 ### 1. 写研究报告
 
@@ -36,34 +36,24 @@ date: 2026-05-15
 
 ### 2. 同步到 HTML 页面
 
-在 Claude Code 中输入：
+agent tool （Claude code, codex, opencode, etc.）输入：
 
 ```
 同步 6098 到 HTML
 ```
 
 skill `sync-md-to-html`（位于 `.agents/skills/sync-md-to-html/`）会自动：
-- 新公司：从 `site/_templates/template.html` 创建页面
+
+- 新公司：从 `site/_templates/template.html` 创建页面，并初始化股价与 PER/PBR 历史数据（若 AI 未自动运行，提醒其执行以下两条命令）：
+  ```bash
+  python .agents/skills/sync-md-to-html/scripts/fetch_price_data.py --ticker 6098 --market JP
+  python .agents/skills/sync-md-to-html/scripts/per_pbr_10y.py --ticker 6098.T --output site/companies/6098/per_pbr.json
+  ```
 - 更新各内容区块（公司概要、核心结论、财务表现等）
 - 维护 `changelog.html`
 - **主页卡片无需手动添加**，`build.py` 从 meta 标签自动生成
 
-### 3. 新公司初始化数据
-
-同步 HTML 后，还需要跑两个脚本准备图表数据：
-
-```bash
-# 股价数据（10 年周线）
-python .agents/skills/sync-md-to-html/scripts/fetch_price_data.py \
-  --ticker 6098 --market JP
-
-# PER/PBR 历史数据
-python .agents/skills/sync-md-to-html/scripts/per_pbr_10y.py \
-  --ticker 6098.T \
-  --output site/companies/6098/per_pbr.json
-```
-
-### 4. 构建 & 预览
+### 3. 构建 & 预览
 
 ```bash
 python scripts/build.py
