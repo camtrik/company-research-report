@@ -17,6 +17,16 @@
 
 - **Context7 MCP**：查库 / 框架 / SDK / API 文档时使用，规则见 [`~/.claude/rules/context7.md`](/Users/ebbi/.claude/rules/context7.md)（全局）。
 
+## 构建
+
+修改 `site/`（包括 `partials/`、`assets/css/`、`assets/js/`、`index.html` 等）后，必须运行构建脚本使变更生效：
+
+```bash
+python scripts/build.py
+```
+
+产物输出到 `site/_dist/`，推送后由 GitHub Actions 自动部署到 GitHub Pages。
+
 ## 新增主题约定
 
 若工作涉及一个新的稳定主题（如：数据脚本、CI/CD、新工具集成），在 `docs/rules/` 下新建一个该主题的规则文件，并在上方"规则索引"表中追加一行。规则文件应描述：何时适用、做什么、不做什么。

@@ -122,33 +122,30 @@
   margin-bottom: var(--s-3);
 }
 
-.company-card__price-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.company-card__footer {
   margin-top: auto;
 }
-.company-card__price {
-  font-size: 30px;
-  font-weight: 500;
-  letter-spacing: var(--tracking-tight);
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-.company-card__price-meta {
-  font-size: 12px;
+.company-card__date {
+  position: absolute;
+  left: 40px;
+  bottom: 36px;
+  font-size: 11px;
   color: var(--slate);
-}
-.company-card__target {
-  font-size: 12px;
-  color: var(--slate);
-  margin-top: 2px;
   font-variant-numeric: tabular-nums;
 }
-.company-card__target strong {
-  font-weight: 500;
-  color: var(--ink);
+
+.view-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
 }
+.view-badge--long   { background: #e4f3ec; color: #1a7a4a; }
+.view-badge--watch  { background: #fef3e2; color: #92540a; }
+.view-badge--avoid  { background: #fde8e4; color: #b91c1c; }
+.view-badge--neutral { background: var(--canvas); color: var(--slate); border: 1px solid var(--dust); }
 
 .company-card__satellite {
   position: absolute;

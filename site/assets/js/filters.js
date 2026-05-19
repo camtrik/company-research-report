@@ -2,12 +2,9 @@
    filters.js — Index page company grid + search + filter
    Data source: window.COMPANIES (injected by build.py from
    each company's <meta data-region="meta">).
-   Each card additionally fetches its own data.json for live price.
    ============================================================ */
 
-const CURRENCY_SYMBOL = { USD: "$", JPY: "¥", HKD: "HK$", CNY: "¥", EUR: "€" };
 const MARKET_LABEL = { US: "美股", JP: "日股", HK: "港股", CN: "A股", EU: "欧股" };
-const MARKET_CURRENCY = { US: "USD", JP: "JPY", HK: "HKD", CN: "CNY" };
 const SITE_BASE_PATH = (window.SITE_BASE_PATH || "").replace(/\/+$/, "");
 
 const state = {
@@ -21,20 +18,17 @@ function withBasePath(path) {
   return `${SITE_BASE_PATH}${normalized}`;
 }
 
-function fmtCurrency(value, currency = "USD") {
-  if (value == null || Number.isNaN(value)) return "—";
-  const symbol = CURRENCY_SYMBOL[currency] || "";
-  return symbol + Number(value).toLocaleString("en-US", { maximumFractionDigits: 2 });
-}
-
 function fmtDate(iso) {
   if (!iso) return "";
   return iso.slice(0, 10);
 }
 
-function fmtUpdatedAt(iso) {
-  if (!iso) return "—";
-  return iso.replace("T", " ").slice(0, 16) + " UTC";
+function viewBadgeClass(view) {
+  const v = (view || "").toLowerCase();
+  if (v === "long") return "long";
+  if (v === "watch") return "watch";
+  if (v === "avoid" || v === "pass") return "avoid";
+  return "neutral";
 }
 
 function renderCompanyCard(company) {
@@ -44,17 +38,15 @@ function renderCompanyCard(company) {
   a.dataset.market = company.market || "";
   a.dataset.sector = company.sector || "";
   a.dataset.view = company.view || "";
-  a.dataset.reportUpdated = company.last_updated || "";
   a.href = withBasePath(`/companies/${company.ticker}/`);
   a.innerHTML = `
     <div class="company-card__eyebrow">${company.market || "—"}・${company.ticker}</div>
     <h3 class="company-card__name">${company.name || ""}</h3>
     <div class="company-card__name-en">${company.name_en || ""}</div>
-    <div class="company-card__price-row">
-      <span class="company-card__price" data-card-price>——</span>
-      <span class="company-card__price-meta" data-card-price-meta>加载中</span>
-      <span class="company-card__target" data-card-target hidden></span>
+    <div class="company-card__footer">
+      <span class="view-badge view-badge--${viewBadgeClass(company.view)}">${company.view || "—"}</span>
     </div>
+    <span class="company-card__date">${company.last_updated ? "updated at " + fmtDate(company.last_updated) : ""}</span>
     <span class="company-card__satellite" aria-hidden="true">→</span>
   `;
   return a;
@@ -107,49 +99,11 @@ function populateFilterOptions(companies) {
   }
 }
 
-async function hydrateCardPrice(card) {
-  const ticker = card.dataset.ticker;
-  if (!ticker) return null;
-  try {
-    const res = await fetch(withBasePath(`/companies/${ticker}/data.json`), { cache: "no-cache" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const series = data.charts?.price_10y;
-    const priceEl = card.querySelector("[data-card-price]");
-    const metaEl = card.querySelector("[data-card-price-meta]");
-    const targetEl = card.querySelector("[data-card-target]");
-    if (series?.values?.length) {
-      const price = series.values[series.values.length - 1];
-      const currency = MARKET_CURRENCY[card.dataset.market] || "USD";
-      if (priceEl) priceEl.textContent = fmtCurrency(price, currency);
-      if (metaEl) {
-        const parts = [];
-        if (data.mock_data) parts.push("mock");
-        const reportDate = card.dataset.reportUpdated;
-        if (reportDate) parts.push(fmtDate(reportDate));
-        metaEl.textContent = parts.join(" · ") || "—";
-      }
-    } else {
-      if (priceEl) priceEl.textContent = "—";
-      if (metaEl) metaEl.textContent = "—";
-    }
-    if (targetEl) targetEl.hidden = true;
-    return data.updated_at;
-  } catch (err) {
-    console.warn("price fetch failed for", ticker, err);
-    return null;
-  }
-}
-
-function updateGlobalUpdatedAt(updates) {
-  const valid = updates.filter(Boolean).sort();
+function updateGlobalUpdatedAt(companies) {
   const target = document.querySelector("[data-global-updated]");
   if (!target) return;
-  if (valid.length === 0) {
-    target.textContent = "无数据";
-    return;
-  }
-  target.textContent = fmtUpdatedAt(valid[valid.length - 1]);
+  const dates = companies.map((c) => c.last_updated).filter(Boolean).sort();
+  target.textContent = dates.length ? dates[dates.length - 1] : "—";
 }
 
 function bindUI() {
@@ -171,7 +125,7 @@ function bindUI() {
   });
 }
 
-async function init() {
+function init() {
   const companies = Array.isArray(window.COMPANIES) ? window.COMPANIES : [];
   const grid = document.querySelector("[data-company-grid]");
   if (!grid) return;
@@ -194,8 +148,7 @@ async function init() {
   empty.textContent = "没有匹配的公司。";
   grid.appendChild(empty);
 
-  const updates = await Promise.all(cards.map(hydrateCardPrice));
-  updateGlobalUpdatedAt(updates);
+  updateGlobalUpdatedAt(companies);
 }
 
 if (document.readyState === "loading") {
