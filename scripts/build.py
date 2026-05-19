@@ -22,6 +22,7 @@ import json
 import os
 import re
 import shutil
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -35,6 +36,7 @@ NOTES_TEMPLATE = SITE / "_templates" / "notes-template.html"
 EXCLUDED_DIR_NAMES = {"partials", "_templates", "_dist"}
 
 INCLUDE_RE = re.compile(r"<!--\s*include:\s*([A-Za-z0-9_.\-]+)\s*-->")
+ASSET_RE = re.compile(r'((?:href|src)="[^"]*assets/(?:css|js)/[^"]+\.(?:css|js))"')
 META_TAG_RE = re.compile(r'<meta\s+data-region="meta"([^>]*?)>', re.DOTALL)
 ATTR_RE = re.compile(r'data-([a-zA-Z\-]+)="([^"]*)"')
 
@@ -111,6 +113,7 @@ def process_html(
     companies_json: str,
     build_time: str,
     site_base_path: str,
+    cache_bust: str = "",
 ) -> str:
     def expand(match: re.Match[str]) -> str:
         name = match.group(1)
@@ -120,6 +123,8 @@ def process_html(
     text = text.replace("{{COMPANIES_JSON}}", companies_json)
     text = text.replace("{{BUILD_TIME}}", build_time)
     text = text.replace("{{SITE_BASE_PATH}}", site_base_path)
+    if cache_bust:
+        text = ASSET_RE.sub(lambda m: f'{m.group(1)}?v={cache_bust}"', text)
     return text
 
 
@@ -130,6 +135,7 @@ def build_notes(
     companies_json: str,
     build_time: str,
     site_base_path: str,
+    cache_bust: str = "",
 ) -> int:
     try:
         import markdown as md_lib
@@ -177,7 +183,7 @@ def build_notes(
         html = html.replace("{{NOTE_CONTENT}}", content_html)
         html = html.replace("{{NOTE_TOC}}", toc_html)
         html = html.replace("{{NOTE_META}}", "")
-        html = process_html(html, partials, companies_json, build_time, site_base_path)
+        html = process_html(html, partials, companies_json, build_time, site_base_path, cache_bust)
 
         out_path = md_path.parent / "index.html"
         out_path.write_text(html, encoding="utf-8")
@@ -195,16 +201,17 @@ def main() -> None:
     companies = collect_companies()
     companies_json = json.dumps(companies, ensure_ascii=False)
     build_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    cache_bust = str(int(time.time()))
     site_base_path = normalize_base_path(os.environ.get("SITE_BASE_PATH", ""))
 
     mirror_site()
 
-    notes_count = build_notes(DIST, NOTES_TEMPLATE, partials, companies_json, build_time, site_base_path)
+    notes_count = build_notes(DIST, NOTES_TEMPLATE, partials, companies_json, build_time, site_base_path, cache_bust)
 
     html_files = list(DIST.rglob("*.html"))
     for html_path in html_files:
         original = html_path.read_text(encoding="utf-8")
-        processed = process_html(original, partials, companies_json, build_time, site_base_path)
+        processed = process_html(original, partials, companies_json, build_time, site_base_path, cache_bust)
         if processed != original:
             html_path.write_text(processed, encoding="utf-8")
 
