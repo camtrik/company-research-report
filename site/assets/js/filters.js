@@ -44,6 +44,7 @@ function renderCompanyCard(company) {
   a.dataset.market = company.market || "";
   a.dataset.sector = company.sector || "";
   a.dataset.view = company.view || "";
+  a.dataset.reportUpdated = company.last_updated || "";
   a.href = withBasePath(`/companies/${company.ticker}/`);
   a.innerHTML = `
     <div class="company-card__eyebrow">${company.market || "—"}・${company.ticker}</div>
@@ -119,13 +120,13 @@ async function hydrateCardPrice(card) {
     const targetEl = card.querySelector("[data-card-target]");
     if (series?.values?.length) {
       const price = series.values[series.values.length - 1];
-      const priceDate = series.dates?.[series.dates.length - 1];
       const currency = MARKET_CURRENCY[card.dataset.market] || "USD";
       if (priceEl) priceEl.textContent = fmtCurrency(price, currency);
       if (metaEl) {
         const parts = [];
         if (data.mock_data) parts.push("mock");
-        if (priceDate) parts.push(fmtDate(priceDate));
+        const reportDate = card.dataset.reportUpdated;
+        if (reportDate) parts.push(fmtDate(reportDate));
         metaEl.textContent = parts.join(" · ") || "—";
       }
     } else {
@@ -183,6 +184,7 @@ async function init() {
     return;
   }
 
+  companies.sort((a, b) => (b.last_updated || "").localeCompare(a.last_updated || ""));
   const cards = companies.map(renderCompanyCard);
   cards.forEach((card) => grid.appendChild(card));
 
