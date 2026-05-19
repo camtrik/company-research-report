@@ -364,6 +364,10 @@ hr { border: 0; height: 1px; background: var(--dust); margin: var(--s-4) 0; }
   color: var(--ink);
   text-decoration: none;
 }
+.site-nav__github {
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 640px) {
   .site-nav__pill { gap: 16px; padding: 12px 18px; }
   .site-nav__links { gap: 18px; }
