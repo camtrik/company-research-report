@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">4568 — 第一三共</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="4568"
+        data-name="第一三共"
+        data-name-en="Daiichi Sankyo Co., Ltd."
+        data-market="JP"
+        data-sector="Healthcare"
+        data-view="Watch"
+        data-tags="japan,pharma,oncology,adc,valuation"
+        data-last-updated="2026-05-15">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market">JP</span>
+          <span class="sep">·</span>
+          <span data-bind="sector">Healthcare</span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated">2026-05-15</span>
+        </div>
+        <h1 class="company-header__title" data-bind="name">第一三共</h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker">4568</span>
+          <span class="sep">·</span>
+          <span data-bind="name-en">Daiichi Sankyo Co., Ltd.</span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ============ 关键数据快照（sync skill 维护） ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">¥2,574</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值</span>
+            <span class="market-data__value">¥4.68 万亿</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">17.9x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">EV/Sales TTM</span>
+            <span class="market-data__value">2.14x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth（FY2025）</span>
+            <span class="market-data__value">+12.6%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Core OP Margin（FY2025）</span>
+            <span class="market-data__value">13.3%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Net Margin（FY2025）</span>
+            <span class="market-data__value">12.2%</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">¥2,443–4,178</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">基准合理价值</span>
+            <span class="market-data__value">¥3,500</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-05-15</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-15</p>
+      </div>
+    </section>
+
+    <!-- ============ Charts (runtime; AI 永远不动) + PER/PBR 历史表 ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / 财务数据来自 Daiichi Sankyo 官方年报；BPS 以归母权益和对应流通股数估算。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 公司概要（first content section） ============ -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">TSE Prime · 4568</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">东京</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业分类</div>
+              <div class="kv-grid__value">创新药 / 肿瘤</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">主要合作伙伴</div>
+              <div class="kv-grid__value">AstraZeneca · Merck</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">最新财报</div>
+              <div class="kv-grid__value">FY2025（截至 2026-03-31）</div>
+            </div>
+          </div>
+
+          <p>
+            第一三共是日本创新药公司，核心资产是 DXd ADC 平台。商业化重心已经从日本本土处方药转向全球肿瘤药，尤其是 Enhertu（HER2 ADC）和 Datroway（TROP2 ADC）。公司与 AstraZeneca、Merck 等合作伙伴通过授权、共同商业化和利润分成，持续放大 DXd 平台的全球价值。
+          </p>
+          <p>
+            FY2025 收入 2.123 万亿日元，同比增长 12.6%，增长主要来自 Enhertu、Datroway 和外汇。Reported operating profit 因 ADC CMO 补偿费及 Odawara 相关临时费用拖累而下滑。公司从 FY2026 起调整 core operating profit 定义，分析时需注意两套定义下的可比性。
+          </p>
+
+          <h3>护城河来源（速览）</h3>
+          <ul>
+            <li>DXd ADC 专有技术平台与专利矩阵</li>
+            <li>Enhertu / Datroway 已商业化适应症的临床数据积累</li>
+            <li>全球合作伙伴网络（AZ、Merck）放大商业化与分成收入</li>
+            <li>ADC 制造与供应链能力（持续投入提升 ADC 产能）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 核心结论 ============ -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch · 基准合理价值 ¥3,500</div>
+            <p>
+              第一三共当前股价约 <span class="kpi">¥2,574</span>，市值约 4.68 万亿日元。基于 DCF、同业倍数和低置信度 SOTP 交叉验证，基准合理价值约 <span class="kpi">¥3,500</span>，合理区间约 <span class="kpi">¥2,900–4,200</span>；相对当前价格约有 <span class="kpi">36%</span> 的基准上行空间。
+            </p>
+            <p>
+              市场现在给的是约 <span class="kpi">18x</span> FY2026 预期 EPS，对一家已商业化 ADC 平台公司并不贵；但估值核心取决于 FY2030 能否接近管理层目标：收入超过 3 万亿日元、营业利润超过 6,000 亿日元、EPS 超过 260 日元。结论是"可跟踪的低估"，但不是无条件便宜：如果 Enhertu / Datroway 增长放缓、ADC 供应链成本无法正常化，或后续适应症数据不达预期，3,500 日元以上的估值会明显削弱。
+            </p>
+          </div>
+
+          <p class="lede">
+            核心看多点是 DXd ADC 平台的商业化加速：Enhertu 多条适应症扩展 + Datroway 放量，有望在 FY2027–FY2030 显著改善利润率。
+          </p>
+          <p>
+            FY2025 的利润压制来自临时 ADC 供应相关费用（FY2025 临时项目约 1,530 亿日元，FY2026 仍包含约 800 亿日元 CMO compensation fee），真正的利润弹性窗口是 FY2027 起。当前持有者需要有足够的耐心等待 CMO 成本正常化，并持续验证关键临床节点。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 业务模式（card 仅含核心；表格在外） ============ -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">收入来自四个地域 / 产品板块，Oncology Business 是核心增长引擎：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>Oncology Business</strong> — 以 Enhertu（HER2 ADC）和 Datroway（TROP2 ADC）为核心，含全球授权与共同推广收入。FY2025 同比增长 31.3%，是集团最重要的增长驱动。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>Japan Business</strong> — 日本本土处方药，包括 Lixiana（抗凝）、Tarlige、Pralia 等。规模稳定，增长较慢（FY2025 +1.9%）。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">03</span>
+              <div class="numbered-list__body">
+                <strong>EU Specialty / ASCA</strong> — 欧洲以 Lixiana / Nilemdo / Nustendi 为主；ASCA 以 Enhertu 在中国等地区增长为主。FY2025 分别增长 16.5% 和 18.8%。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">04</span>
+              <div class="numbered-list__body">
+                <strong>American Regent</strong> — 静脉铁剂业务，FY2025 收入同比下降 16.1%，是集团内唯一负增长板块。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>Business Segments</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>板块 / 产品</th>
+                  <th class="num">FY2025 收入</th>
+                  <th class="num">YoY</th>
+                  <th>说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Oncology Business</td><td class="num">6,088 亿日元</td><td class="num pos">+31.3%</td><td>核心增长来源</td></tr>
+                <tr><td>Enhertu</td><td class="num">8,195 亿日元</td><td class="num pos">+1,681 亿</td><td>含产品销售、首付款和里程碑</td></tr>
+                <tr><td>Datroway</td><td class="num">561 亿日元</td><td class="num pos">+482 亿</td><td>早期放量，FY2026 指引翻倍以上</td></tr>
+                <tr><td>Japan Business</td><td class="num">4,858 亿日元</td><td class="num pos">+1.9%</td><td>Lixiana、Tarlige、Pralia 等</td></tr>
+                <tr><td>American Regent</td><td class="num">1,822 亿日元</td><td class="num neg">-16.1%</td><td>铁剂业务承压</td></tr>
+                <tr><td>EU Specialty</td><td class="num">2,766 亿日元</td><td class="num pos">+16.5%</td><td>Lixiana、Nilemdo/Nustendi</td></tr>
+                <tr><td>ASCA</td><td class="num">2,510 亿日元</td><td class="num pos">+18.8%</td><td>中国、巴西等地区 Enhertu 增长</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>FY2030 增长路径</h3>
+          <ul>
+            <li><strong>Enhertu 适应症扩张</strong>：FY2026 管理层预计 Enhertu 总收入 9,933 亿日元，其中产品销售 8,613 亿日元。</li>
+            <li><strong>Datroway 放量</strong>：FY2026 指引 1,215 亿日元，较 FY2025 增长 116.8%。</li>
+            <li><strong>5DXd ADC 平台</strong>：FY2026 总收入指引 1.158 万亿日元。</li>
+            <li><strong>FY2030 目标</strong>：收入 &gt;3 万亿日元，营业利润 &gt;6,000 亿日元，EPS &gt;260 日元；公司称 2030 年代初营业利润有望达到约 1 万亿日元规模。</li>
+            <li><strong>资本配置</strong>：FY2026–FY2030 计划 R&amp;D 约 2.9 万亿日元，CAPEX 约 0.7 万亿日元，分红政策为 progressive dividend 和调整后 DOE &gt;10%。</li>
+          </ul>
+          <blockquote>Enhertu 收入含产品销售及来自 AstraZeneca 的首付款 / 里程碑 / 利润分成等合作收入，并非单纯产品销售口径。</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 财务表现（含宽表格） ============ -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">FY2023 – FY2026E · 单位：亿日元</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度</th>
+                  <th class="num">Revenue</th>
+                  <th class="num">YoY</th>
+                  <th class="num">Reported OP</th>
+                  <th class="num">Core OP ①</th>
+                  <th class="num">Net Income</th>
+                  <th class="num">EPS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2023</td><td class="num">16,020</td><td class="num pos">+25.3%</td><td class="num">2,116</td><td class="num">—</td><td class="num">2,007</td><td class="num">104.62</td></tr>
+                <tr><td>FY2024</td><td class="num">18,860</td><td class="num pos">+17.8%</td><td class="num">3,319</td><td class="num">3,128</td><td class="num">2,958</td><td class="num">155.87</td></tr>
+                <tr><td>FY2025</td><td class="num">21,230</td><td class="num pos">+12.6%</td><td class="num">2,291</td><td class="num">2,824</td><td class="num">2,599</td><td class="num">140 TTM</td></tr>
+                <tr class="row--highlight"><td>FY2026E</td><td class="num">22,800</td><td class="num pos">+7.4%</td><td class="num">3,150</td><td class="num">3,600</td><td class="num">~2,600</td><td class="num">~143</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>① Core OP 从 FY2026 起改用新定义，FY2025 的 2,824 亿为按新定义重列值（旧定义下 FY2025 Core OP 为 3,600 亿，同比 +15.1%）。FY2026E Core OP 3,600 亿为新定义，较 FY2025 重列值增长 27.5%。EPS 单位：日元。</blockquote>
+
+          <p>
+            FY2025 利润质量需要拆开看：旧定义核心经营利润同比增长 15.1%，但临时费用从 31 亿增加到 1,530 亿日元，导致 reported operating profit 同比下降。按新定义，FY2026 Core OP 指引较 FY2025 重列值增长 <span class="kpi">27.5%</span>，反映出 ADC CMO 成本下降预期。
+          </p>
+          <p>
+            FY2026 指引仍包含约 800 亿日元 CMO compensation fee，真正的利润弹性应体现在 FY2027–FY2030。净现金约 1,493 亿日元，财务结构相对健康。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 护城河（浅灰底 + feature-card） ============ -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">护城河来自 DXd ADC 技术平台、临床数据积累、全球合作网络和制造能力。</p>
+
+          <div class="moat-block">
+            <h4>DXd ADC 专有技术平台</h4>
+            <p>自主开发的 topoisomerase I inhibitor 载荷与 cleavable linker 技术，构成 Enhertu、Datroway 等多个 ADC 产品的共同基础，专利组合覆盖 linker-payload 结构和制造工艺。公司已解决 Seagen 专利争议，强化了 DXd ADC 技术自主性。</p>
+          </div>
+          <div class="moat-block">
+            <h4>临床数据积累</h4>
+            <p>Enhertu 在 HER2+ 乳腺癌、HER2-low 乳腺癌、NSCLC、胃癌等多适应症的大型 III 期数据，是进入新适应症和防御竞争者的重要壁垒。</p>
+          </div>
+          <div class="moat-block">
+            <h4>全球合作伙伴网络</h4>
+            <p>与 AstraZeneca 和 Merck 的共同商业化协议放大了全球销售覆盖；首付款、里程碑和利润分成构成高质量的非稀释现金流。</p>
+          </div>
+          <div class="moat-block">
+            <h4>ADC 制造与供应链能力</h4>
+            <p>ADC 生产需要高度专业的 CMO 网络；公司持续投入产能扩张，形成一定的制造壁垒，但也带来了近两年的高额供应相关费用。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">Forward P/E</th>
+                  <th class="num">P/S TTM</th>
+                  <th class="num">EV/Sales</th>
+                  <th class="num">EV/EBITDA</th>
+                  <th class="num">Rev Growth</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>Daiichi Sankyo</td><td>4568.T</td><td class="num">17.9x</td><td class="num">2.21x</td><td class="num">2.14x</td><td class="num">14.8x</td><td class="num pos">+13.7%</td></tr>
+                <tr><td>Takeda</td><td>4502.T</td><td class="num">37.6x</td><td class="num">1.85x</td><td class="num">2.92x</td><td class="num">9.8x</td><td class="num pos">+3.9%</td></tr>
+                <tr><td>Astellas</td><td>4503.T</td><td class="num">30.7x</td><td class="num">1.95x</td><td class="num">2.12x</td><td class="num">7.9x</td><td class="num pos">+20.7%</td></tr>
+                <tr><td>Chugai</td><td>4519.T</td><td class="num">33.6x</td><td class="num">10.12x</td><td class="num">9.66x</td><td class="num">19.5x</td><td class="num pos">+11.5%</td></tr>
+                <tr><td>Eisai</td><td>4523.T</td><td class="num">23.3x</td><td class="num">1.65x</td><td class="num">1.57x</td><td class="num">14.3x</td><td class="num pos">+1.8%</td></tr>
+                <tr><td>Shionogi</td><td>4507.T</td><td class="num">16.1x</td><td class="num">5.25x</td><td class="num">5.19x</td><td class="num">17.1x</td><td class="num pos">+32.8%</td></tr>
+                <tr><td>Ono Pharma</td><td>4528.T</td><td class="num">15.0x</td><td class="num">2.31x</td><td class="num">2.13x</td><td class="num">8.5x</td><td class="num pos">+5.7%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>数据来自 Yahoo Finance，截至 2026-05-15。</blockquote>
+
+          <p>
+            第一三共相对日本创新药同行，P/E 不高，EV/Sales 也低；但 EV/EBITDA 不低，因为当前 R&amp;D、利润分成和 ADC 供应链费用压低了利润率。市场实际在等待利润率正常化证据。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 近期动态 ============ -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+          <h3>最新财报（FY2025 全年）</h3>
+          <p class="lede">核心观察：FY2025 收入 +12.6%，Enhertu / Datroway 大幅超预期；ADC 供应链费用导致 reported OP 下降，同步发布 5 年业务计划，FY2030 营业利润目标 &gt;6,000 亿日元。</p>
+          <p>
+            2026-05-11 公布 FY2025 全年结果：收入 2.123 万亿日元，旧定义 Core OP 3,600 亿日元（+15.1%），但 reported OP 仅 2,291 亿（因 1,530 亿临时费用冲击）。Datroway 全年 561 亿日元，远超初始指引 160 亿。
+          </p>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-05-11</strong>　发布 FY2025 Q4 财报及 FY2026–FY2030 五年业务计划；给出 FY2026 收入 2.28 万亿 / Core OP 3,600 亿（新定义）指引。<em>市场关注 CMO 费用能否从 FY2027 起实质下降。</em></li>
+            <li><strong>2026-05-08</strong>　公告修正 FY2025 全年财报预测并调整 Core OP 定义口径。<em>需按新定义重列 FY2025 基数才能正确解读同比增长。</em></li>
+            <li><strong>2026 上半年</strong>　Enhertu 和 Datroway 多个美国 PDUFA 审批节点（2026-05-18、06-02、07-07）。<em>适应症扩张是近期最大的价值释放来源。</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 催化剂 / 关注点 ============ -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>2026-05-18：Enhertu 美国 PDUFA 节点（HER2+ breast cancer neoadjuvant）。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>2026-06-02：Datroway 美国 PDUFA 节点。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>2026-07-07：Enhertu 美国 PDUFA 节点（post-neoadjuvant）。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>FY2026 中期财报：验证 FY2026 收入 2.28 万亿、Core OP 3,600 亿（新定义）是否可达。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Datroway 在美国 TNBC / NSCLC 的放量速度。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>TROPION-Lung07、TROPION-Lung15 等 FY2026 H2 数据读出。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>I-DXd 2026-10-10 PDUFA，以及后续 ES-SCLC 商业化潜力。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>ADC CMO 费用是否从 FY2027 开始明显下降，释放利润弹性。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 估值（含宽表格） ============ -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值</h2>
+          <span class="section-plain__meta">DCF · 相对倍数 · SOTP · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>DCF</h3>
+          <p>使用日元现金流模型。无风险利率采用日本 10 年国债约 2.5%–2.7%，行业 beta 基准 0.85–0.90，股权风险溢价 5.5%，基准 WACC 7.5%，永续增长 1.5%。</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">Revenue</th><th class="num">Operating Profit</th><th class="num">FCFF</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2026E</td><td class="num">2.28 万亿</td><td class="num">3,150 亿</td><td class="num">1,592 亿</td></tr>
+                <tr><td>FY2027E</td><td class="num">2.455 万亿</td><td class="num">3,950 亿</td><td class="num">2,265 亿</td></tr>
+                <tr><td>FY2028E</td><td class="num">2.645 万亿</td><td class="num">4,750 亿</td><td class="num">2,948 亿</td></tr>
+                <tr><td>FY2029E</td><td class="num">2.845 万亿</td><td class="num">5,500 亿</td><td class="num">3,605 亿</td></tr>
+                <tr><td>FY2030E</td><td class="num">3.050 万亿</td><td class="num">6,200 亿</td><td class="num">4,238 亿</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>DCF 基准隐含 EV 约 6.14 万亿日元，加回约 1,493 亿日元净现金，权益价值约 6.29 万亿，对应约 <span class="kpi">¥3,460/股</span>。</p>
+
+          <h4>DCF 敏感性：每股价值（日元）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>WACC \ g</th><th class="num">0.5%</th><th class="num">1.0%</th><th class="num">1.5%</th><th class="num">2.0%</th><th class="num">2.5%</th></tr></thead>
+              <tbody>
+                <tr><td>6.5%</td><td class="num">3,579</td><td class="num">3,854</td><td class="num">4,183</td><td class="num">4,585</td><td class="num">5,088</td></tr>
+                <tr><td>7.0%</td><td class="num">3,289</td><td class="num">3,517</td><td class="num">3,786</td><td class="num">4,110</td><td class="num">4,504</td></tr>
+                <tr class="row--highlight"><td>7.5%</td><td class="num">3,041</td><td class="num">3,233</td><td class="num"><strong>3,457</strong></td><td class="num">3,721</td><td class="num">4,038</td></tr>
+                <tr><td>8.0%</td><td class="num">2,827</td><td class="num">2,990</td><td class="num">3,178</td><td class="num">3,397</td><td class="num">3,657</td></tr>
+                <tr><td>8.5%</td><td class="num">2,639</td><td class="num">2,779</td><td class="num">2,939</td><td class="num">3,124</td><td class="num">3,339</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Relative Valuation</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>方法</th><th>假设</th><th class="num">隐含价值</th></tr></thead>
+              <tbody>
+                <tr><td>FY2026 P/E</td><td>22x FY2026 EPS 约 143.6 日元</td><td class="num">3,158 日元</td></tr>
+                <tr><td>FY2030 EPS 折现</td><td>18x FY2030 EPS 260，按 7.7% 折现 4.5 年</td><td class="num">3,352 日元</td></tr>
+                <tr><td>EV/Sales</td><td>3.0x FY2026 Revenue</td><td class="num">3,841 日元</td></tr>
+                <tr><td>EV/EBITDA</td><td>12x FY2026 EBITDA</td><td class="num">2,686 日元</td></tr>
+                <tr class="row--highlight"><td colspan="2">相对估值中位数</td><td class="num">~3,300 日元</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>EV/EBITDA 偏低因 FY2026 仍处于利润释放前期，P/E 与 EV/Sales 更能反映 ADC 平台商业化价值。</p>
+
+          <h3>SOTP 交叉检查（低置信度）</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>部分</th><th class="num">FY2030 收入假设</th><th class="num">倍数</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>Oncology / DXd ADC</td><td class="num">2.3 万亿日元</td><td class="num">4.0x Sales</td><td>主要价值来源</td></tr>
+                <tr><td>非肿瘤与区域业务</td><td class="num">0.75 万亿日元</td><td class="num">1.5x Sales</td><td>成熟现金流</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>折现回当前后，SOTP 基准约 <span class="kpi">¥4,180/股</span>。高度依赖 FY2030 肿瘤收入兑现和利润率改善，仅作为上行弹性参考，不作为主估值。</p>
+
+          <h3>估值结论</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>方法</th><th class="num">隐含价值</th><th class="num">权重</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>DCF</td><td class="num">3,460 日元</td><td class="num">45%</td><td>以 FY2030 管理层目标为锚</td></tr>
+                <tr><td>Relative</td><td class="num">3,300 日元</td><td class="num">40%</td><td>结合日本 pharma 和全球 oncology peers</td></tr>
+                <tr><td>SOTP</td><td class="num">4,180 日元</td><td class="num">15%</td><td>低置信度产品/业务拆分</td></tr>
+                <tr class="row--total"><td colspan="3">基准合理价值</td><td class="num">~¥3,500</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">保守</div>
+              <div class="scenario-card__value">¥2,900</div>
+              <div class="scenario-card__trigger">WACC 8.5%、终值增长 1.5%，FY2030 OP 低于 5,500 亿。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">基准</div>
+              <div class="scenario-card__value">¥3,500</div>
+              <div class="scenario-card__trigger">FY2030 Revenue 约 3.05 万亿、OP 约 6,200 亿。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">乐观</div>
+              <div class="scenario-card__value">¥4,200</div>
+              <div class="scenario-card__trigger">Enhertu / Datroway 持续超预期，FY2030 后 OP 向 1 万亿日元路径更可信。</div>
+            </div>
+          </div>
+          <p><strong>当前 vs 合理价值：</strong>当前 ¥2,574 相对基准 ¥3,500 有约 <span class="kpi">36%</span> 上行空间；相对合理区间 ¥2,900–4,200，当前处于区间下沿附近。</p>
+
+          <h3>管理层与资本配置</h3>
+          <ul>
+            <li><strong>分红政策</strong>：FY2026 分红指引 100 日元/股，采用 progressive dividend 和调整后 DOE &gt;10% 政策。</li>
+            <li><strong>资本配置优先级</strong>：FY2026–FY2030 计划 R&amp;D 约 2.9 万亿日元（收入占比约 23–27%），CAPEX 约 0.7 万亿日元（主要为 ADC 产能扩张）。</li>
+            <li><strong>合作伙伴结构</strong>：AstraZeneca 共同商业化 Enhertu；Merck 共同商业化 Datroway。利润分成模式持续带来非稀释合作收入，但也限制了毛利率上限。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 主要风险（risk-grid 2 列卡片网格） ============ -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. 临床和监管风险</h4>
+              <p>Datroway、I-DXd、HER3-DXd 后续适应症数据或审批不及预期，直接压低 FY2030 收入路径。监控信号：PDUFA 结果、关键 III 期 readout。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. 供应链和 CMO 成本风险</h4>
+              <p>FY2025/2026 已反映高额 ADC 供应相关费用；若 minimum purchase obligation、良率或产能计划继续偏差，FY2027 起利润率无法正常化。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. 利润分成压力</h4>
+              <p>Enhertu、Datroway 与 AZ / Merck 分成，销售增长不一定全部转化为第一三共利润。若分成条款不利，毛利率改善空间会压缩。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. 利率风险</h4>
+              <p>日本 10 年国债收益率约 2.5%–2.7%，若继续上行，WACC 上移到 8.5%，DCF 基准价值会接近 2,900 日元。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>05. 专利和生命周期风险</h4>
+              <p>公司已提示 FY2030 后需面对 Enhertu 专利到期和新 BGT 接续问题。若接续管线不成熟，FY2032+ 现金流折现价值下降，长期 DCF 估值大幅压缩。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              若 FY2026 之后核心经营利润率没有改善，或 FY2030 营业利润目标从 &gt;6,000 亿日元被实质下修，同时 Datroway / I-DXd 关键临床节点失败，应把合理价值下调至接近当前价格甚至以下。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 待验证问题 ============ -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>FY2026 每季 Enhertu、Datroway 产品销售是否跟上公司全年指引？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>FY2027 起 CMO compensation fee 是否如管理层暗示下降，利润率是否开始正常化？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>FY2030 3 万亿收入中，Oncology 贡献占比和真实利润率分别是多少？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>I-DXd、R-DXd 是否能成为 Enhertu/Datroway 之后的第三、第四个商业化支柱？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>日本利率上行是否继续压缩长久期创新药估值，WACC 是否需要上调？</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>Daiichi Sankyo, <a class="link-blue" href="https://www.daiichisankyo.com/files/investors/library/quarterly_result/2025/FY2025Q4_Financial_Results_E.pdf" rel="noopener" target="_blank">FY2025 Financial Results</a>，2026-05-11。</li>
+            <li>Daiichi Sankyo, <a class="link-blue" href="https://www.daiichisankyo.com/files/investors/library/quarterly_result/2025/FY2025%20Financial%20Results%20and%205Year%20Business%20Plan%20Presentation_E_v2.pdf" rel="noopener" target="_blank">FY2025 Financial Results and 5-Year Business Plan Presentation</a>，2026-05-11。</li>
+            <li>Daiichi Sankyo, <a class="link-blue" href="https://www.daiichisankyo.com/files/investors/library/quarterly_result/2025/FY2025Q4_Reference_Data_E_v2.pdf" rel="noopener" target="_blank">FY2025 Q4 Reference Data</a>，2026-05-11。</li>
+            <li>Daiichi Sankyo, <a class="link-blue" href="https://www.daiichisankyo.com/files/investors/library/materials/2026/Revision%20of%20the%20FY2025%20Consolidated%20Financial%20Results%20Forecast%20_E.pdf" rel="noopener" target="_blank">Revision of FY2025 Consolidated Financial Results Forecast</a>，2026-05-08。</li>
+            <li>Yahoo Finance: 4568.T and peer multiples，accessed 2026-05-15。</li>
+            <li>Reuters / market data reports on Japan 10-year JGB yield，accessed 2026-05-15。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('4568');</script>
+</body>
+</html>
