@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">ARM — Arm Holdings</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="ARM"
+        data-name="Arm Holdings"
+        data-name-en="Arm Holdings plc"
+        data-market="US"
+        data-sector="Technology / Semiconductor IP"
+        data-view="Watch"
+        data-tags="semiconductor-ip,ai-infrastructure,data-center,armv9,agi-cpu,valuation"
+        data-last-updated="2026-05-22">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market">US</span>
+          <span class="sep">·</span>
+          <span data-bind="sector">Technology / Semiconductor IP</span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated">2026-05-22</span>
+        </div>
+        <h1 class="company-header__title" data-bind="name">Arm Holdings</h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker">ARM</span>
+          <span class="sep">·</span>
+          <span data-bind="name-en">Arm Holdings plc</span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ============ 关键数据快照（sync skill 维护） ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">$298.23</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值</span>
+            <span class="market-data__value">$317.3B</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">97.6x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">EV / FY2026 Revenue</span>
+            <span class="market-data__value">63.9x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth（FY2026 / Q4）</span>
+            <span class="market-data__value">+22.8% / +20.1%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Operating Margin（FY2026 GAAP / non-GAAP）</span>
+            <span class="market-data__value">18.3% / 43.0%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Gross Margin（FY2026）</span>
+            <span class="market-data__value">97.5%</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">$100.02 – $298.69</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">分析师目标价</span>
+            <span class="market-data__value">$232 / $250 / $326</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-05-22</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-21</p>
+      </div>
+    </section>
+
+    <!-- ============ Charts (runtime; AI 永远不动) + PER/PBR 历史表 ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / BPS 来自 ARM 官方披露财务数据。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 公司概要（first content section） ============ -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">Nasdaq · ARM（ADR）</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">Cambridge, UK</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">FY2026 Revenue</div>
+              <div class="kv-grid__value">$4.92B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">Net Cash</div>
+              <div class="kv-grid__value">~$3.2B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业（yfinance）</div>
+              <div class="kv-grid__value">Technology · Semiconductor IP</div>
+            </div>
+          </div>
+
+          <p>
+            ARM 总部位于 Cambridge, UK，上市证券为 Nasdaq ADR。公司不直接大规模制造芯片，而是设计和授权处理器架构、
+            CPU 核、GPU、NPU、interconnect、compute subsystem 和相关软件生态。客户包括手机 SoC 厂商、车载芯片厂商、
+            IoT/工业厂商、cloud hyperscalers、AI accelerator 厂商和数据中心系统供应链。
+          </p>
+
+          <h3>收入结构</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>收入类型</th><th>机制</th><th>投资含义</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>License and other</td><td>客户取得 IP / architecture / CSS / design access，通常受大额合同和 backlog 转换节奏影响</td><td>波动更大，但能领先反映客户采用 Arm 平台的意愿</td></tr>
+                <tr><td>Royalty</td><td>客户产品出货后，按芯片或系统价值的一定比例支付</td><td>质量更高、持续性更强，是长期复利的核心</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>护城河来源（速览）</h3>
+          <ul>
+            <li>生态标准：OS、编译器、EDA、IP、foundry、开发者围绕 Arm 架构形成长期兼容性优势</li>
+            <li>能效优势：移动时代积累的低功耗设计，在数据中心和 AI inference / orchestration 更有价值</li>
+            <li>Royalty 复利模型：客户采用后多年出货带来持续 royalty；Armv9 / CSS / Neoverse 提高单芯片 royalty dollars</li>
+            <li>AI compute position：agentic AI 需要更多 CPU coordination，ARM 可受益于每 AI rack 中 CPU 数量和价值量提升</li>
+          </ul>
+
+          <blockquote>
+            ARM 的护城河本质是生态和兼容性：架构已嵌入移动、车载、IoT、PC 和云端 CPU 生态，开发者、操作系统、编译器、
+            EDA、IP、Foundry 和系统厂商共同形成平台网络效应。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 核心结论 ============ -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch · 基准合理价值 ~$200 · 不追涨</div>
+            <p>
+              ARM 是全球最重要的处理器 IP 平台之一。2026 年以来，投资者开始把它重新定价为 AI data center CPU、
+              hyperscaler custom silicon 和 agentic AI infrastructure 的 royalty layer。
+            </p>
+            <p>
+              截至 2026-05-21 收盘，股价 <span class="kpi">$298.23</span>，市值约 <span class="kpi">$317.3B</span>。
+              5 月 20–21 日两日累计上涨约 <span class="kpi">33.7%</span>。保守 DCF 很难支持 $298；
+              相对估值需要 FY2027E 45–55x EV/Revenue 或 90–110x EPS 才接近现价。
+            </p>
+          </div>
+
+          <p class="lede">
+            ARM 是高质量资产，但当前价格已经在交易非常乐观的长期剧本，缺乏安全边际。
+          </p>
+          <p>
+            直接催化是 NVIDIA Vera / Rubin CPU 叙事、NVIDIA 超预期财报、Jefferies / Bernstein / RBC 等 sell-side
+            上调目标价，以及 ARM 自身 FY2026 Q4 强劲财报共同形成的动量重估。
+            持有者可以继续用趋势和基本面验证管理仓位；新资金需要等待回撤或更明确的 AGI CPU 收入兑现。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 业务模式（card 仅含核心；表格在外） ============ -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">ARM 的业务可以拆成四层，互相支撑：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>Architecture</strong> — Arm instruction set / Armv9 等架构授权。最底层标准，客户粘性高，但 royalty rate 取决于合同结构。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>IP Cores</strong> — Cortex、Neoverse、Mali、Ethos 等 CPU/GPU/NPU/IP。传统主业，覆盖移动、车载、IoT、数据中心。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">03</span>
+              <div class="numbered-list__body">
+                <strong>CSS / Platform</strong> — Neoverse CSS、compute subsystem、预集成平台。提升客户采用速度和 ASP，有助于提高 royalty dollars per chip。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">04</span>
+              <div class="numbered-list__body">
+                <strong>Silicon / AGI CPU</strong> — ARM 自身推出面向 agentic AI 的 production silicon。新增长向量，但也可能改变原有轻资产模型和客户关系。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>Business Layers</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>层级</th><th>内容</th><th>投资含义</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Architecture</td><td>Arm instruction set / Armv9 等架构授权</td><td>最底层标准，客户粘性高，royalty rate 取决于合同</td></tr>
+                <tr><td>IP Cores</td><td>Cortex、Neoverse、Mali、Ethos 等</td><td>传统主业，覆盖移动、车载、IoT、数据中心</td></tr>
+                <tr><td>CSS / Platform</td><td>Neoverse CSS、compute subsystem、预集成平台</td><td>提升客户采用速度和 ASP</td></tr>
+                <tr><td>Silicon / AGI CPU</td><td>面向 agentic AI 的 production silicon</td><td>新增长向量，可能改变轻资产模型和客户关系</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <blockquote>
+            当前最重要的投资问题是：数据中心 CPU 是否会把 ARM 从"手机 IP 平台"升级为"AI compute orchestration 的基础 royalty layer"。
+            如果 AGI CPU / Vera / Graviton / Axion 等需求低于预期，ARM 的估值回撤空间会很大。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 财务表现 ============ -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">FY2023 – FY2026 · 单位：十亿美元</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度</th>
+                  <th class="num">Revenue</th>
+                  <th class="num">YoY</th>
+                  <th class="num">GAAP Op. Income</th>
+                  <th class="num">GAAP Op. Margin</th>
+                  <th class="num">GAAP Net Income</th>
+                  <th class="num">GAAP Diluted EPS</th>
+                  <th class="num">non-GAAP EPS</th>
+                  <th class="num">FCF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2023</td><td class="num">$2.679B</td><td class="num neg">-0.9%</td><td class="num">$0.678B</td><td class="num">25.3%</td><td class="num">$0.524B</td><td class="num">$0.51</td><td class="num">n/a</td><td class="num">$0.646B</td></tr>
+                <tr><td>FY2024</td><td class="num">$3.233B</td><td class="num pos">+20.7%</td><td class="num">$0.117B</td><td class="num">3.6%</td><td class="num">$0.306B</td><td class="num">$0.29</td><td class="num">n/a</td><td class="num">$0.947B</td></tr>
+                <tr><td>FY2025</td><td class="num">$4.007B</td><td class="num pos">+23.9%</td><td class="num">$0.831B</td><td class="num">20.7%</td><td class="num">$0.792B</td><td class="num">$0.75</td><td class="num">$1.63</td><td class="num">$0.099B</td></tr>
+                <tr class="row--highlight"><td>FY2026</td><td class="num">$4.920B</td><td class="num pos">+22.8%</td><td class="num">$0.900B</td><td class="num">18.3%</td><td class="num">$0.904B</td><td class="num">$0.85</td><td class="num">$1.77</td><td class="num">$0.882B</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>
+            FY2026 share-based compensation cost 为 $1.052B，相当于收入的 21.4%，这是估值中必须扣减的经济成本。
+            non-GAAP operating margin 达 43.0%，但 GAAP operating margin 只有 18.3%，主要因为 SBC 很高。
+          </blockquote>
+
+          <p>
+            Q4 FY2026 收入 <span class="kpi">$1.49B</span>，同比 <span class="kpi">+20%</span>。
+            其中 royalty 收入 $671M（同比 +11%），license and other 收入 $819M（同比 +29%），
+            ACV 同比 +22% 至 $1.66B。Q1 FY2027 指引收入为 $1.26B ± $50M，non-GAAP EPS 为 $0.40 ± $0.04，
+            说明季度节奏仍会受大额 license timing 影响。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 护城河 ============ -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">护城河评级：<strong>Wide but Valuation-Stretched</strong>。核心护城河来源：</p>
+
+          <div class="moat-block">
+            <h4>生态标准</h4>
+            <p>操作系统、编译器、软件、EDA、IP、foundry、开发者生态已经围绕 Arm 架构形成长期兼容性优势。</p>
+          </div>
+          <div class="moat-block">
+            <h4>能效优势</h4>
+            <p>移动时代积累的低功耗设计能力，在数据中心和 AI inference / orchestration 里更有价值。</p>
+          </div>
+          <div class="moat-block">
+            <h4>Royalty 复利模型</h4>
+            <p>一旦客户采用 Arm 架构，后续出货会带来多年 royalty；Armv9 / CSS / Neoverse 可提高每颗芯片 royalty dollars。</p>
+          </div>
+          <div class="moat-block">
+            <h4>客户广度</h4>
+            <p>AWS Graviton、Google Axion、Microsoft Cobalt、NVIDIA Vera、Qualcomm、MediaTek、Apple ecosystem 等提高了平台冗余度。</p>
+          </div>
+          <div class="moat-block">
+            <h4>AI Compute Position</h4>
+            <p>如果 agentic AI 需要更多 CPU coordination，ARM 可受益于每个 AI rack / hyperscaler cluster 中 CPU 数量和价值量提升。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">市值</th>
+                  <th class="num">Forward P/E</th>
+                  <th class="num">EV/Revenue</th>
+                  <th class="num">EV/EBITDA</th>
+                  <th class="num">Revenue Growth</th>
+                  <th class="num">Operating Margin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>Arm Holdings</td><td>ARM</td><td class="num">$317B</td><td class="num">97.6x</td><td class="num">54.9x</td><td class="num">234.4x</td><td class="num pos">+20.1%</td><td class="num">29.6%</td></tr>
+                <tr><td>NVIDIA</td><td>NVDA</td><td class="num">$5,317B</td><td class="num">18.8x</td><td class="num">24.9x</td><td class="num">40.4x</td><td class="num pos">+73.2%</td><td class="num">65.0%</td></tr>
+                <tr><td>AMD</td><td>AMD</td><td class="num">$733B</td><td class="num">34.7x</td><td class="num">19.3x</td><td class="num">97.1x</td><td class="num pos">+37.8%</td><td class="num">14.4%</td></tr>
+                <tr><td>Broadcom</td><td>AVGO</td><td class="num">$1,963B</td><td class="num">22.7x</td><td class="num">29.7x</td><td class="num">54.5x</td><td class="num pos">+29.5%</td><td class="num">44.9%</td></tr>
+                <tr><td>Qualcomm</td><td>QCOM</td><td class="num">$225B</td><td class="num">20.1x</td><td class="num">4.9x</td><td class="num">16.8x</td><td class="num neg">-3.5%</td><td class="num">22.1%</td></tr>
+                <tr><td>Marvell</td><td>MRVL</td><td class="num">$167B</td><td class="num">35.0x</td><td class="num">20.6x</td><td class="num">64.2x</td><td class="num pos">+22.1%</td><td class="num">18.7%</td></tr>
+                <tr><td>Synopsys</td><td>SNPS</td><td class="num">$97B</td><td class="num">29.6x</td><td class="num">13.1x</td><td class="num">65.1x</td><td class="num pos">+65.5%</td><td class="num">13.3%</td></tr>
+                <tr><td>Cadence</td><td>CDNS</td><td class="num">$99B</td><td class="num">38.2x</td><td class="num">18.2x</td><td class="num">49.8x</td><td class="num pos">+18.7%</td><td class="num">29.7%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>数据来源：Yahoo Finance / yfinance，2026-05-22 JST 拉取。</blockquote>
+
+          <p>
+            ARM 的质量和战略地位不弱，但当前估值已经显著高于大多数半导体和 EDA 同行。市场不是按 FY2026 收益给 ARM 定价，
+            而是在按"AI CPU royalty monopoly option"定价。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 近期动态 ============ -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+
+          <h3>最近财报（FY2026 Q4）</h3>
+          <p class="lede">
+            FY2026 Q4 record revenue $1.49B，同比 +20%；royalty 收入 $671M（+11%），license and other 收入 $819M（+29%），
+            ACV 同比 +22% 至 $1.66B。收入增长强劲，gross margin 接近 98%。
+          </p>
+          <p>
+            Q1 FY2027 指引收入 $1.26B ± $50M，non-GAAP EPS $0.40 ± $0.04，低于 Q4 的 $0.60，
+            说明季度节奏仍会受大额 license timing 影响。
+          </p>
+
+          <h3>两日暴涨复盘（5 月 20–21 日）</h3>
+          <p class="lede">
+            5 月 20 日上涨 15.0%，5 月 21 日再涨 16.2%，两日累计约 33.7%。拆成四个层次：
+          </p>
+          <ul>
+            <li><strong>基本面底座</strong>　FY2026 Q4 record revenue，收入同比 +20%，license 收入同比 +29%，强调数据中心 royalty、Armv9、CSS 和 hyperscaler adoption。</li>
+            <li><strong>CPU renaissance 叙事</strong>　agentic AI 不只需要 GPU，也需要大量 CPU 做 orchestration / data movement / memory / security。ARM 称 agentic AI scaling 可能让数据中心每 GW 需要超过 4x 的 CPU capacity，2030 年超过 $100B 市场机会。</li>
+            <li><strong>NVIDIA Vera / Rubin 催化</strong>　Vera CPU 具备 full Armv9.2 compatibility；NVIDIA Q1 FY2027 财报显示 AI data center 需求继续超预期。</li>
+            <li><strong>Sell-side 集体上调</strong>　Bernstein Outperform / $300、Jefferies Buy / $290、RBC 上调至 $260，使资金提前交易 FY2027–FY2031 的 AGI CPU upside。</li>
+          </ul>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-05-21</strong>　ARM 收涨 16.2% 至 $298.23，盘中触及 $298.69，刷新 52 周高点。<em>股价已接近/进入多数 sell-side bull case。</em></li>
+            <li><strong>2026-05-21</strong>　NVIDIA Q1 FY2027 收入 $81.6B，Data Center 收入 $75.2B，指引 Q2 收入约 $91.0B。<em>强化 AI infrastructure capex 周期，间接强化 ARM 数据中心 CPU royalty 可见度。</em></li>
+            <li><strong>2026-05-21</strong>　Investing.com 报道 Jefferies 认为 NVIDIA 对 Arm-based Vera CPU 的评论利好 ARM royalty，维持 Buy / $290 目标价。</li>
+            <li><strong>2026-05-20</strong>　Bernstein 以 Outperform / $300 目标价覆盖 ARM，核心论点是 agentic AI 带来 CPU renaissance。<em>高知名度覆盖报告成为第一天暴涨的重要触发因素。</em></li>
+            <li><strong>2026-01-05</strong>　NVIDIA 发布 Rubin 平台，包含 Vera CPU（88 个 custom Olympus cores，full Armv9.2 compatibility）。<em>ARM 数据中心叙事的关键产品锚点。</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 催化剂 / 关注点 ============ -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>Q1 FY2027 财报：收入是否超过 $1.26B ± $50M 指引，non-GAAP EPS 是否超过 $0.40 ± $0.04。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>NVIDIA Vera / Rubin 订单可见度：是否继续披露 CPU revenue、Vera standalone shipments。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>Sell-side EPS / revenue revision：目标价已上调，关键看 consensus 是否真的上修 FY2028–FY2031 收入。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>SoftBank 持股/流通盘：大股东结构会放大股价波动。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>监管/授权模式：FTC 或其他监管机构若调查 IP 授权方式，可能压低估值倍数。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Data center royalty 是否连续多个季度加速，并能抵消 smartphone royalty 波动。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Armv9 / CSS 是否继续提高 royalty rate per chip。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>AGI CPU 是否从新闻稿进入实际收入确认，且不显著侵蚀轻资产利润率。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Hyperscaler custom silicon 是否持续转向 Arm，而非 x86 反攻或 RISC-V 替代。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>SBC 占收入是否从 FY2026 的 21%+ 下降。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 估值 ============ -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值</h2>
+          <span class="section-plain__meta">DCF · 相对估值 · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>DCF（保守）</h3>
+          <p>
+            保守现金流 DCF 基准假设：FY2026 revenue $4.92B，未来 5 年收入增长 25% / 25% / 23% / 20% / 17%，
+            FCF margin 18% → 30%，WACC 10.5%，Terminal growth 3.0%，净现金 ~$3.2B。
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>方法</th><th class="num">隐含股价</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>Gordon terminal DCF</td><td class="num">~$45</td><td>纯 Gordon terminal</td></tr>
+                <tr><td>Exit multiple（40x EBITDA）+ Gordon 中值</td><td class="num">$90 – $100</td><td>终值占比超过 90%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            DCF 对 ARM 现价的解释力较弱，现价更多来自远期 TAM 和估值倍数，而非可见现金流。
+          </p>
+
+          <h4>Gordon terminal DCF 敏感性表（$/股）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>WACC \ g</th><th class="num">2.0%</th><th class="num">2.5%</th><th class="num">3.0%</th><th class="num">3.5%</th><th class="num">4.0%</th></tr></thead>
+              <tbody>
+                <tr><td>9.5%</td><td class="num">$46</td><td class="num">$49</td><td class="num">$52</td><td class="num">$55</td><td class="num">$60</td></tr>
+                <tr><td>10.0%</td><td class="num">$43</td><td class="num">$45</td><td class="num">$48</td><td class="num">$51</td><td class="num">$54</td></tr>
+                <tr><td>10.5%</td><td class="num">$41</td><td class="num">$42</td><td class="num">$45</td><td class="num">$47</td><td class="num">$50</td></tr>
+                <tr><td>11.0%</td><td class="num">$38</td><td class="num">$40</td><td class="num">$42</td><td class="num">$44</td><td class="num">$46</td></tr>
+                <tr><td>11.5%</td><td class="num">$36</td><td class="num">$38</td><td class="num">$39</td><td class="num">$41</td><td class="num">$43</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>相对估值</h3>
+          <p>
+            当前 ARM 约 <span class="kpi">63.9x</span> FY2026 EV/Revenue、约 <span class="kpi">168.5x</span> FY2026 non-GAAP EPS。
+            同行中位数约 18.2x EV/Revenue 和 29.6x Forward P/E。
+          </p>
+
+          <h4>FY2027E EV/Revenue（假设 $6.15B revenue）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th class="num">FY2027E EV/Revenue</th><th class="num">隐含股价</th></tr></thead>
+              <tbody>
+                <tr><td class="num">25x</td><td class="num">$147</td></tr>
+                <tr><td class="num">30x</td><td class="num">$176</td></tr>
+                <tr><td class="num">35x</td><td class="num">$205</td></tr>
+                <tr><td class="num">40x</td><td class="num">$233</td></tr>
+                <tr><td class="num">45x</td><td class="num">$262</td></tr>
+                <tr class="row--highlight"><td class="num">50x</td><td class="num">$291</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>FY2027E P/E（假设 EPS ~$3.05）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th class="num">FY2027E P/E</th><th class="num">隐含股价</th></tr></thead>
+              <tbody>
+                <tr><td class="num">60x</td><td class="num">$183</td></tr>
+                <tr><td class="num">75x</td><td class="num">$229</td></tr>
+                <tr><td class="num">90x</td><td class="num">$274</td></tr>
+                <tr class="row--highlight"><td class="num">100x</td><td class="num">$305</td></tr>
+                <tr><td class="num">110x</td><td class="num">$336</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            当前 $298 附近已经隐含 FY2027 约 50x EV/Revenue 或 ~100x P/E。必须满足：数据中心 CPU royalty 加速、
+            AGI CPU 收入按 FY2028–FY2031 快速放量、智能手机 royalty 不拖累、SBC 占比下降、
+            且市场继续愿意给 ARM 结构性垄断期权高倍数。
+          </p>
+
+          <h3>估值结论</h3>
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">Bear</div>
+              <div class="scenario-card__value">$80 – $120</div>
+              <div class="scenario-card__trigger">手机/消费电子 royalty 放缓，AGI CPU 只贡献有限收入，SBC 继续高企，估值向成熟半导体/EDA 收敛。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">Base</div>
+              <div class="scenario-card__value">$170 – $230</div>
+              <div class="scenario-card__trigger">收入维持 20–25% 增长，数据中心 royalty 成为第二曲线，市场给予 30–40x FY2027E EV/Revenue。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">Bull</div>
+              <div class="scenario-card__value">$270 – $330</div>
+              <div class="scenario-card__trigger">ARM 成为 AI CPU / agentic compute 的核心 royalty layer，NVIDIA Vera、AWS Graviton、Google Axion、Microsoft Cobalt 和 AGI CPU 持续放量。</div>
+            </div>
+          </div>
+          <p>
+            <strong>当前 vs 合理价值：</strong>
+            当前 $298.23 已经落在 bull case 区间内。对长期持有者，核心问题是是否相信 ARM 的数据中心 CPU / AGI CPU 收入
+            在未来 3–5 年会非线性放大；对新资金，当前缺乏足够安全边际。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 主要风险 ============ -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. 估值前置过多</h4>
+              <p>当前约 64x FY2026 revenue 和 168x FY2026 non-GAAP EPS，已经折现了多年高增长和高倍数，任何下修都可能导致大幅回撤。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. AGI CPU 收入不确定</h4>
+              <p>自研 silicon 是新方向，可能带来更高收入，但也可能带来更高研发/供应链/客户冲突风险，削弱原有轻资产 IP 模型。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. Royalty rate 与出货量不透明</h4>
+              <p>NVIDIA Vera 或 hyperscaler CPU 的总销售额不等于 ARM 收入，关键取决于 royalty rate、合同结构和确认节奏。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. SBC 稀释</h4>
+              <p>FY2026 SBC $1.052B，占收入 21.4%。如果把 SBC 当真实成本，现金流质量比 non-GAAP 利润看起来弱。</p>
+            </div>
+            <div class="risk-item">
+              <h4>05. 智能手机仍是重要基础盘</h4>
+              <p>若高端手机换机、Android SoC 或中国智能手机链条疲软，可能拖累 royalty growth。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>06. 客户集中与生态冲突 / SoftBank 控制权</h4>
+              <p>Apple、Qualcomm、NVIDIA、hyperscalers 都有强议价能力；ARM 若向 silicon 延伸可能改变与部分 licensees 的关系。
+              SoftBank 仍是重要控股股东，其资本配置和潜在减持会影响少数股东风险收益。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              如果未来两个季度数据中心 royalty 没有明显加速，Q1/Q2 FY2027 指引或实际收入低于预期，
+              且 FY2028 AGI CPU / Vera / hyperscaler CPU 相关收入没有被 consensus 实质性上修，
+              会把观点从 Watch 下调到 Pass，并把合理价值中枢下调到 $120 – $170。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 待验证问题 ============ -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>NVIDIA Vera CPU 对 ARM 的实际 royalty rate 是多少？是接近传统 Neoverse / Grace，还是更低？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>ARM AGI CPU FY2028–FY2031 的收入路径是否能从订单/设计赢得转化为确认收入？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>数据中心 royalty 是否能持续达到或超过 20% 增长，而不是单季叙事？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>FY2027 license revenue 是否会因为 Q4 FY2026 高基数而出现波动？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>SBC 占收入是否开始下降，还是继续稀释股东经济收益？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Hyperscaler custom silicon 是否持续采用 Arm，而不是转向自研 ISA、RISC-V 或重新提高 x86 份额？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>当前 sell-side 目标价上调后，未来 1–2 个季度是否还有 EPS / revenue estimate revision 支撑股价？</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>ARM, <a class="link-blue" href="https://investors.arm.com/static-files/adf3bac7-1e91-442e-92e0-5f2d8f1b6a14" rel="noopener" target="_blank">FY2026 Q4 Shareholder Letter / Form 6-K</a>，2026-05-06。</li>
+            <li>NVIDIA, <a class="link-blue" href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx" rel="noopener" target="_blank">Rubin / Vera CPU 官方发布</a>，2026-01-05。</li>
+            <li>NVIDIA, <a class="link-blue" href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027" rel="noopener" target="_blank">Q1 FY2027 Results</a>，2026-05-21。</li>
+            <li>Investing.com, <a class="link-blue" href="https://www.investing.com/news/stock-market-news/nvidia-cpu-comments-read-positively-for-this-chip-stock-analyst-4703817" rel="noopener" target="_blank">Nvidia CPU comments read positively for Arm</a>，2026-05-21。</li>
+            <li>Investing.com Australia, <a class="link-blue" href="https://au.investing.com/news/stock-market-news/why-is-arm-stock-surging-to-an-alltime-high-today-93CH-4450170" rel="noopener" target="_blank">Why is Arm stock surging to an all-time high today?</a>，2026-05-21。</li>
+            <li>行情、估值倍数、同业数据：Yahoo Finance / yfinance，拉取时间 2026-05-22 JST。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('ARM');</script>
+</body>
+</html>
