@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">NVDA — NVIDIA</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="NVDA"
+        data-name="NVIDIA"
+        data-name-en="NVIDIA Corporation"
+        data-market="US"
+        data-sector="Semiconductors"
+        data-view="Watch"
+        data-tags="semiconductors,ai-infrastructure,valuation"
+        data-last-updated="2026-05-22">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market"></span>
+          <span class="sep">·</span>
+          <span data-bind="sector"></span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated"></span>
+        </div>
+        <h1 class="company-header__title" data-bind="name"></h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker"></span>
+          <span class="sep">·</span>
+          <span data-bind="name-en"></span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ============ 关键数据快照（sync skill 维护） ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">$219.51</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值 / EV</span>
+            <span class="market-data__value">$5.32T / $5.28T</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">18.8x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">P/B / 净现金</span>
+            <span class="market-data__value">33.9x / $41.8B</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth（Q1 YoY / FY27E）</span>
+            <span class="market-data__value">+85.2% / +75.8%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Operating Margin（TTM）</span>
+            <span class="market-data__value">64.0%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">FCF Margin（TTM）</span>
+            <span class="market-data__value">47.0%</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">$129.16 – $236.54</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">分析师目标价</span>
+            <span class="market-data__value">$275</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-05-22</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-21</p>
+      </div>
+    </section>
+
+    <!-- ============ Charts (runtime; AI 永远不动) + PER/PBR 历史表 ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / BPS 来自 NVIDIA 官方财报数据。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">2026-05-22</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 公司概要（first content section） ============ -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">NASDAQ · NVDA</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">Santa Clara, CA</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">员工数</div>
+              <div class="kv-grid__value">约 42,000</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">市值</div>
+              <div class="kv-grid__value">约 $5.3 万亿</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业</div>
+              <div class="kv-grid__value">Technology · Semiconductors</div>
+            </div>
+          </div>
+
+          <p>
+            NVIDIA 不再只是 GPU 芯片公司，而是一个覆盖 GPU、CPU、DPU、networking、系统、软件栈和开发工具的
+            AI 基础设施平台。其商业模式的核心，是通过硬件性能优势叠加 CUDA 生态、开发者锁定和系统级方案，
+            持续获取超额毛利和高回报资本配置空间。
+          </p>
+
+          <h3>护城河来源（速览）</h3>
+          <ul>
+            <li>CUDA 及配套开发工具链——行业最深的开发者锁定层</li>
+            <li>GPU、CPU、DPU、networking、switch、rack-scale system 的全栈交付能力</li>
+            <li>hyperscaler、sovereign AI 和 enterprise AI 三类需求同时扩张</li>
+            <li>供应链执行力强，能在超大规模需求爆发期转化技术优势为出货与利润</li>
+            <li>软件、网络和系统级 attach rate 抬高单位客户收入密度和切换成本</li>
+          </ul>
+
+          <blockquote>
+            NVIDIA 的护城河不是单一芯片领先，而是"开发范式 + 系统集成 + 供应链执行 + 生态锁定"的复合护城河。
+            这也解释了为什么市场愿意给它明显高于大多数半导体公司的收入倍数。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 核心结论 ============ -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch · 基准合理价值 $214</div>
+            <p>
+              NVIDIA 仍然是全球 AI 基础设施里最强的资产之一，但截至 2026-05-21 美股收盘附近的
+              <span class="kpi">$219.51</span>，市场已经把相当多的高增长预期提前计入。
+              基准公允价值约 <span class="kpi">$214</span>，接近现价，安全边际不明显。
+            </p>
+          </div>
+
+          <p class="lede">
+            核心多头逻辑：CUDA + GPU + networking + rack-scale systems + developer ecosystem 的平台组合，
+            让 NVIDIA 继续把 AI 资本开支周期中的大部分经济租金留在自己手里。
+          </p>
+          <p>
+            核心空头逻辑：当前估值对 2027 年之后的增长持续性、毛利率维持能力和 hyperscaler/sovereign AI 支出强度要求都很高。
+            如果只看短期基本面，公司几乎无可挑剔；如果看风险收益比，它更接近"高质量、但价格已不便宜"的 Watch 标的。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 业务模式（card 仅含核心；表格在外） ============ -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">FY2027 Q1 起过渡到新的市场平台披露框架：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>Data Center</strong> — 核心引擎，覆盖 hyperscale、AI clouds、industrial、enterprise、sovereign AI，
+                由 Blackwell 平台和 networking 拉动，营收占比 92.2%，同比增长 92%。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>Edge Computing</strong> — 覆盖 workstation、PC、console、automotive、robotics、AI-RAN 等边缘/终端场景，
+                营收占比 7.8%，同比增长 29%。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>Reportable Segments</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>板块</th>
+                  <th class="num">营收占比</th>
+                  <th class="num">增长率</th>
+                  <th>简述</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Compute &amp; Networking</td><td class="num">91.3%</td><td class="num pos">+88% YoY</td><td>AI compute 与 InfiniBand / Spectrum-X / NVLink 共同构成大部分估值基础。</td></tr>
+                <tr><td>Graphics</td><td class="num">8.7%</td><td class="num pos">+58% YoY</td><td>游戏、专业图形与相关图形栈，已不再是估值主变量。</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>公司在 FY2027 Q1 开始过渡到新披露框架，以 Data Center 和 Edge Computing 作为市场平台口径。</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 财务表现 ============ -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">FY2024 – FY2026 · LTM · 单位：十亿美元</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度</th>
+                  <th class="num">Revenue</th>
+                  <th class="num">YoY</th>
+                  <th class="num">Op Margin</th>
+                  <th class="num">Net Income</th>
+                  <th class="num">EPS</th>
+                  <th class="num">FCF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2024</td><td class="num">$60.9B</td><td class="num pos">+126%</td><td class="num">54.1%</td><td class="num">$29.8B</td><td class="num">$1.19</td><td class="num">$27.0B</td></tr>
+                <tr><td>FY2025</td><td class="num">$130.5B</td><td class="num pos">+114%</td><td class="num">62.4%</td><td class="num">$72.9B</td><td class="num">$2.94</td><td class="num">$60.9B</td></tr>
+                <tr><td>FY2026</td><td class="num">$215.9B</td><td class="num pos">+65.5%</td><td class="num">60.4%</td><td class="num">$120.1B</td><td class="num">$4.90</td><td class="num">$96.7B</td></tr>
+                <tr class="row--highlight"><td>LTM（含 FY27 Q1）</td><td class="num">$253.5B</td><td class="num">n.a.</td><td class="num">64.0%</td><td class="num">$159.6B</td><td class="num">n.a.</td><td class="num">$119.1B</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>EPS 单位：美元。LTM 净利润被 Q1 FY2027 的 $159 亿 equity securities gains 明显抬高。</blockquote>
+
+          <p>
+            FY2027 Q1 收入 <span class="kpi">$816 亿</span>，环比 +20%、同比 +85%，Blackwell ramp 仍在持续兑现。
+            TTM 经营利润率回到 <span class="kpi">64%</span>，在大型硬件平台公司里极其罕见。
+          </p>
+          <p>
+            需要注意的是，LTM 净利润被 Q1 FY2027 的 equity securities gains 抬高，因此 trailing EPS 和 trailing P/E 的解释力下降。
+            当前阶段看 NVIDIA，<span class="kpi">forward P/E</span>、<span class="kpi">EV/Revenue</span> 和 <span class="kpi">FCF</span> 比单纯看 trailing net income 更可靠。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 护城河 ============ -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">当前评估：<strong>Wide and Deep</strong>——复合型护城河，非单一芯片领先。</p>
+
+          <div class="moat-block">
+            <h4>CUDA 开发者生态</h4>
+            <p>CUDA 及配套开发工具链仍是行业最深的开发者锁定层，训练出的模型和部署管线切换成本极高。</p>
+          </div>
+          <div class="moat-block">
+            <h4>全栈系统交付</h4>
+            <p>GPU、CPU、DPU、networking、switch、rack-scale system 的全栈交付，使客户采购逻辑从"买芯片"升级为"买 AI factory"。</p>
+          </div>
+          <div class="moat-block">
+            <h4>多元化需求结构</h4>
+            <p>hyperscaler、sovereign AI 和 enterprise AI 三类需求同时扩张，降低单一客户集中的脆弱性。</p>
+          </div>
+          <div class="moat-block">
+            <h4>供应链执行</h4>
+            <p>在超大规模需求爆发期把技术优势转化为真实出货与利润，supply commitments 达 $1,190 亿。</p>
+          </div>
+          <div class="moat-block">
+            <h4>Attach rate 与切换成本</h4>
+            <p>软件、网络和系统级 attach rate 抬高了单位客户的收入密度和切换成本。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">市值</th>
+                  <th class="num">Fwd P/E</th>
+                  <th class="num">EV/Rev</th>
+                  <th class="num">Rev Growth</th>
+                  <th class="num">Op Margin</th>
+                  <th class="num">EV/EBITDA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>NVIDIA</td><td>NVDA</td><td class="num">$5,316.8B</td><td class="num">18.8x</td><td class="num">24.9x</td><td class="num pos">+73.2%</td><td class="num">65.0%</td><td class="num">40.4x</td></tr>
+                <tr><td>AMD</td><td>AMD</td><td class="num">$733.1B</td><td class="num">34.7x</td><td class="num">19.3x</td><td class="num pos">+37.8%</td><td class="num">14.4%</td><td class="num">97.1x</td></tr>
+                <tr><td>Broadcom</td><td>AVGO</td><td class="num">$1,962.9B</td><td class="num">22.7x</td><td class="num">29.5x</td><td class="num pos">+29.5%</td><td class="num">44.9%</td><td class="num">54.1x</td></tr>
+                <tr><td>Marvell</td><td>MRVL</td><td class="num">$167.0B</td><td class="num">35.0x</td><td class="num">20.6x</td><td class="num pos">+22.1%</td><td class="num">18.7%</td><td class="num">64.2x</td></tr>
+                <tr><td>Micron</td><td>MU</td><td class="num">$859.4B</td><td class="num">7.4x</td><td class="num">14.1x</td><td class="num pos">+196.3%</td><td class="num">67.6%</td><td class="num">22.3x</td></tr>
+                <tr><td>Qualcomm</td><td>QCOM</td><td class="num">$224.9B</td><td class="num">20.1x</td><td class="num">4.9x</td><td class="num neg">-3.5%</td><td class="num">22.1%</td><td class="num">16.8x</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>市值为美元口径。数据来自 Yahoo Finance。</blockquote>
+
+          <p>
+            NVIDIA 的估值并不便宜，但它也不是简单的"半导体平均数"。Forward P/E 已经不像过去那样极端昂贵；
+            但 EV/Revenue 明确反映市场在为其生态控制力和资本回报质量支付高溢价。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 近期动态 ============ -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+          <h3>最近财报（FY2027 Q1，2026-05-20）</h3>
+          <p class="lede">
+            Q1 FY2027 收入 $816 亿，同比 +85%，GAAP gross margin 74.9%，GAAP operating income $535 亿，
+            GAAP diluted EPS $2.39。Data Center 收入 $752 亿，同比 +92%，仍是绝对主引擎。
+          </p>
+          <p>
+            管理层给出的 Q2 FY2027 收入指引为 <span class="kpi">$910 亿 ± 2%</span>。
+            该指引<strong>没有假设任何来自中国的 Data Center compute revenue</strong>，
+            既体现了监管约束，也意味着指引本身并不依赖中国恢复出货。
+          </p>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-05-18</strong>　董事会批准将季度股息从每股 $0.01 提高至 $0.25，并新增 $800 亿回购授权。<em>公司在维持高投入的同时开始系统性提高对股东的现金回报。</em></li>
+            <li><strong>2026-05-20</strong>　公司披露一季度向股东返还约 $200 亿。<em>资本配置依旧激进，但当前估值下回购的边际性价比已不如业务再投资直观。</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 催化剂 / 关注点 ============ -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>下次财报：FY2027 Q2，重点看 Data Center 增速、gross margin 稳定性与 DSO 回归情况。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>Blackwell 平台能否继续顺利放量，尤其是整机与 networking attach 的收入质量。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>中国相关限制下，是否仍能维持高于指引的非中国需求吸收能力。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>AI capex 是否从"几家 hyperscaler 驱动"扩展到更多 sovereign、enterprise、industrial 场景。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>新披露框架下 Edge Computing 是否能成为第二增长曲线，而非仅仅稳定补充。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>供应承诺与库存水平是否转化为健康交付，而不是周期后段的错配风险。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 估值 ============ -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值</h2>
+          <span class="section-plain__meta">DCF · 相对估值 · 平台估值 · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>DCF</h3>
+          <p>
+            FY2027E / FY2028E 收入约 <span class="kpi">$379.6B / $507.2B</span>（一致预期），
+            其后 3 年收入增速 24% / 16% / 10%，Operating margin 路径 62% → 54%，
+            WACC 11.7%，终值增长率 3.0%，退出倍数 20x EV/EBITDA。
+            DCF 基准估值约 <span class="kpi">$196</span>。压低估值的核心不是前两年预测，而是对 2029–2031 年后资本开支正常化的处理。
+          </p>
+
+          <h4>敏感性表（美元/股）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>WACC \ g</th><th class="num">1.5%</th><th class="num">2.0%</th><th class="num">2.5%</th><th class="num">3.0%</th><th class="num">3.5%</th></tr></thead>
+              <tbody>
+                <tr><td>10.7%</td><td class="num">$201</td><td class="num">$204</td><td class="num">$207</td><td class="num">$211</td><td class="num">$215</td></tr>
+                <tr><td>11.2%</td><td class="num">$194</td><td class="num">$197</td><td class="num">$200</td><td class="num">$203</td><td class="num">$207</td></tr>
+                <tr class="row--highlight"><td>11.7%</td><td class="num">$188</td><td class="num">$191</td><td class="num">$193</td><td class="num">$196</td><td class="num">$199</td></tr>
+                <tr><td>12.2%</td><td class="num">$183</td><td class="num">$185</td><td class="num">$187</td><td class="num">$190</td><td class="num">$192</td></tr>
+                <tr><td>12.7%</td><td class="num">$178</td><td class="num">$179</td><td class="num">$181</td><td class="num">$184</td><td class="num">$186</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>相对估值</h3>
+          <p>
+            用 AMD / AVGO / MRVL / MU / QCOM 做同行篮子，forward P/E 中位数约 22.7x，
+            EV/Revenue 中位数约 19.3x。由于 NVIDIA 的增长质量、生态深度和经营利润率显著优于大多数可比公司，
+            相对估值中枢约 <span class="kpi">$234</span>。
+            其中 forward P/E 对应值约 $264，EV/Revenue 对应值约 $203。
+          </p>
+
+          <h3>平台估值</h3>
+          <p>
+            按 FY2027 Q1 新平台口径年化，给 Data Center 约 17x EV/Revenue、Edge Computing 约 6x EV/Revenue，
+            平台估值约 <span class="kpi">$219</span>。新口径刚切换，历史验证样本不足。
+          </p>
+
+          <h3>估值结论</h3>
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">保守</div>
+              <div class="scenario-card__value">$146</div>
+              <div class="scenario-card__trigger">AI capex 降速明显，margin 回落快于预期，估值进一步去泡沫化。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">基准</div>
+              <div class="scenario-card__value">$214</div>
+              <div class="scenario-card__trigger">高增长延续，但市场开始要求更正常化的终值假设。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">乐观</div>
+              <div class="scenario-card__value">$255</div>
+              <div class="scenario-card__trigger">Blackwell 与 networking 维持强势，margin 高位钝化，市场继续给平台溢价。</div>
+            </div>
+          </div>
+          <p>
+            <strong>当前 vs 合理价值：</strong>
+            当前 $219.51 相对基准 $214，大致处于<strong>接近合理、略偏贵</strong>的区间。
+          </p>
+
+          <h3>管理层与资本配置</h3>
+          <ul>
+            <li><strong>核心管理层</strong>：Jensen Huang 仍是公司最核心的战略与产品驱动者，管理层执行力在过去两轮周期里已被反复验证。</li>
+            <li><strong>分红 / 回购</strong>：2026-05-18 提高股息至 $0.25/季度并扩大回购授权；Q1 FY2027 单季向股东返还约 $200 亿。</li>
+            <li><strong>资本开支与库存</strong>：Q1 FY2027 存货约 $258 亿，supply-related commitments 达 $1,190 亿，公司在主动锁产能、赌需求持续。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 主要风险 ============ -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. AI 资本开支降速</h4>
+              <p>如果 hyperscaler 和 sovereign AI 的投资节奏在 2027 年后明显降档，当前估值会先压缩，再反映到基本面预期。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. 利润率回落快于预期</h4>
+              <p>当前超高毛利率和经营利润率部分来自供需极度紧张，若竞争或客户议价增强，估值中枢会被重定价。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. 监管与中国约束</h4>
+              <p>Q2 FY2027 指引不含中国 Data Center compute revenue；若限制外溢到更多产品层，收入和供应链弹性都会受影响。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. 估值锚点失真</h4>
+              <p>Q1 FY2027 的 equity securities gains 抬高了 GAAP net income，若市场错误使用 trailing EPS 定价，会放大多空双方的认知偏差。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>05. 客户集中与平台替代尝试</h4>
+              <p>虽然客户结构正在分散，但超大客户仍有能力推动自研 ASIC、软件抽象层和 alternative accelerators。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              如果 Data Center 收入同比连续两季降到 30% 以下，且 gross margin 失守 70%，
+              我会撤回当前对其平台定价权和长期高 ROIC 的核心假设。
+              反过来，如果公司在高增长放缓后仍能把经营利润率稳定在 55%+，
+              则我会接受更高的长期公允价值中枢。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 待验证问题 ============ -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>新披露框架下，ACIE（AI Clouds, Industrial, Enterprise）在 Data Center 内部的长期结构性增速是否高于 hyperscale。</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>当 AI 基础设施从训练转向推理与 agentic/physical AI，NVIDIA 的 attach rate 是否还能继续提升。</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>回购授权扩大之后，公司会更多选择股东回报，还是继续把大部分资本留在生态、供应链和投资布局上。</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>NVIDIA, <a class="link-blue" href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027" rel="noopener" target="_blank">FY2027 Q1 Earnings Release</a>，2026-05-20。</li>
+            <li>NVIDIA, <a class="link-blue" href="https://investor.nvidia.com/financial-info/financial-reports/default.aspx?dv=c&amp;mt=p" rel="noopener" target="_blank">Financial Reports</a>。</li>
+            <li>NVIDIA, <a class="link-blue" href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000036/nvda-20260512.htm" rel="noopener" target="_blank">FY2026 Annual Report / Proxy</a>。</li>
+            <li>Yahoo Finance, <a class="link-blue" href="https://finance.yahoo.com/quote/NVDA/" rel="noopener" target="_blank">NVDA Quote</a>。</li>
+            <li>Yahoo Finance, <a class="link-blue" href="https://finance.yahoo.com/quote/NVDA/analysis/" rel="noopener" target="_blank">NVDA Analysis / Estimates</a>。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('NVDA');</script>
+</body>
+</html>

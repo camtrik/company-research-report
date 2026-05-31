@@ -1,5 +1,13 @@
 # SOFI - SoFi Technologies Changelog
 
+## 2026-05-29
+
+- 新建 `2026-05-29-reports.md`，更新 SoFiUSD 正式面向 app 用户上线后的事件分析和估值。
+- 使用 Nasdaq 盘前行情更新 2026-05-29 08:22 ET 价格、成交量、盘前隐含市值和估值倍数。
+- 将 SoFiUSD 作为风险调整后的平台期权纳入估值：上调 P/TBV、EV / adjusted EBITDA、2027E EPS 退出倍数，并额外加入 `$0.7/股` 的基准期权价值。
+- 将基准合理价值从约 `$16/股` 上调至约 `$18/股`，并更新 bear/base/bull 情景区间。
+- 补充 Galileo Debit Spend Index 和 SEC 最新披露检查，说明盘前大涨更像 SoFiUSD 叙事和动量资金驱动，而非新的财务指引。
+
 ## 2026-05-18
 
 - 新建 `2026-05-18-reports.md`，按 `docs/template.md` 结构整理 SOFI 公司研究报告。

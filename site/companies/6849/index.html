@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">6849 — 日本光電</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="6849"
+        data-name="日本光電"
+        data-name-en="Nihon Kohden Corporation"
+        data-market="JP"
+        data-sector="Healthcare / Medical Devices"
+        data-view="Watch"
+        data-tags="japan,medical-devices,patient-monitoring,defensive,deep-value"
+        data-last-updated="2026-05-19">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market">JP</span>
+          <span class="sep">·</span>
+          <span data-bind="sector">Healthcare / Medical Devices</span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated">2026-05-19</span>
+        </div>
+        <h1 class="company-header__title" data-bind="name">日本光電</h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker">6849</span>
+          <span class="sep">·</span>
+          <span data-bind="name-en">Nihon Kohden Corporation</span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ============ 关键数据快照（sync skill 维护） ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">¥1,503.5</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值</span>
+            <span class="market-data__value">¥2,405 亿</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">13.7x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">P/B</span>
+            <span class="market-data__value">1.42x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth（FY25）</span>
+            <span class="market-data__value">+1.5%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Operating Margin（FY25）</span>
+            <span class="market-data__value">9.2%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Net Margin（FY25）</span>
+            <span class="market-data__value">6.3%</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">¥1,408 – ¥1,885</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">分析师目标价</span>
+            <span class="market-data__value">¥1,880</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-05-19</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-19</p>
+      </div>
+    </section>
+
+    <!-- ============ Charts (runtime; AI 永远不动) + PER/PBR 历史表 ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>EPS / BPS 由 yfinance 净利与权益除以股本估算，未做权益变动调整；BPS ¥1,122 vs 现价 ¥1,503 → 当前 P/B 1.42x。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">2026-05-19</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 公司概要 ============ -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">TSE Prime · 6849</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">东京 新宿</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">员工数</div>
+              <div class="kv-grid__value">约 6,000+</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业</div>
+              <div class="kv-grid__value">Healthcare · 医療用電子機器</div>
+            </div>
+          </div>
+
+          <p>
+            日本光电以<strong>患者监护仪、脑波計 (EEG)、心電図 (ECG)、除細動器</strong>为核心产品，
+            国内监护市场份额领先（多年保持龙头），同时通过血液诊断、CathLab 设备、医院信息系统等切入诊断与重症监护场景。
+            海外业务占比近年提升至约 30%+，覆盖北美、欧洲、亚洲、拉美。
+            商业模式 = "设备销售 + 耗材/服务"，长尾耗材（电极、纸张、导线、维护合约）提供稳定毛利底盘，
+            毛利率长期维持在 <span class="kpi">50%</span> 上下。
+          </p>
+
+          <h3>护城河来源（速览）</h3>
+          <ul>
+            <li>日本院内监护装机量长期领先，电子病历集成形成切换成本</li>
+            <li>耗材 / 服务 / 维护合约的 recurring 现金流，构成稳定 50% 毛利底盘</li>
+            <li>行业监管壁垒（PMDA、JCI、FDA、CE）+ 临床验证周期长</li>
+            <li>强资产负债表（净现金 ¥17B、自有资本比率 70% 左右）支撑研发与海外扩张</li>
+          </ul>
+
+          <blockquote>公司不披露独立分部报表，收入结构来自年报描述性披露。海外业务占比约 30%+。</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 核心结论 ============ -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch · 基准合理价值 ¥1,830</div>
+            <p>
+              当前 <span class="kpi">¥1,503.5</span> 接近 52 周低点 ¥1,408，
+              估值已隐含了"利润率永远回不去"的悲观情景。
+              基准合理价值 <span class="kpi">¥1,830</span>（DCF ¥1,627 与同业相对估值 ¥2,040 的 50/50 混合），
+              对应约 <span class="kpi">+22% 上行</span>，与卖方 8 人共识目标价中位 ¥1,880 一致。
+            </p>
+          </div>
+
+          <p class="lede">
+            核心看多点是患者监护设备需求修复 + 强资产负债表（净现金 ¥17B）+ 22% 折价 vs 同业 + 治理改善预期。
+          </p>
+          <p>
+            核心反向风险是 OPM 自 FY22 的 15% 一路滑落到 9%，ROE 只 8%，海外竞争加剧。
+            安全边际：Bear case ¥1,280 与 52 周低点 ¥1,408 接近，意味着下行风险已被部分消化。
+            利润率能否回到 11%+ 是估值最大单一变量。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 业务模式 ============ -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">日本光电的收入来源围绕四大产品线，设备销售带动后续 5–10 年的耗材 + 服务 + 维护合约：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>生体情報モニタ（患者监护仪）</strong> — 最大单一品类，日本行业领先份额。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>検査機器</strong> — EEG / 心电 / 多导生理记录仪。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">03</span>
+              <div class="numbered-list__body">
+                <strong>治療機器</strong> — 自动体外除颤器 AED、CathLab、心律失常治疗设备。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">04</span>
+              <div class="numbered-list__body">
+                <strong>其他</strong> — 信息系统、耗材、服务、海外 OEM。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>现金流引擎</h3>
+          <p>
+            设备销售带动后续 5–10 年的耗材 + 服务 + 校正/维护合约（recurring，毛利 60%+）。
+            这是公司在低收入增长下仍能维持稳定 EBITDA 的基础。
+          </p>
+          <blockquote>公司不披露独立分部报表，收入结构来自年报描述性披露。海外护城河较弱（直面 Masimo、GE Healthcare、Philips、Mindray）。</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 财务表现 ============ -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">FY2022 – FY2025 · 单位：十亿日元</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度</th>
+                  <th class="num">Revenue</th>
+                  <th class="num">YoY</th>
+                  <th class="num">Op Margin</th>
+                  <th class="num">Net Income</th>
+                  <th class="num">EPS</th>
+                  <th class="num">FCF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2022</td><td class="num">205.1</td><td class="num">—</td><td class="num">15.1%</td><td class="num">23.4</td><td class="num">146.5</td><td class="num">22.8</td></tr>
+                <tr><td>FY2023</td><td class="num">206.6</td><td class="num pos">+0.7%</td><td class="num">10.2%</td><td class="num">17.1</td><td class="num">107.0</td><td class="num neg">-10.8</td></tr>
+                <tr><td>FY2024</td><td class="num">222.0</td><td class="num pos">+7.4%</td><td class="num">8.8%</td><td class="num">17.0</td><td class="num">106.4</td><td class="num">10.8</td></tr>
+                <tr><td>FY2025</td><td class="num">225.4</td><td class="num pos">+1.5%</td><td class="num">9.2%</td><td class="num">14.1</td><td class="num">88.1</td><td class="num">6.6</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>EPS 单位：日元。FY2025 CapEx ¥8.7B 处历史高点。</blockquote>
+
+          <p>
+            营收四年内复合 <span class="kpi">+3.2%</span>，但经营利润率从 <span class="kpi">15%</span> 一路掉到 <span class="kpi">9%</span>，
+            是估值压制的核心原因。FY22 的 OPM 15% 是 COVID 监护设备需求井喷的不可重复峰值；
+            之后销售构成回归常态（更多低利润率耗材/服务、海外业务成本上升、CapEx 加大）。
+          </p>
+          <p>
+            FY23 大幅工作资本占用导致 FCF 转负，FY24/25 恢复但远低于历史均值；
+            FY25 CapEx ¥8.7B 是历史高点，需关注是否为产能扩张/M&amp;A 前置投入。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 护城河 ============ -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">当前评估：<strong>国内窄而稳、海外偏弱</strong>。护城河依赖国内装机基础和监管壁垒：</p>
+
+          <div class="moat-block">
+            <h4>日本院内监护装机量</h4>
+            <p>长期领先，电子病历集成形成切换成本。</p>
+          </div>
+          <div class="moat-block">
+            <h4>耗材 / 服务 recurring</h4>
+            <p>维护合约的 recurring 现金流，构成稳定 50% 毛利底盘。</p>
+          </div>
+          <div class="moat-block">
+            <h4>监管壁垒</h4>
+            <p>PMDA、JCI、FDA、CE 临床验证周期长，新进入者门槛高。</p>
+          </div>
+          <div class="moat-block">
+            <h4>强资产负债表</h4>
+            <p>净现金 ¥17B、自有资本比率 70% 左右，支撑研发与海外扩张。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">市值</th>
+                  <th class="num">Fwd P/E</th>
+                  <th class="num">EV/EBITDA</th>
+                  <th class="num">P/B</th>
+                  <th class="num">OPM</th>
+                  <th class="num">RevG</th>
+                  <th class="num">ROE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>日本光電</td><td>6849.T</td><td class="num">¥240B</td><td class="num">13.7x</td><td class="num">8.9x</td><td class="num">1.42x</td><td class="num">13.5%</td><td class="num">6.2%</td><td class="num">8.1%</td></tr>
+                <tr><td>Terumo</td><td>4543.T</td><td class="num">¥3,384B</td><td class="num">22.5x</td><td class="num">12.3x</td><td class="num">2.14x</td><td class="num">14.9%</td><td class="num pos">13.8%</td><td class="num">9.2%</td></tr>
+                <tr><td>Olympus</td><td>7733.T</td><td class="num">¥2,065B</td><td class="num">14.9x</td><td class="num">9.5x</td><td class="num">2.54x</td><td class="num">16.9%</td><td class="num pos">8.5%</td><td class="num">8.7%</td></tr>
+                <tr><td>Hoya</td><td>7741.T</td><td class="num">¥8,997B</td><td class="num">39.4x</td><td class="num">23.6x</td><td class="num">8.84x</td><td class="num">46.7%</td><td class="num pos">14.2%</td><td class="num">25.1%</td></tr>
+                <tr><td>Masimo</td><td>MASI</td><td class="num">$9.4B</td><td class="num">27.1x</td><td class="num">26.5x</td><td class="num">11.87x</td><td class="num">23.6%</td><td class="num pos">8.5%</td><td class="num">25.0%</td></tr>
+                <tr><td>GE Healthcare</td><td>GEHC</td><td class="num">$28.3B</td><td class="num">11.6x</td><td class="num">10.4x</td><td class="num">2.65x</td><td class="num">11.1%</td><td class="num pos">7.4%</td><td class="num">19.5%</td></tr>
+                <tr><td>Philips</td><td>PHG</td><td class="num">$24.9B</td><td class="num">12.8x</td><td class="num">14.5x</td><td class="num">1.86x</td><td class="num">6.2%</td><td class="num neg">-4.7%</td><td class="num">8.4%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>6849 在所有估值维度上都对同业中位有 25–60% 折价。折价部分合理（增长慢、ROE 低、利润率波动大），但折价幅度已在 Bull / Base 情景之外提供安全垫。</blockquote>
+
+          <p>
+            ROE 仅 <span class="kpi">8%</span>，资本配置效率低（现金堆积、缺乏明确回购计划）。
+            海外业务面对 Masimo、GE Healthcare、Philips、Mindray 等的直接竞争，议价能力弱。
+            增长率 6.2% 显著低于全球医疗器械同业中位 8.5%。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 催化剂 / 关注点 ============ -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>FY2026-Q1 财报（预计 2026-08）：关注 OPM 是否企稳在 9%+，海外销售季度增长是否恢复双位数。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>任何回购或特别分红公告——账上 ¥43B 现金 + 1.4x P/B 是日本式治理改革的典型候选。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>美元/日元走势：日元过强（&lt; 140）会同步压制海外营收的折算与定价。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>中期经营计划达成情况，重点验证管理层对 OPM &gt; 10% 目标的兑现节奏。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>新一代监护设备 / AI 心电分析产品的海外注册与上市进度。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>ROE 是否能向 10%+ 修复——这是估值多重重估的核心条件。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 估值 ============ -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值</h2>
+          <span class="section-plain__meta">DCF · 相对估值 · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>方法一：DCF（5 年 FCFF + 永续）</h3>
+          <h4>关键假设</h4>
+          <ul>
+            <li>增长路径：FY26 +1.5% → FY30 +2.5%（共识 FY26 +0.5%，本模型偏中性）</li>
+            <li>经营利润率：9.5%（FY25 9.2% 小幅修复，未达到管理层 10%+ 目标）</li>
+            <li>永续增长 g = 1.5%（日本长期名义 GDP）</li>
+            <li>WACC = 5.89%：rf 1.6%（10Y JGB）、β 0.80、ERP 6.0%（Damodaran Japan）、E/V 90.5%</li>
+            <li>退出倍数 9x EV/EBITDA（同业中位 13.4x 折让 30%）</li>
+            <li>隐含价 = <span class="kpi">¥1,627</span>（+8%）；TV 占 EV 83%，对永续假设极敏感</li>
+          </ul>
+
+          <h4>敏感性（WACC × g → 隐含价）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>WACC \ g</th><th class="num">0.5%</th><th class="num">1.0%</th><th class="num">1.5%</th><th class="num">2.0%</th><th class="num">2.5%</th></tr></thead>
+              <tbody>
+                <tr><td>4.89%</td><td class="num">1,520</td><td class="num">1,671</td><td class="num">1,867</td><td class="num">2,131</td><td class="num">2,505</td></tr>
+                <tr><td>5.39%</td><td class="num">1,377</td><td class="num">1,495</td><td class="num">1,643</td><td class="num">1,836</td><td class="num">2,095</td></tr>
+                <tr class="row--highlight"><td>5.89%</td><td class="num">1,261</td><td class="num">1,355</td><td class="num"><strong>1,471</strong></td><td class="num">1,617</td><td class="num">1,805</td></tr>
+                <tr><td>6.39%</td><td class="num">1,164</td><td class="num">1,241</td><td class="num">1,334</td><td class="num">1,447</td><td class="num">1,590</td></tr>
+                <tr><td>6.89%</td><td class="num">1,083</td><td class="num">1,146</td><td class="num">1,222</td><td class="num">1,313</td><td class="num">1,424</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>方法二：相对估值（同业 4 法中位，统一 −20% 折让）</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>方法</th><th>同业中位 × (1−20%)</th><th>输入</th><th class="num">隐含价</th></tr></thead>
+              <tbody>
+                <tr><td>Forward P/E</td><td class="num">15.0x</td><td>× ¥102 (Fwd EPS)</td><td class="num">¥1,528</td></tr>
+                <tr><td>EV / EBITDA</td><td class="num">10.7x</td><td>× ¥26B − 净债</td><td class="num">¥1,871</td></tr>
+                <tr><td>P / B</td><td class="num">2.08x</td><td>× ¥1,062 BV</td><td class="num">¥2,209</td></tr>
+                <tr><td>EV / Revenue（参考）</td><td class="num">2.02x</td><td>× ¥225B − 净债</td><td class="num">¥2,981</td></tr>
+                <tr class="row--total"><td colspan="3">4 法中位</td><td class="num">¥2,040</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>EV/Revenue 因同业（Hoya 46% OPM、Masimo 23%）与目标（13%）利润率差距过大，归入参考；最终用 P/E、EV/EBITDA、P/B 三法中位 ≈ ¥1,870–2,040 区间。</blockquote>
+
+          <h3>估值结论</h3>
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">保守</div>
+              <div class="scenario-card__value">¥1,280–1,430</div>
+              <div class="scenario-card__trigger">OPM 停留 8%、增长 &lt; 2%、同业折让扩大至 30%。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">基准</div>
+              <div class="scenario-card__value">¥1,830</div>
+              <div class="scenario-card__trigger">OPM 9.5%、增长 2.5%、同业 20% 折让维持。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">乐观</div>
+              <div class="scenario-card__value">¥2,400–2,700</div>
+              <div class="scenario-card__trigger">OPM 修复至 11–12%、营收 5% CAGR、估值向同业中位收敛。</div>
+            </div>
+          </div>
+          <p>
+            <strong>当前 vs 合理价值：</strong>
+            当前 ¥1,503.5 相对基准 ¥1,830，折价约 <span class="kpi">18%</span>。
+            上行空间 +22%，下行风险（到 Bear 上沿）约 −5%——风险/回报比偏正向。
+          </p>
+
+          <h3>管理层与资本配置</h3>
+          <ul>
+            <li><strong>股权结构</strong>：典型分散持股 + 外资持有比例约 30–40%；无单一大股东超 5%。</li>
+            <li><strong>派息政策</strong>：FY25 派息率 35.8%（行业中等），股息率 2.22%。无明显回购历史。</li>
+            <li><strong>资本开支</strong>：FY25 CapEx ¥8.7B 处历史高点，需在下一份报告确认是产能扩张、新工厂还是 IT 系统投入——这一项的解释会显著影响 FCF 假设。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 主要风险 ============ -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. 利润率结构性下沉</h4>
+              <p>FY25 的 OPM 9% 是新常态而非周期低点。若毛利率 51% 因竞争或材料成本失守，DCF 公允价对应再下挫 ¥200–¥300。监控信号：季度毛利率连续 2 季 &lt; 50%。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. 海外竞争与 FX</h4>
+              <p>Masimo / GE / Philips / Mindray 在监护与诊断领域价格战，叠加日元升值 → 海外营收和利润双杀。监控信号：海外营收占比下滑 + 日元 &lt; ¥140/USD。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. 资本配置 / ROE 锁死</h4>
+              <p>现金不分配、不回购、不并购，市场会继续给 1.4x P/B（治理折价）。监控信号：年度资本回报政策无更新。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. 国内监护设备替换周期延后</h4>
+              <p>日本医院预算紧缩 / 医保收紧推迟换机。监控信号：日本国内监护品类增长 &lt; 2%。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>05. 数据质量</h4>
+              <p>本报告 yfinance β 为空（用 0.80 默认值）、Diluted EPS FY25 缺失、ΔNWC 波动极大；最终结论应以 EDINET / 公司有価証券報告書一手核对。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              OPM 连续 2 季跌破 8%，或毛利率连续 2 季跌破 50% → 利润结构性恶化，撤回正面观点。
+              股价站上 ¥1,900（接近基准合理价上沿）且 OPM 未修复至 10%+ → 估值已透支催化剂，下调至 Pass。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 待验证问题 ============ -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>FY2025 CapEx 翻倍至 ¥8.7B 的具体用途？产能扩张 / 海外建厂 / IT 系统？这会决定 FCF 假设的可持续性。</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>管理层中期经营计划中 OPM &gt; 10% 目标的具体路径——是品类组合优化、海外提价，还是固定成本削减？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>是否有迹象显示治理改革（回购、调高派息率、出售非核心资产）？账上 ¥43B 现金是估值折价的核心来源。</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>海外营收的真实结构——按 IFRS 分部披露的数据，对比 Masimo / GEHC / Mindray 的同区域增速。</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>国内监护设备替换周期的实际时点（疫情期间装机的 5–7 年周期 → 2026–2028 进入更换窗口？）。</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>Nihon Kohden, <a class="link-blue" href="https://www.nihonkohden.com/ir/" rel="noopener" target="_blank">Investor Relations</a>，accessed 2026-05-19。</li>
+            <li>Yahoo Finance Japan, <a class="link-blue" href="https://finance.yahoo.co.jp/quote/6849.T" rel="noopener" target="_blank">6849.T 股价</a>，accessed 2026-05-19。</li>
+            <li>Yahoo Finance API（unofficial，建议以 EDINET 有価証券報告書一手核对）。</li>
+            <li>分析师共识：Yahoo Finance Analyst Estimates（n=8，截至 2026-05-19）。</li>
+            <li>WACC 参考：Damodaran Japan ERP 6%、10Y JGB ~1.6%。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('6849');</script>
+</body>
+</html>
