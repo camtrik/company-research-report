@@ -10,9 +10,9 @@
         data-name-en="ServiceNow, Inc."
         data-market="US"
         data-sector="Technology / Enterprise Software"
-        data-view="Watch / Accumulate on Pullbacks"
+        data-view="Watch / Accumulate Selectively"
         data-tags="saas,enterprise-software,workflow,ai-agents,ai-control-tower,valuation"
-        data-last-updated="2026-05-31">
+        data-last-updated="2026-06-23">
 </head>
 <body>
   <!-- include: header.html -->
@@ -44,23 +44,23 @@
         <div class="market-data" data-region="snapshot">
           <div class="market-data__tile">
             <span class="market-data__label">股价</span>
-            <span class="market-data__value">$124.37</span>
+            <span class="market-data__value">$93.01</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">市值</span>
-            <span class="market-data__value">$128.3B</span>
+            <span class="market-data__value">$95.9B</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Forward P/E</span>
-            <span class="market-data__value">24.7x</span>
+            <span class="market-data__value">18.5x</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">EV/Revenue</span>
-            <span class="market-data__value">9.0x</span>
+            <span class="market-data__value">6.7x</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Revenue Growth（TTM / Q1 YoY）</span>
-            <span class="market-data__value">20.9% / 22.0%</span>
+            <span class="market-data__value">22.1% / 22.0%</span>
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Operating Margin（TTM）</span>
@@ -68,7 +68,7 @@
           </div>
           <div class="market-data__tile">
             <span class="market-data__label">Net Margin（TTM）</span>
-            <span class="market-data__value">13.2%</span>
+            <span class="market-data__value">12.6%</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
             <span class="market-data__label">52 周区间</span>
@@ -76,14 +76,14 @@
           </div>
           <div class="market-data__tile market-data__tile--accent">
             <span class="market-data__label">分析师目标价</span>
-            <span class="market-data__value">$143</span>
+            <span class="market-data__value">$142</span>
           </div>
           <div class="market-data__tile market-data__tile--sm">
             <span class="market-data__label">分析截至</span>
-            <span class="market-data__value">2026-05-31</span>
+            <span class="market-data__value">2026-06-23</span>
           </div>
         </div>
-        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-05-31</p>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-06-23</p>
       </div>
     </section>
 
@@ -121,18 +121,10 @@
               <thead>
                 <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
               </thead>
-              <tbody>
-                <tr><td>FY2019</td><td class="num">$282.32</td><td class="num">$3.18</td><td class="num">$11.21</td><td class="num">88.8</td><td class="num">25.2</td></tr>
-                <tr><td>FY2020</td><td class="num">$550.43</td><td class="num">$0.59</td><td class="num">$14.45</td><td class="num">932.9</td><td class="num">38.1</td></tr>
-                <tr><td>FY2021</td><td class="num">$649.11</td><td class="num">$1.13</td><td class="num">$18.48</td><td class="num">574.4</td><td class="num">35.1</td></tr>
-                <tr><td>FY2022</td><td class="num">$388.27</td><td class="num">$1.60</td><td class="num">$24.79</td><td class="num">242.7</td><td class="num">15.7</td></tr>
-                <tr><td>FY2023</td><td class="num">$706.49</td><td class="num">$8.42</td><td class="num">$37.21</td><td class="num">83.9</td><td class="num">19.0</td></tr>
-                <tr><td>FY2024</td><td class="num">$1,060.12</td><td class="num">$6.84</td><td class="num">$46.65</td><td class="num">155.0</td><td class="num">22.7</td></tr>
-                <tr><td>FY2025</td><td class="num">$153.19</td><td class="num">$1.67</td><td class="num">$12.39</td><td class="num">91.7</td><td class="num">12.4</td></tr>
-              </tbody>
+              <tbody data-bind="per-pbr-table"></tbody>
             </table>
           </div>
-          <blockquote>期末股价使用 yfinance 后复权收盘价（按报告期股价基准调整至当前股数口径）；EPS / BPS 来自 SEC EDGAR XBRL 公司事实数据。FY2025 价格为 2025-12-31 收盘价，已包含 2025-2026 年股价拆分调整。</blockquote>
+          <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / BPS 来自 SEC EDGAR XBRL 公司事实数据。PER / PBR 表格由 site/companies/NOW/per_pbr.json 通过前端 JS 渲染，报告中的估值判断以最新 yfinance 和公司披露数据为准。</blockquote>
         </div>
         <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
       </div>
@@ -204,43 +196,36 @@
         <div class="section-plain__head"><h2>核心结论</h2></div>
         <div class="section-plain__body">
           <div class="callout callout--ink">
-            <div class="callout__label">观点 · Watch / Accumulate on Pullbacks · 基准合理价值 $122</div>
+            <div class="callout__label">观点 · Watch / Accumulate Selectively · 基准合理价值 $105</div>
             <p>
-              ServiceNow（NOW）需要上调：它已经不只是"传统 SaaS 被 AI 修复估值"的反弹股，而是具备成为 enterprise AI execution / governance layer 的真实候选者。
-              Q1 2026 财报的订阅增长、RPO/cRPO、现金流和 Now Assist 大客户数据已足以证明它不是 AI 时代的纯受害者。
+              ServiceNow（NOW）从 5 月底的 $124.37 回落到 2026-06-22 收盘的 <span class="kpi">$93.01</span>，
+              投资问题重新从"是否追高"变成"回落后是否有足够安全边际"。我的基准合理价值约为 <span class="kpi">$105/股</span>，
+              相对当前价格约有 13% 上行；但如果把 SBC 全额视为普通股东真实成本，价值约为 $82/股。
             </p>
             <p>
-              截至 2026-05-29 收盘，NOW 股价为 <span class="kpi">$124.37</span>，市值约 <span class="kpi">$128.3B</span>，企业价值约 <span class="kpi">$125.5B</span>。
-              从 2026-05-15 的 $95.07 到 2026-05-29，股价上涨约 30.8%，明显跑赢 IGV 软件 ETF 的约 10.8% 和 WCLD 云软件 ETF 的约 15.1%。
-              上涨不是单纯板块 beta，市场正在重新给 ServiceNow 的 AI 平台价值定价。
+              业务层面，ServiceNow 仍是企业 AI execution / governance layer 的真实候选者。Q1 2026 的订阅收入、RPO/cRPO、现金流和 Now Assist 大客户数据都没有崩坏；
+              Action Fabric、MCP Server、AI Control Tower 和 Context Engine 也强化了"AI agent 需要受治理执行层"的产品逻辑。
             </p>
             <p>
-              估值框架从 5 月 19 日的保守 $90–$105 上调为三层：保守扣全额 SBC 约 $95–$110；折中基准约 $115–$130；non-GAAP FCF / AI 平台重估约 $140–$155。
-              当前 $124.37 位于折中基准区间内，不是明显低估，也不能说已经明显高估。投资上更适合分批参与或持有，不适合把它当成低位错杀股一次性重仓。
+              当前位置可以作为小到中等仓位的分批区间，但不是无脑低估。Q2 需要验证剔除 Armis 后 organic cRPO、AI ACV 披露和 FY2027 margin normalization；
+              真正更强的安全边际仍在 $80-$85 附近。
             </p>
           </div>
 
           <p class="lede">
-            ServiceNow 正在从"可能被 AI 绕过的传统 workflow SaaS"重新定价为"AI agent 需要调用的企业执行与治理平台"——Q1 数据提供了证据，但 AI 商业化仍需后续季度持续验证。
-          </p>
-          <p>
-            5 月下旬软件股整体从"SaaS 会被 AI 颠覆"的压力中修复。Snowflake 财报后大涨，带动市场重新寻找 AI 软件受益者。
-            ServiceNow 跑赢软件 ETF，说明它同时受益于板块修复和个股 AI 重估。
+            ServiceNow 正在从"可能被 AI 绕过的传统 workflow SaaS"重新定价为"AI agent 需要调用的企业执行与治理平台"；股价回落让风险回报改善，但估值分歧仍主要来自 SBC 如何处理。
           </p>
 
-          <h3>板块背景与相对表现</h3>
+          <h3>股价回落后的相对表现</h3>
           <div class="table-wrap">
             <table>
               <thead>
-                <tr><th>标的</th><th class="num">2026-05-29 收盘</th><th class="num">5/15 以来</th><th class="num">近 1 月</th><th class="num">YTD</th></tr>
+                <tr><th>标的</th><th class="num">2026-06-22 收盘</th><th class="num">近 3 月</th><th class="num">近 1 月</th><th class="num">近 5 日</th></tr>
               </thead>
               <tbody>
-                <tr class="row--highlight"><td>ServiceNow</td><td class="num">$124.37</td><td class="num pos">+30.8%</td><td class="num pos">+39.9%</td><td class="num neg">−15.7%</td></tr>
-                <tr><td>IGV 软件 ETF</td><td class="num">$101.66</td><td class="num pos">+10.8%</td><td class="num pos">+20.3%</td><td class="num neg">−0.9%</td></tr>
-                <tr><td>WCLD 云软件 ETF</td><td class="num">$32.95</td><td class="num pos">+15.1%</td><td class="num pos">+20.5%</td><td class="num neg">−2.7%</td></tr>
-                <tr><td>Snowflake</td><td class="num">$255.55</td><td class="num pos">+62.3%</td><td class="num pos">+81.0%</td><td class="num pos">+17.9%</td></tr>
-                <tr><td>Salesforce</td><td class="num">$191.10</td><td class="num pos">+10.1%</td><td class="num pos">+5.5%</td><td class="num neg">−24.5%</td></tr>
-                <tr><td>Workday</td><td class="num">$146.19</td><td class="num pos">+16.9%</td><td class="num pos">+19.4%</td><td class="num neg">−29.0%</td></tr>
+                <tr class="row--highlight"><td>ServiceNow</td><td class="num">$93.01</td><td class="num neg">−15.7%</td><td class="num neg">−0.6%</td><td class="num neg">−8.9%</td></tr>
+                <tr><td>IGV 软件 ETF</td><td class="num">$87.31</td><td class="num pos">+5.2%</td><td class="num neg">−3.9%</td><td class="num neg">−3.7%</td></tr>
+                <tr><td>WCLD 云软件 ETF</td><td class="num">$28.94</td><td class="num pos">+3.5%</td><td class="num neg">−2.7%</td><td class="num neg">−5.5%</td></tr>
               </tbody>
             </table>
           </div>
@@ -460,25 +445,47 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="row--highlight"><td>ServiceNow</td><td>NOW</td><td class="num">$128.3B</td><td class="num">30.2x</td><td class="num">9.0x</td><td class="num">46.9x</td><td class="num pos">22.1%</td><td class="num">13.3%</td></tr>
-                <tr><td>Salesforce</td><td>CRM</td><td class="num">$182.7B</td><td class="num">14.5x</td><td class="num">4.4x</td><td class="num">14.6x</td><td class="num pos">12.1%</td><td class="num">19.2%</td></tr>
-                <tr><td>Workday</td><td>WDAY</td><td class="num">$38.8B</td><td class="num">12.5x</td><td class="num">4.0x</td><td class="num">27.6x</td><td class="num pos">14.5%</td><td class="num">12.0%</td></tr>
-                <tr><td>Adobe</td><td>ADBE</td><td class="num">$103.3B</td><td class="num">9.7x</td><td class="num">4.2x</td><td class="num">10.8x</td><td class="num pos">12.0%</td><td class="num">38.8%</td></tr>
-                <tr><td>Intuit</td><td>INTU</td><td class="num">$112.2B</td><td class="num">15.2x</td><td class="num">5.7x</td><td class="num">18.9x</td><td class="num pos">17.4%</td><td class="num">18.4%</td></tr>
-                <tr><td>Oracle</td><td>ORCL</td><td class="num">$536.7B</td><td class="num">23.2x</td><td class="num">10.4x</td><td class="num">24.2x</td><td class="num pos">21.7%</td><td class="num">32.7%</td></tr>
-                <tr><td>SAP</td><td>SAP</td><td class="num">$205.9B</td><td class="num">18.4x</td><td class="num">5.4x</td><td class="num">17.4x</td><td class="num pos">6.0%</td><td class="num">30.0%</td></tr>
-                <tr><td>Atlassian</td><td>TEAM</td><td class="num">$22.7B</td><td class="num">14.4x</td><td class="num">4.7x</td><td class="num">85.5x</td><td class="num pos">31.7%</td><td class="num neg">−2.0%</td></tr>
-                <tr><td>Datadog</td><td>DDOG</td><td class="num">$74.3B</td><td class="num">73.4x</td><td class="num">19.3x</td><td class="num">325.9x</td><td class="num pos">32.2%</td><td class="num">0.8%</td></tr>
+                <tr class="row--highlight"><td>ServiceNow</td><td>NOW</td><td class="num">$95.9B</td><td class="num">18.5x</td><td class="num">6.7x</td><td class="num">32.3x</td><td class="num pos">22.1%</td><td class="num">13.3%</td></tr>
+                <tr><td>Salesforce</td><td>CRM</td><td class="num">$122.9B</td><td class="num">9.7x</td><td class="num">3.6x</td><td class="num">11.9x</td><td class="num pos">13.3%</td><td class="num">21.8%</td></tr>
+                <tr><td>Workday</td><td>WDAY</td><td class="num">$27.9B</td><td class="num">8.9x</td><td class="num">2.8x</td><td class="num">18.1x</td><td class="num pos">13.5%</td><td class="num">13.3%</td></tr>
+                <tr><td>Adobe</td><td>ADBE</td><td class="num">$77.5B</td><td class="num">7.1x</td><td class="num">3.1x</td><td class="num">8.1x</td><td class="num pos">12.7%</td><td class="num">35.3%</td></tr>
+                <tr><td>Intuit</td><td>INTU</td><td class="num">$70.5B</td><td class="num">9.4x</td><td class="num">3.4x</td><td class="num">11.0x</td><td class="num pos">10.4%</td><td class="num">47.0%</td></tr>
+                <tr><td>Oracle</td><td>ORCL</td><td class="num">$503.5B</td><td class="num">16.0x</td><td class="num">9.3x</td><td class="num">19.8x</td><td class="num pos">20.6%</td><td class="num">36.3%</td></tr>
+                <tr><td>SAP</td><td>SAP</td><td class="num">$176.3B</td><td class="num">15.4x</td><td class="num">4.6x</td><td class="num">14.8x</td><td class="num pos">6.0%</td><td class="num">30.0%</td></tr>
+                <tr><td>Atlassian</td><td>TEAM</td><td class="num">$20.3B</td><td class="num">12.9x</td><td class="num">3.3x</td><td class="num">116.5x</td><td class="num pos">31.7%</td><td class="num">9.4%</td></tr>
+                <tr><td>Datadog</td><td>DDOG</td><td class="num">$78.8B</td><td class="num">77.5x</td><td class="num">20.5x</td><td class="num">n.m.</td><td class="num pos">32.2%</td><td class="num">0.8%</td></tr>
               </tbody>
             </table>
           </div>
-          <blockquote>同业倍数来自 yfinance，2026-05-31 JST 拉取。</blockquote>
+          <blockquote>同业倍数来自 yfinance，2026-06-23 JST 拉取。</blockquote>
 
           <p>
-            股价从 $95 快速修复至 $124 后，NOW 的 EV/Revenue 已回升至约 <span class="kpi">9.0x</span>。
-            它仍低于 Datadog 等高增长基础设施软件，但明显高于 Salesforce、Workday、Adobe、Intuit、SAP 等成熟应用软件。
-            市场现在愿意为 ServiceNow 的 AI workflow platform 叙事支付一部分溢价。后续需要看 Q2/Q3 数据能否接住这轮重估。
+            股价从 5 月底的 $124 回落至 $93 后，NOW 的 EV/Revenue 回到约 <span class="kpi">6.7x</span>。
+            它仍高于 Salesforce、Workday、Adobe、Intuit、SAP 等成熟应用软件，但明显低于 Datadog 这类高增长基础设施软件。
+            当前价格已经回吐不少 AI 平台溢价，后续需要看 Q2/Q3 数据能否重新建立信心。
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 近期动态 — section-plain -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+          <h3>最近财报（FY2026 Q1）</h3>
+          <p class="lede">核心观察：基本面强，但市场仍在折价处理 Armis 对 organic growth 和 margin 的扰动。</p>
+          <p>
+            Q1 2026 订阅收入、cRPO、RPO、FCF 都强，管理层也上调 FY2026 subscription revenue 指引；
+            但 FY2026 指引含约 125 bps Armis 贡献，且 Armis 对 FY2026 FCF margin 有约 200 bps headwind。
+          </p>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-06-22</strong>　NOW 收于 $93.01，较 5 月底 $124.37 明显回落。<em>估值从“已反映 AI 平台重估”重新回到“可分批参与但需验证”的区间。</em></li>
+            <li><strong>2026-05</strong>　Action Fabric 与 MCP Server 开放 ServiceNow system-of-action 给外部 AI agents。<em>强化企业 AI 受治理执行层叙事。</em></li>
+            <li><strong>2026-05</strong>　Financial Analyst Day 提出 2030 subscription revenue $30B+，AI 预计占 ACV 30%+。<em>这是 bull case 的核心长期路径。</em></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -522,43 +529,43 @@
         </div>
         <div class="section-plain__body">
 
-          <h3>估值口径：三层框架</h3>
-          <p>Q1 现金流、AI ACV 牵引和软件板块重估后，应从单一保守值切换为三层框架，而不只用一个 SBC-adjusted 口径。</p>
+          <h3>估值口径：三种现金流处理</h3>
+          <p>当前位置的估值分歧不在收入路径，而在 SBC 是否视为普通股东真实成本。基准合理价值约 <span class="kpi">$105/股</span>，但现金流口径会把结果拉开到 $82-$124。</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>口径</th><th class="num">合理价值</th><th>核心假设</th></tr></thead>
               <tbody>
-                <tr><td>保守，扣全额 SBC</td><td class="num">$95 – $110</td><td>把 SBC 视为真实股东成本，不预支 AI 成功</td></tr>
-                <tr><td>折中基准，扣部分 SBC</td><td class="num">$115 – $130</td><td>承认 FCF 质量和 AI 初步牵引，但不全按 non-GAAP FCF</td></tr>
-                <tr><td>non-GAAP FCF / AI 平台重估</td><td class="num">$140 – $155</td><td>市场相信 ServiceNow 是 AI execution layer，按公司 FCF 口径定价</td></tr>
-                <tr><td>强 bull case</td><td class="num">$170 – $200+</td><td>2030 $30B+ subscription revenue 和 AI ACV 30%+ 持续兑现</td></tr>
+                <tr><td>保守，扣全额 SBC</td><td class="num">~$82</td><td>把 SBC 视为真实股东成本，不预支 AI 成功</td></tr>
+                <tr class="row--highlight"><td>折中基准，扣部分 SBC</td><td class="num">~$106</td><td>承认 FCF 质量和 AI 初步牵引，但不全按 non-GAAP FCF</td></tr>
+                <tr><td>公司 non-GAAP FCF</td><td class="num">~$124</td><td>市场接受公司 FCF 口径，并相信 AI 平台化能支撑现金流</td></tr>
               </tbody>
             </table>
           </div>
 
           <h3>方法一：DCF（三层现金流口径）</h3>
-          <p>使用 FY2026 revenue $16.2B、FY2027 $19.2B、FY2030 约 $28.5B 作为收入路径。分歧不是收入路径，而是 <strong>SBC 扣多少</strong> 和 <strong>市场是否愿意给 AI 平台更低风险折现率</strong>。</p>
+          <p>使用 FY2026 revenue $16.2B、FY2027 $19.2B、FY2030 约 $28.2B 作为收入路径。10 年美债 4.51%、ERP 5.5%、beta 0.927，对应 WACC 约 9.5%。</p>
 
           <div class="table-wrap">
             <table>
-              <thead><tr><th>现金流口径</th><th class="num">2026E FCF</th><th class="num">2030E FCF</th><th class="num">WACC 8.5%</th><th class="num">WACC 9.0%</th><th class="num">WACC 9.5%</th></tr></thead>
+	              <thead><tr><th>现金流口径</th><th class="num">2026E FCFF</th><th class="num">2030E FCFF</th><th class="num">隐含价值</th><th>说明</th></tr></thead>
               <tbody>
-                <tr><td>扣全额 SBC</td><td class="num">$3.24B</td><td class="num">$7.41B</td><td class="num">$107</td><td class="num">$98</td><td class="num">$91</td></tr>
-                <tr><td>折中口径</td><td class="num">$4.46B</td><td class="num">$8.84B</td><td class="num">$127</td><td class="num">$117</td><td class="num">$109</td></tr>
-                <tr class="row--highlight"><td>non-GAAP FCF</td><td class="num">$5.67B</td><td class="num">$10.26B</td><td class="num">$148</td><td class="num">$136</td><td class="num">$127</td></tr>
+                <tr><td>扣全额 SBC</td><td class="num">$3.16B</td><td class="num">$6.90B</td><td class="num">~$82</td><td>SBC 完全视为普通股东真实成本</td></tr>
+                <tr class="row--highlight"><td>折中口径</td><td class="num">$4.45B</td><td class="num">$8.88B</td><td class="num">~$106</td><td>FCFF margin 27.5% -> 31.5%</td></tr>
+                <tr><td>non-GAAP FCF</td><td class="num">$5.67B</td><td class="num">$10.29B</td><td class="num">~$124</td><td>FCFF margin 35.0% -> 36.5%</td></tr>
               </tbody>
             </table>
           </div>
 
           <h3>方法二：相对估值</h3>
-          <p>不按 SOTP 硬拆（各产品线不独立披露）。考虑 NOW 增速高于成熟应用软件但低于 hypergrowth SaaS，使用约 <span class="kpi">7.5x</span> FY2026E EV/Revenue 作为折中基准。</p>
+          <p>不按 SOTP 硬拆（各产品线不独立披露）。考虑 NOW 增速高于成熟应用软件但低于 hypergrowth SaaS，使用 <span class="kpi">6.5x FY2026E revenue</span> 和 <span class="kpi">22x FY2027E EPS</span> 交叉验证。</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>估值口径</th><th class="num">核心假设</th><th class="num">隐含价值</th></tr></thead>
               <tbody>
-                <tr><td>EV / FY2026E Revenue</td><td class="num">7.5x × $16.2B</td><td class="num">~$118/股</td></tr>
-                <tr><td>Forward P/E cross-check</td><td class="num">24x × FY2027E EPS $5.03，折现一年</td><td class="num">~$110/股</td></tr>
-                <tr class="row--highlight"><td>相对估值基准</td><td class="num">EV/Revenue 为主，P/E 交叉验证</td><td class="num">~$114/股</td></tr>
+                <tr><td>EV / FY2026E Revenue</td><td class="num">6.5x × $16.2B</td><td class="num">~$104/股</td></tr>
+                <tr><td>EV / FY2026E Revenue</td><td class="num">7.0x × $16.2B</td><td class="num">~$112/股</td></tr>
+                <tr><td>Forward P/E cross-check</td><td class="num">22x × FY2027E EPS $5.03，折现一年</td><td class="num">~$101/股</td></tr>
+                <tr class="row--highlight"><td>相对估值基准</td><td class="num">EV/Revenue 为主，P/E 交叉验证</td><td class="num">~$104/股</td></tr>
               </tbody>
             </table>
           </div>
@@ -567,24 +574,24 @@
           <div class="scenario-grid">
             <div class="scenario-card">
               <div class="scenario-card__label">保守</div>
-              <div class="scenario-card__value">$95 – $110</div>
-              <div class="scenario-card__trigger">扣全额 SBC，不预支 AI 成功。如果市场重新严格扣 SBC 且 AI 叙事消退。</div>
+              <div class="scenario-card__value">$60 – $70</div>
+              <div class="scenario-card__trigger">organic growth 掉到 mid-teens 以下，AI 更多是防守而非增量，SBC / 并购继续压低现金流质量。</div>
             </div>
             <div class="scenario-card scenario-card--base">
               <div class="scenario-card__label">基准</div>
-              <div class="scenario-card__value">$115 – $130</div>
-              <div class="scenario-card__trigger">折中口径，承认 FCF 质量和 AI 初步牵引。DCF 约 $117，相对估值约 $114。</div>
+              <div class="scenario-card__value">~$105</div>
+              <div class="scenario-card__trigger">FY2026 指引实现，Q2-Q3 organic cRPO 稳住，FY2027 margin normalization 逐步可见。</div>
             </div>
             <div class="scenario-card">
               <div class="scenario-card__label">乐观</div>
-              <div class="scenario-card__value">$140 – $155</div>
-              <div class="scenario-card__trigger">non-GAAP FCF 口径 / AI 平台重估。市场相信 ServiceNow 是 AI execution layer。</div>
+              <div class="scenario-card__value">~$160</div>
+              <div class="scenario-card__trigger">2030 $30B+ subscription revenue 路径可信，AI ACV 持续超预期，SBC 占收入下降。</div>
             </div>
           </div>
           <p>
             <strong>当前 vs 合理价值：</strong>
-            当前 <span class="kpi">$124.37</span> 位于折中基准区间中上部（$115–$130），低于 non-GAAP FCF / AI 平台重估区间（$140–$155）。
-            不是明显低估，也不能说已明显高估。投资上更适合分批参与或持有，不适合一次性重仓。
+            当前 <span class="kpi">$93.01</span> 低于基准合理价值约 11%-13%，但高于扣全额 SBC 的保守价值。
+            $90-$95 可以分批参与；$80-$85 以下才是更明显的安全边际；$110+ 需要 Q2 / FY2027 margin 证据来支撑。
           </p>
 
           <h3>当前股价判断</h3>
@@ -592,11 +599,11 @@
             <table>
               <thead><tr><th>投资者类型</th><th>判断</th></tr></thead>
               <tbody>
-                <tr><td>已有仓位</td><td>继续持有，让趋势和 Q2 数据验证</td></tr>
-                <tr><td>没有仓位</td><td>可以建观察仓，不必等完美价格</td></tr>
-                <tr><td>想重仓</td><td>不建议一次性追高，等回撤或 Q2 确认</td></tr>
-                <tr><td>交易性买入</td><td>风险回报不如 5 月中旬，但趋势已有改善</td></tr>
-                <tr><td>长期 2–3 年视角</td><td>若相信 AI execution layer 逻辑，当前位置仍可分批参与</td></tr>
+                <tr><td>已有仓位</td><td>继续持有，重点观察 Q2 organic cRPO 和 FY2027 margin path</td></tr>
+                <tr><td>没有仓位</td><td>$90-$95 可小到中等仓位分批参与</td></tr>
+                <tr><td>想重仓</td><td>等待 $80-$85 或 Q2 财报确认后再提高仓位</td></tr>
+                <tr><td>交易性买入</td><td>股价技术面仍弱，反弹需要基本面催化</td></tr>
+                <tr><td>长期 2–3 年视角</td><td>若相信 AI execution layer 逻辑，当前位置风险回报已改善</td></tr>
               </tbody>
             </table>
           </div>
@@ -637,12 +644,12 @@
               <p>Microsoft Copilot、Salesforce、Workday、Oracle、Atlassian、Palantir 以及模型厂商都在争夺企业 AI workflow 入口。</p>
             </div>
             <div class="risk-item">
-              <h4>05. 估值已经修复</h4>
-              <p>从 $95 到 $124 的快速上涨已反映一部分 AI 受益者逻辑，后续需要 Q2/Q3 数据验证。若验证不及预期，估值可能向下修正。</p>
+              <h4>05. 股价技术面弱</h4>
+              <p>NOW 从 5 月底 $124 回落到 $93，说明市场仍未完全接受 AI 平台重估，需要财务验证重新建立信心。</p>
             </div>
             <div class="risk-item risk-item--wide">
               <h4>06. non-GAAP FCF 口径可能过于乐观</h4>
-              <p>如果市场重新严格扣 SBC，估值中枢会更接近 $95–$110，而非当前折中基准的 $115–$130。</p>
+              <p>如果把 SBC 当真实成本，non-GAAP FCF 模型会高估普通股东可得现金流，保守 DCF 价值更接近 $82。</p>
             </div>
           </div>
 
@@ -650,7 +657,7 @@
             <div class="callout__label">撤回条件</div>
             <p>
               如果未来两个季度剔除并购后的 cRPO constant currency growth 低于 mid-teens，且管理层不能给出 FY2027 margin 反弹的清晰路径，
-              观点从 Watch / Accumulate on Pullbacks 下调至 Pass，估值中枢下调至 <span class="kpi">$85 – $100</span>。
+              观点从 Watch / Accumulate Selectively 下调至 Pass，估值中枢下调至 <span class="kpi">$70 – $85</span>。
             </p>
           </div>
         </div>
@@ -670,7 +677,7 @@
               </li>
               <li>
                 <span class="q-badge">Q</span>
-                <p>Now Assist 2026 目标是继续超过 $1B，还是能接近市场讨论的 $1.5B commitment？</p>
+                <p>Now Assist 2026 目标是否能超过 $1.5B AI ACV？</p>
               </li>
               <li>
                 <span class="q-badge">Q</span>
@@ -697,15 +704,14 @@
 
           <h3>参考来源</h3>
           <ul>
-            <li>ServiceNow, <a class="link-blue" href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-First-Quarter-2026-Financial-Results/default.aspx" rel="noopener" target="_blank">Q1 2026 Earnings Release / Guidance</a>，2026。</li>
+            <li>ServiceNow, <a class="link-blue" href="https://investor.servicenow.com/news/news-details/2026/ServiceNow-Reports-First-Quarter-2026-Financial-Results/default.aspx" rel="noopener" target="_blank">Q1 2026 Earnings Release / Guidance</a>，2026。</li>
             <li>ServiceNow, <a class="link-blue" href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-opens-its-full-system-of-action-to-every-AI-Agent-in-the-enterprise/default.aspx" rel="noopener" target="_blank">Action Fabric / MCP Server</a>，2026。</li>
             <li>ServiceNow, <a class="link-blue" href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-expands-AI-Control-Tower-to-discover-observe-govern-secure-and-measure-AI-deployed-across-any-system-in-the-enterprise/default.aspx" rel="noopener" target="_blank">AI Control Tower Expansion</a>，2026。</li>
-            <li>ServiceNow, <a class="link-blue" href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-turns-enterprise-AI-chaos-into-control-with-the-platform-for-governed-autonomous-work/default.aspx" rel="noopener" target="_blank">Governed Autonomous Work / 2030 Target</a>，2026。</li>
+            <li>ServiceNow, <a class="link-blue" href="https://investor.servicenow.com/events-and-presentations/financial-analyst-day/default.aspx" rel="noopener" target="_blank">Financial Analyst Day / 2030 Target</a>，2026。</li>
             <li>ServiceNow, <a class="link-blue" href="https://investor.servicenow.com/news/news-details/2026/ServiceNow-launches-the-real-time-data-foundation-that-puts-autonomous-AI-to-work-across-the-enterprise/default.aspx" rel="noopener" target="_blank">Workflow Data Fabric / Context Engine</a>，2026。</li>
-            <li>Axios, <a class="link-blue" href="https://www.axios.com/2026/05/29/salesforce-snowflake-software-stocks" rel="noopener" target="_blank">SaaS Sector Context</a>，2026-05-29。</li>
             <li>ServiceNow, <a class="link-blue" href="https://www.sec.gov/Archives/edgar/data/1373715/000137371526000056/now-20260331.htm" rel="noopener" target="_blank">FY2026 Q1 Form 10-Q</a>，SEC Filing。</li>
             <li>ServiceNow, <a class="link-blue" href="https://www.sec.gov/Archives/edgar/data/1373715/000137371526000007/now-20251231.htm" rel="noopener" target="_blank">FY2025 Form 10-K</a>，SEC Filing。</li>
-            <li>Yahoo Finance / yfinance：市场数据、同业倍数、分析师预期，2026-05-31 JST 拉取。</li>
+            <li>Yahoo Finance / yfinance：市场数据、同业倍数、分析师预期，2026-06-23 JST 拉取。</li>
           </ul>
         </div>
       </div>
