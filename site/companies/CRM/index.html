@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">CRM — Salesforce</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="CRM"
+        data-name="Salesforce"
+        data-name-en="Salesforce, Inc."
+        data-market="US"
+        data-sector="Technology / Enterprise Software"
+        data-view="Watch / Undervalued if execution holds"
+        data-tags="saas,enterprise-software,crm,ai-agents,agentforce,valuation"
+        data-last-updated="2026-06-23">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market"></span>
+          <span class="sep">·</span>
+          <span data-bind="sector"></span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated"></span>
+        </div>
+        <h1 class="company-header__title" data-bind="name"></h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker"></span>
+          <span class="sep">·</span>
+          <span data-bind="name-en"></span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ↓ 关键数据快照（sync skill 维护）↓ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">$150.12</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值 / EV</span>
+            <span class="market-data__value">$122.9B / ~$153.0B</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">9.7x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">EV/Revenue（TTM）</span>
+            <span class="market-data__value">3.6x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth（TTM / Q1 YoY）</span>
+            <span class="market-data__value">13.3% / 13%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Operating Margin（TTM）</span>
+            <span class="market-data__value">21.9%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Net Margin（TTM）</span>
+            <span class="market-data__value">18.7%</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">$146.32 – $276.80</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">分析师中位目标价</span>
+            <span class="market-data__value">$246</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-06-23</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-06-22 收盘</p>
+      </div>
+    </section>
+
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <!-- PER / PBR 历史数据表（sync skill 维护；位于 PER/PBR 折线图下方） -->
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>期末股价使用 yfinance 后复权收盘价（财年截至每年 1 月 31 日）；EPS / BPS 来自 SEC EDGAR XBRL 公司事实数据。Salesforce FY2020、FY2023 等年份 GAAP EPS 接近于零，导致 PER 异常高（数百至上千倍），属于 GAAP 利润极低的真实结果，不代表估值贵；这几年更适合用 EV/Revenue 或 non-GAAP 口径理解。PER / PBR 表格由 site/companies/CRM/per_pbr.json 通过前端 JS 渲染，报告中的估值判断以最新 yfinance 和公司披露数据为准。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
+      </div>
+    </section>
+    <!-- ↑ 关键数据 / 图表区结束 ↑ -->
+
+    <!-- ↓ 内容区（sync skill 维护，AI 可自由生成 HTML 片段） ↓ -->
+    <!-- 公司概要 — section-plain，作为第一个内容 section -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">NYSE · CRM</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">San Francisco, California</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">FY2026 收入</div>
+              <div class="kv-grid__value">$41.525B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">Q1 FY2027 收入</div>
+              <div class="kv-grid__value">$11.133B（+13% YoY）</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业</div>
+              <div class="kv-grid__value">Technology · Enterprise Software</div>
+            </div>
+          </div>
+
+          <p>
+            Salesforce 是全球最大的企业 CRM 和 customer-facing application 平台之一，核心产品覆盖 Sales Cloud、Service Cloud、Marketing Cloud、Commerce Cloud、MuleSoft、Tableau、Slack、Data Cloud、Agentforce 和行业云。
+            公司收入以 subscription and support 为主，客户为中大型企业，典型价值来自销售、客服、营销、数据集成、协作和自动化流程。
+          </p>
+          <p>
+            Salesforce 的长期价值不在单个 CRM 应用，而在客户数据、工作流、权限、集成和 go-to-market 生态。
+            AI agent 时代的 bull case 是：企业需要把 customer data、workflow action、审计、权限和人工审批连接起来，Salesforce 可以成为 customer engagement 侧的 agentic execution layer。
+            bear case 是：如果 AI 让企业减少 seat、压低传统应用预算，Agentforce 的新增收入不足以抵消核心云增速放缓，估值就难以回到历史高位。
+          </p>
+
+          <h3>护城河来源（速览）</h3>
+          <ul>
+            <li>客户数据与流程嵌入——CRM、客服、营销、数据集成和审批流程一旦嵌入大企业，迁移不是简单替换软件</li>
+            <li>多产品交叉销售——Sales、Service、Platform、MuleSoft、Tableau、Slack、Data Cloud 组合提高客户 lifetime value</li>
+            <li>生态规模——AppExchange、SI、顾问、管理员和开发者生态降低客户采用新模块的摩擦</li>
+            <li>AI agent 执行层可能性——Agentforce 如果能连接数据、权限、动作和审计，平台价值会提高</li>
+            <li>品牌和采购惯性——企业应用预算中的核心供应商，采购关系和合规认证是新进入者的阻力</li>
+          </ul>
+
+          <blockquote>
+            近期管理层强调 Agentforce + Data 360 的 ARR 已接近 <span class="kpi">$3.4B</span>。
+            这说明 AI / Data 不只是 demo 层产品，但仍需要观察 ARR 口径、净新增、续费率和是否带动核心云 expansion。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心结论 — section-plain -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch / Undervalued if execution holds · 基准合理价值 $203</div>
+            <p>
+              Salesforce（CRM）当前核心问题不是公司质量差，而是市场正在用很低的软件估值定价它：2026-06-22 收盘价 <span class="kpi">$150.12</span>，
+              约 9.7x forward P/E、3.6x EV/Revenue、11.9x EV/EBITDA。我的基准混合合理价值约 <span class="kpi">$203/股</span>，
+              相对当前价格约有 35% 上行；DCF 约 $234/股，相对估值约 $173/股。
+            </p>
+            <p>
+              这不是一个无风险便宜股。FY2027 revenue guidance 的约 11% 增长包含 Informatica 约 3pct 贡献；Q1 FY2027 后净债务上升到约 $30B；
+              AI agent 可能提升 Salesforce 的数据和 workflow 价值，也可能压缩传统 seat-based SaaS。
+            </p>
+            <p>
+              当前位置更适合列入重点观察或小仓位价值修复，而不是直接按 DCF 满仓下注。
+              若后续两个季度证明 organic growth 没有被 Informatica 掩盖、AI ARR 继续扩张、净债务开始回落，合理价值可以向 $210-$230 靠拢；
+              若 AI 主要带来 seat compression，价值可能更接近 $125-$150。
+            </p>
+          </div>
+
+          <p class="lede">
+            投资判断取决于三个验证点：有机收入能否维持 high-single 到 low-double digit，GAAP operating margin 能否继续向 mid-20s 推进，Agentforce / Data 360 是否从故事变成可持续 ARR。
+          </p>
+
+          <h3>当前估值的位置</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>口径</th><th class="num">数值</th><th>含义</th></tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>FCF 收益率（TTM FCF / 市值）</td><td class="num">~10%</td><td>对一家仍以低双位数增长、77% 毛利率的公司，是历史性低估值</td></tr>
+                <tr><td>Forward P/E（non-GAAP）</td><td class="num">9.7x</td><td>低于成熟应用软件同业中位约 12.4x</td></tr>
+                <tr><td>EV / Revenue（TTM）</td><td class="num">3.6x</td><td>低于同业中位约 4.0x</td></tr>
+                <tr><td>EV / EBITDA（TTM）</td><td class="num">11.9x</td><td>明显低于同业中位约 16.5x</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>市场已把"增长大幅放缓 + AI 颠覆席位制"基本计入价格。换句话说，下行已被 deeply priced in，真正的赌注是 AI 究竟瓦解还是放大 Salesforce 的席位制 SaaS 商业模式。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 业务模式 — 浅灰底 + feature-card 仅含核心，扩展内容（如分部表）放在 section-plain__body -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">Salesforce 的商业模式有四个特征，互相支撑：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>订阅收入为主</strong> — 大部分收入来自 subscription and support，收入可见度高，但续约和 seat 数变化很关键。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>多云交叉销售</strong> — Sales、Service、Platform、Marketing、Commerce、Integration、Analytics、Slack、Data。客户使用产品越多，迁移成本越高。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">03</span>
+              <div class="numbered-list__body">
+                <strong>生态和实施伙伴强</strong> — SI、ISV、AppExchange、顾问生态庞大。大客户项目迁移成本高，但销售周期和实施复杂。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">04</span>
+              <div class="numbered-list__body">
+                <strong>AI / Data 叙事升级</strong> — Agentforce、Data 360、Slack、MuleSoft 共同支撑 agent workflow。可能扩大 TAM，也可能暴露传统 seat 模式压力。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>产品组合</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>特征</th><th>说明</th><th>投资含义</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>订阅收入为主</td><td>大部分收入来自 subscription and support</td><td>收入可见度高，但续约和 seat 数变化很关键</td></tr>
+                <tr><td>多云交叉销售</td><td>Sales、Service、Platform、Marketing、Commerce、Integration、Analytics、Slack、Data</td><td>客户使用产品越多，迁移成本越高</td></tr>
+                <tr><td>生态和实施伙伴强</td><td>SI、ISV、AppExchange、顾问生态庞大</td><td>大客户项目迁移成本高，但销售周期和实施复杂</td></tr>
+                <tr><td>AI / Data 叙事升级</td><td>Agentforce、Data 360、Slack、MuleSoft 共同支撑 agent workflow</td><td>可能扩大 TAM，也可能暴露传统 seat 模式压力</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>
+            Salesforce 按产品云披露业务，但经济实质是统一客户关系、统一数据平台、统一 go-to-market 和交叉销售。
+            管理层强调 Agentforce + Data 360 ARR 已接近 $3.4B，是后续 AI monetization 的核心跟踪指标——需要观察 ARR 口径、净新增、续费率和是否带动核心云 expansion。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 财务表现 — section-plain（含宽表格） -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">FY2023 – Q1 FY2027 · 单位：十亿美元</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度 / 期间</th>
+                  <th class="num">Revenue</th>
+                  <th class="num">YoY</th>
+                  <th class="num">GAAP Op Margin</th>
+                  <th class="num">Net Income</th>
+                  <th class="num">Diluted EPS</th>
+                  <th class="num">FCF</th>
+                  <th class="num">SBC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2023</td><td class="num">$31.352B</td><td class="num">—</td><td class="num">5.9%</td><td class="num">$0.208B</td><td class="num">$0.21</td><td class="num">$6.313B</td><td class="num">$3.279B</td></tr>
+                <tr><td>FY2024</td><td class="num">$34.857B</td><td class="num pos">+11.2%</td><td class="num">17.2%</td><td class="num">$4.136B</td><td class="num">$4.20</td><td class="num">$9.498B</td><td class="num">$2.787B</td></tr>
+                <tr><td>FY2025</td><td class="num">$37.895B</td><td class="num pos">+8.7%</td><td class="num">20.2%</td><td class="num">$6.197B</td><td class="num">$6.36</td><td class="num">$12.434B</td><td class="num">$3.183B</td></tr>
+                <tr><td>FY2026</td><td class="num">$41.525B</td><td class="num pos">+9.6%</td><td class="num">21.5%</td><td class="num">$7.457B</td><td class="num">$7.80</td><td class="num">$14.402B</td><td class="num">$3.509B</td></tr>
+                <tr class="row--highlight"><td>Q1 FY2027</td><td class="num">$11.133B</td><td class="num pos">+13%</td><td class="num">21.8%</td><td class="num">$2.107B</td><td class="num">$2.42</td><td class="num">$6.556B</td><td class="num">$0.857B</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>单位为十亿美元；Salesforce 财年截至每年 1 月 31 日。数据来源：Salesforce FY2027 Q1 earnings release、Yahoo Finance / yfinance。</blockquote>
+
+          <p>
+            财务质量的改善是真实的。FY2023 到 FY2026，GAAP operating margin 从 <span class="kpi">5.9%</span> 提升到 <span class="kpi">21.5%</span>，
+            FCF 从 $6.3B 增至 $14.4B。Salesforce 过去被市场质疑增长和效率失衡，现在效率明显改善。
+          </p>
+          <p>
+            但 Q1 FY2027 后资本结构变化也很大。季度资产负债表显示 cash and short-term investments 约 <span class="kpi">$11.8B</span>、
+            total debt 约 <span class="kpi">$41.9B</span>、net debt 约 <span class="kpi">$30.0B</span>、ordinary shares 约 <span class="kpi">819M</span>。
+            这主要来自债务融资和大额回购。回购减少分母，对每股价值有利；但净债务上升会降低股权价值桥接，也提高利率和再融资风险。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 护城河 — 浅灰底 + feature-card 仅含核心，对比表放在 section-plain__body -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">护城河可拆成五个来源：</p>
+
+          <div class="moat-block">
+            <h4>客户数据与流程嵌入</h4>
+            <p>CRM、客服、营销、数据集成和审批流程一旦嵌入大企业，迁移不是简单替换软件，而是重做流程、权限和数据模型。</p>
+          </div>
+          <div class="moat-block">
+            <h4>生态规模</h4>
+            <p>AppExchange、SI、顾问、管理员和开发者生态降低客户采用新模块的摩擦，也提高替换成本。</p>
+          </div>
+          <div class="moat-block">
+            <h4>多产品交叉销售</h4>
+            <p>Sales Cloud、Service Cloud、Platform、MuleSoft、Tableau、Slack、Data Cloud 组合提高客户 lifetime value。</p>
+          </div>
+          <div class="moat-block">
+            <h4>AI agent 执行层可能性</h4>
+            <p>Agentforce 如果能连接数据、权限、动作和审计，Salesforce 的平台价值会提高。</p>
+          </div>
+          <div class="moat-block">
+            <h4>品牌和采购惯性</h4>
+            <p>Salesforce 是企业应用预算中的核心供应商，采购关系和合规认证是新进入者的阻力。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">Fwd P/E</th>
+                  <th class="num">EV/Revenue</th>
+                  <th class="num">EV/EBITDA</th>
+                  <th class="num">Rev Growth</th>
+                  <th class="num">Op Margin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>Salesforce</td><td>CRM</td><td class="num">9.7x</td><td class="num">3.6x</td><td class="num">11.9x</td><td class="num pos">13.3%</td><td class="num">21.8%</td></tr>
+                <tr><td>ServiceNow</td><td>NOW</td><td class="num">18.5x</td><td class="num">6.7x</td><td class="num">32.3x</td><td class="num pos">22.1%</td><td class="num">13.3%</td></tr>
+                <tr><td>Adobe</td><td>ADBE</td><td class="num">7.1x</td><td class="num">3.1x</td><td class="num">8.1x</td><td class="num pos">12.7%</td><td class="num">35.3%</td></tr>
+                <tr><td>Intuit</td><td>INTU</td><td class="num">9.4x</td><td class="num">3.4x</td><td class="num">11.0x</td><td class="num pos">10.4%</td><td class="num">47.0%</td></tr>
+                <tr><td>Workday</td><td>WDAY</td><td class="num">8.9x</td><td class="num">2.8x</td><td class="num">18.1x</td><td class="num pos">13.5%</td><td class="num">13.3%</td></tr>
+                <tr><td>Oracle</td><td>ORCL</td><td class="num">16.0x</td><td class="num">9.3x</td><td class="num">19.8x</td><td class="num pos">20.6%</td><td class="num">36.3%</td></tr>
+                <tr><td>SAP</td><td>SAP</td><td class="num">15.4x</td><td class="num">4.6x</td><td class="num">14.8x</td><td class="num pos">6.0%</td><td class="num">30.0%</td></tr>
+                <tr class="row--total"><td>同业中位数</td><td>—</td><td class="num">12.4x</td><td class="num">4.0x</td><td class="num">16.5x</td><td class="num">13.1%</td><td class="num">32.7%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>同业倍数来自 yfinance，2026-06-23 JST 拉取。</blockquote>
+
+          <p>
+            Salesforce 的收入增长接近同业中位数，但 GAAP operating margin 明显低于 Adobe、Intuit、Oracle 和 SAP，
+            同时在 Fwd P/E、EV/Revenue、EV/EBITDA 三项倍数上全面折价。相对估值中我对同业中位倍数打 <span class="kpi">10%</span> 折价，
+            主要反映利润率、杠杆和 AI seat compression 风险。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 近期动态 — section-plain -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+          <h3>最近财报（FY2027 Q1）</h3>
+          <p class="lede">核心解读：基本盘没有崩，现金流很强，AI / Data ARR 有规模；但有机增长、净债务和 AI 对传统 seat 模式的真实影响还需要后续季度验证。</p>
+          <p>
+            Salesforce Q1 FY2027 revenue 为 <span class="kpi">$11.1B</span>，同比增长 13%；GAAP operating margin 为 21.1%，non-GAAP operating margin 为 33.8%；
+            operating cash flow 为 $6.7B，free cash flow 为 $6.6B。RPO 为 <span class="kpi">$67.9B</span>，同比增长 13%；current RPO 为 $33.6B，同比增长 12%。
+            公司给出 FY2027 revenue guidance <span class="kpi">$45.9B-$46.2B</span>，同比约 11%，并说明 Informatica 预计贡献约 3pct revenue growth。
+          </p>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-06-22</strong>　CRM 收于 $150.12，接近 52 周低位 $146.32，3 个月下跌约 23%，12 个月下跌约 42%。<em>估值回到历史低位，市场对增长和 AI 替代担忧 deeply priced in。</em></li>
+            <li><strong>2026-05</strong>　公司披露 Agentforce + Data 360 ARR 接近 $3.4B。<em>这是后续 AI monetization 的核心跟踪指标。</em></li>
+            <li><strong>FY2027 Q1</strong>　普通股数从 FY2026 年末约 929M 降至约 819M，回购力度很大；同时 total debt 从 FY2026 年末约 $17.2B 升至约 $41.9B。<em>债务融资 + 大额回购 + Informatica，资本结构一个季度内大幅变化。</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 催化剂 — section-plain + 短期/中期两张白卡 -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>Q2 / Q3 FY2027：剔除 Informatica 后的 organic revenue growth 和 cRPO growth。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>Agentforce + Data 360 ARR 是否继续从 $3.4B 扩张，并披露更清晰的净新增或客户使用数据。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>GAAP operating margin 是否能稳定高于 21%-22%，而不是只靠 non-GAAP 口径改善。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>净债务是否从 Q1 FY2027 的约 $30B 开始回落。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>AI agent 是否提升 Salesforce 的 pricing / expansion，还是导致客户减少传统 seat。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Slack、Data 360、MuleSoft、Tableau 与 Agentforce 是否形成真实平台协同。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Informatica 并购后的 cross-sell 与 margin 影响。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>回购是否继续提升每股价值，还是主要用来抵消 SBC 稀释。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 估值 — section-plain（含宽表格） -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值分析</h2>
+          <span class="section-plain__meta">GAAP-EBIT DCF · 相对估值 · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>方法一：DCF</h3>
+          <p>基准 DCF 使用 GAAP EBIT 构建 FCFF，SBC 不作为现金流加回。这样处理比公司 non-GAAP 口径保守，因为 SBC 对普通股东是真实稀释成本。</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>项目</th><th class="num">假设</th></tr></thead>
+              <tbody>
+                <tr><td>预测期</td><td class="num">FY2027E – FY2031E</td></tr>
+                <tr><td>Revenue</td><td class="num">$46.1B → $61.0B</td></tr>
+                <tr><td>Revenue growth</td><td class="num">11.0% / 9.6% / 8.0% / 6.5% / 5.0%</td></tr>
+                <tr><td>GAAP EBIT margin</td><td class="num">22.0% → 25.5%</td></tr>
+                <tr><td>Tax rate</td><td class="num">21%</td></tr>
+                <tr><td>WACC</td><td class="num">9.1%</td></tr>
+                <tr><td>Terminal growth</td><td class="num">2.5%</td></tr>
+                <tr><td>Exit multiple</td><td class="num">14.8x EV/EBITDA</td></tr>
+                <tr><td>Net debt</td><td class="num">$30.0B</td></tr>
+                <tr><td>Shares</td><td class="num">819M</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>FCFF 预测</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>年度</th><th class="num">Revenue</th><th class="num">EBIT Margin</th><th class="num">EBIT</th><th class="num">FCFF</th></tr></thead>
+              <tbody>
+                <tr><td>FY2027E</td><td class="num">$46.1B</td><td class="num">22.0%</td><td class="num">$10.1B</td><td class="num">$10.9B</td></tr>
+                <tr><td>FY2028E</td><td class="num">$50.5B</td><td class="num">23.0%</td><td class="num">$11.6B</td><td class="num">$12.1B</td></tr>
+                <tr><td>FY2029E</td><td class="num">$54.6B</td><td class="num">24.0%</td><td class="num">$13.1B</td><td class="num">$13.2B</td></tr>
+                <tr><td>FY2030E</td><td class="num">$58.1B</td><td class="num">25.0%</td><td class="num">$14.5B</td><td class="num">$14.3B</td></tr>
+                <tr><td>FY2031E</td><td class="num">$61.0B</td><td class="num">25.5%</td><td class="num">$15.6B</td><td class="num">$15.2B</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>EV-to-equity bridge</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>项目</th><th class="num">金额</th></tr></thead>
+              <tbody>
+                <tr><td>PV of explicit FCFF</td><td class="num">~$50B</td></tr>
+                <tr><td>PV of terminal value</td><td class="num">~$171B</td></tr>
+                <tr><td>Implied EV</td><td class="num">~$222B</td></tr>
+                <tr><td>Plus: cash and short-term investments</td><td class="num pos">+$11.8B</td></tr>
+                <tr><td>Less: total debt</td><td class="num neg">−$41.9B</td></tr>
+                <tr><td>Implied equity value</td><td class="num">~$192B</td></tr>
+                <tr><td>Shares</td><td class="num">819M</td></tr>
+                <tr class="row--highlight"><td>DCF implied price</td><td class="num">~$234/股</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>
+            终值现值约占 DCF EV 的 77%，处于软件公司 DCF 常见但仍需谨慎的区间。Gordon-only DCF 约 $211/股，exit-multiple-only DCF 约 $257/股，基准取中点约 $234/股。
+            注意：当前股价较低、债务占比上升，会机械性压低 WACC、稍微抬高 DCF 价值；若改用长期目标资本结构，WACC 会略高，DCF 价值会低于 $234/股。
+          </blockquote>
+
+          <h4>DCF 敏感性（Gordon terminal value 口径，每股价值）</h4>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr><th>WACC \ Terminal g</th><th class="num">1.5%</th><th class="num">2.0%</th><th class="num">2.5%</th><th class="num">3.0%</th><th class="num">3.5%</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>8.1%</td><td class="num">$220</td><td class="num">$237</td><td class="num">$256</td><td class="num">$280</td><td class="num">$309</td></tr>
+                <tr><td>8.6%</td><td class="num">$201</td><td class="num">$215</td><td class="num">$232</td><td class="num">$251</td><td class="num">$275</td></tr>
+                <tr class="row--highlight"><td>9.1%</td><td class="num">$185</td><td class="num">$197</td><td class="num">$211</td><td class="num">$227</td><td class="num">$247</td></tr>
+                <tr><td>9.6%</td><td class="num">$171</td><td class="num">$181</td><td class="num">$193</td><td class="num">$207</td><td class="num">$223</td></tr>
+                <tr><td>10.1%</td><td class="num">$158</td><td class="num">$167</td><td class="num">$178</td><td class="num">$189</td><td class="num">$203</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>方法二：相对估值</h3>
+          <p>
+            同业原始中位数为 12.4x forward P/E、4.0x EV/Revenue、16.5x EV/EBITDA。考虑 Salesforce 利润率低于多数成熟软件同业、净债务显著上升、AI 对 seat-based SaaS 的影响未验证，
+            我对同业中位倍数打 <span class="kpi">10%</span> 折价。
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>口径</th><th>推导</th><th class="num">Implied price</th></tr></thead>
+              <tbody>
+                <tr><td>Forward P/E</td><td>15.50 FY2028E EPS × 12.4x × 90%</td><td class="num">$173</td></tr>
+                <tr><td>EV / Revenue</td><td>$42.8B TTM revenue × 4.0x × 90% − net debt</td><td class="num">$151</td></tr>
+                <tr><td>EV / EBITDA</td><td>$13.8B TTM EBITDA × 16.5x × 90% − net debt</td><td class="num">$212</td></tr>
+                <tr class="row--highlight"><td>相对估值中位数</td><td>—</td><td class="num">$173</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            相对估值给出的结论比 DCF 保守，因为市场当前整体压低成熟应用软件倍数。
+            换句话说，若只问"按今天市场给同类公司的价格 CRM 值多少"，答案约 $170-$175；若问"按现金流和中长期利润率应值多少"，答案更接近 $210-$235。
+          </p>
+
+          <h3>方法三：SOTP</h3>
+          <p>
+            不做硬拆。Salesforce 按产品云披露业务，但经济实质是统一客户关系、统一数据平台、统一 go-to-market 和交叉销售。
+            把 Sales Cloud、Service Cloud、Marketing、MuleSoft、Tableau、Slack、Data / AI 拆成独立资产套倍数，会制造虚假的精确性。
+            SOTP 适合分部经济差异清晰、独立资本结构和利润可识别的公司，Salesforce 当前不满足这个条件。
+          </p>
+
+          <h3>估值结论</h3>
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">保守</div>
+              <div class="scenario-card__value">~$125</div>
+              <div class="scenario-card__trigger">有机增长降到 mid-single digit，AI 带来 seat compression，margin 停在 low-20s，WACC 上升。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">基准</div>
+              <div class="scenario-card__value">~$203</div>
+              <div class="scenario-card__trigger">FY2027 指引实现，FY2028 仍接近 10% 增长，GAAP EBIT margin 逐步到 mid-20s。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">乐观</div>
+              <div class="scenario-card__value">~$300+</div>
+              <div class="scenario-card__trigger">AI / Data ARR 高速扩张，核心云保持 low-double digit，margin 到 high-20s，市场重新给平台型软件溢价。</div>
+            </div>
+          </div>
+          <p>
+            <strong>当前 vs 合理价值：</strong>
+            当前 <span class="kpi">$150.12</span> 相对基准价值 <span class="kpi">$203</span> 有约 35% 上行。
+            结论是<strong>偏低估，但需要验证</strong>：估值已经便宜，现金流强，回购后每股价值弹性更大；但市场担心的有机增长、AI 替代和杠杆并不是噪音。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 风险 — section-plain + risk-grid 2 列卡片网格 -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. AI seat compression</h4>
+              <p>如果 AI agent 降低销售、客服、营销团队 seat 数，Salesforce 的核心订阅模式会承压。这是市场给出折价的根本原因，也是整个论点的成败手。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. 有机增长被并购掩盖</h4>
+              <p>FY2027 指引包含 Informatica 约 3pct revenue contribution，不能只看 headline growth，需要看剔除并购后的 organic cRPO。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. 杠杆上升</h4>
+              <p>Q1 FY2027 后 total debt 约 $41.9B，净债务约 $30.0B，净债务 / EBITDA 升到约 2.3x。回购提高每股价值的同时也提高财务和再融资风险。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. SBC 仍是股东成本</h4>
+              <p>TTM SBC 约 $3.6B（占收入约 8.5%）。本模型已将其作为真实成本费用化；若市场严格扣 SBC，non-GAAP 盈利质量会被打折。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>05. 竞争加剧</h4>
+              <p>Microsoft、ServiceNow、Oracle、SAP、Adobe、HubSpot、Databricks、Snowflake 以及模型厂商都在争夺企业 AI workflow 和 customer data 层。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              如果未来两个到三个季度显示剔除并购后的收入增速低于 7%，同时 GAAP operating margin 无法站稳 22%，且 Agentforce / Data 360 ARR 没有持续增长，
+              那么 $150 附近未必便宜，合理价值应下修到 <span class="kpi">$125 – $150</span>。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 待验证问题 — section-plain + tinted Q-badge 卡片 -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Agentforce + Data 360 ARR 的新增来自新客户、现有客户 expansion，还是包装口径变化？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>FY2028 organic revenue growth 是否能接近 9%-10%？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Informatica 对收入、margin、净债务和 cross-sell 的实际贡献是多少？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>回购后的 share count 是否维持在低位，还是 SBC 稀释重新抬头？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Salesforce 是否能证明 AI agent 是增量 revenue，而不是传统 seat revenue 的替代？</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>Salesforce Investor Relations, <a class="link-blue" href="https://investor.salesforce.com/news/news-details/2026/Salesforce-Delivers-Record-First-Quarter-Fiscal-2027-Results/default.aspx" rel="noopener" target="_blank">FY2027 Q1 earnings release</a>，2026。</li>
+            <li>Salesforce Investor Relations, <a class="link-blue" href="https://investor.salesforce.com/stock-info/default.aspx" rel="noopener" target="_blank">Stock information</a>，2026。</li>
+            <li>Yahoo Finance / yfinance：CRM 市场数据、财务报表、分析师预期、同业倍数，2026-06-23 JST 拉取。</li>
+            <li>同业数据：NOW、ADBE、INTU、WDAY、ORCL、SAP，Yahoo Finance / yfinance，2026-06-23 JST 拉取。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- ↑ 内容区结束 ↑ -->
+
+    <!-- 变更日志入口（固定结构，AI 不动） -->
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('CRM');</script>
+</body>
+</html>

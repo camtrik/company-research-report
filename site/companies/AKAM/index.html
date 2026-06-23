@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- include: head.html -->
+  <title data-region="title">AKAM — Akamai</title>
+  <link rel="stylesheet" href="{{SITE_BASE_PATH}}/assets/css/company.css">
+  <meta data-region="meta"
+        data-ticker="AKAM"
+        data-name="Akamai"
+        data-name-en="Akamai Technologies, Inc."
+        data-market="US"
+        data-sector="Technology / Software Infrastructure"
+        data-view="Watch"
+        data-tags="cybersecurity,cloud-infrastructure,cdn,ai-infrastructure,valuation"
+        data-last-updated="2026-06-23">
+</head>
+<body>
+  <!-- include: header.html -->
+
+  <main class="company-page">
+    <!-- ============ Header ============ -->
+    <header class="company-header">
+      <div class="section__inner">
+        <div class="eyebrow eyebrow--muted company-header__eyebrow">
+          <span data-bind="market"></span>
+          <span class="sep">·</span>
+          <span data-bind="sector"></span>
+          <span class="sep">·</span>
+          <span data-bind="last-updated"></span>
+        </div>
+        <h1 class="company-header__title" data-bind="name"></h1>
+        <p class="company-header__sub">
+          <span class="ticker" data-bind="ticker"></span>
+          <span class="sep">·</span>
+          <span data-bind="name-en"></span>
+        </p>
+        <div class="company-header__meta" data-bind="tags-row"></div>
+      </div>
+    </header>
+
+    <!-- ============ 关键数据快照（sync skill 维护） ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="market-data" data-region="snapshot">
+          <div class="market-data__tile">
+            <span class="market-data__label">股价</span>
+            <span class="market-data__value">$120.74</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">市值 / EV</span>
+            <span class="market-data__value">$17.6B / $22.5B</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Forward P/E</span>
+            <span class="market-data__value">16.9x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">EV / EBITDA</span>
+            <span class="market-data__value">19.6x</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Revenue Growth（TTM）</span>
+            <span class="market-data__value">+5.8%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">Operating Margin（TTM）</span>
+            <span class="market-data__value">13.8%</span>
+          </div>
+          <div class="market-data__tile">
+            <span class="market-data__label">FCF（TTM）</span>
+            <span class="market-data__value">$0.76B</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">52 周区间</span>
+            <span class="market-data__value">$69.78 – $165.45</span>
+          </div>
+          <div class="market-data__tile market-data__tile--accent">
+            <span class="market-data__label">分析师目标价（均 / 中位）</span>
+            <span class="market-data__value">$159 / $165</span>
+          </div>
+          <div class="market-data__tile market-data__tile--sm">
+            <span class="market-data__label">分析截至</span>
+            <span class="market-data__value">2026-06-23</span>
+          </div>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">数据截至 2026-06-23</p>
+      </div>
+    </section>
+
+    <!-- ============ Charts (runtime; AI 永远不动) + PER/PBR 历史表 ============ -->
+    <section class="section section--no-pad-top">
+      <div class="section__inner">
+        <div class="charts" data-region="charts">
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年股价走势</span>
+              <span class="chart-row__meta">price · 月度</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="price-10y"></canvas>
+            </div>
+          </figure>
+          <figure class="chart-row">
+            <figcaption class="chart-row__caption">
+              <span class="chart-row__title">10 年 PER / PBR 走势</span>
+              <span class="chart-row__meta">年度 · 双 Y 轴</span>
+            </figcaption>
+            <div class="chart-row__canvas-wrap">
+              <canvas data-chart="per-pbr-10y"></canvas>
+            </div>
+          </figure>
+        </div>
+
+        <div class="per-pbr-history">
+          <div class="per-pbr-history__head">
+            <span class="eyebrow eyebrow--muted">10 年 PER / PBR 历史数据</span>
+            <span class="per-pbr-history__hint">期末股价 · EPS · BPS</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">期末股价</th><th class="num">EPS</th><th class="num">BPS</th><th class="num">PER</th><th class="num">PBR</th></tr>
+              </thead>
+              <tbody data-bind="per-pbr-table"></tbody>
+            </table>
+          </div>
+          <blockquote>期末股价使用 yfinance 后复权收盘价；EPS / BPS 来自 Akamai 官方披露财务数据。早年股数口径可能与公司披露小幅不一致，本表用于历史估值区间观察，不作为精确会计数据。</blockquote>
+        </div>
+        <p class="eyebrow eyebrow--muted" style="margin-top:var(--s-2);text-align:right;">图表 / 表格数据截至 <span data-bind="per-pbr-updated">—</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 公司概要（first content section） ============ -->
+    <section class="section section--top-border" data-region="company-overview">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>公司概要</h2>
+          <span class="section-plain__meta">基本面 · 业务定位</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="kv-grid">
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">上市地 / 代码</div>
+              <div class="kv-grid__value">Nasdaq · AKAM</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">总部</div>
+              <div class="kv-grid__value">Cambridge, MA</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">TTM Revenue</div>
+              <div class="kv-grid__value">$4.27B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">市值 / EV</div>
+              <div class="kv-grid__value">$17.6B / $22.5B</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">最近披露</div>
+              <div class="kv-grid__value">FY2026 Q1 10-Q</div>
+            </div>
+            <div class="kv-grid__item">
+              <div class="kv-grid__label">行业（yfinance）</div>
+              <div class="kv-grid__value">Technology · Software Infrastructure</div>
+            </div>
+          </div>
+
+          <p>
+            Akamai 起家于 CDN 和边缘网络，核心资产是全球分布式网络、客户流量入口、应用交付能力和安全防护能力。
+            公司 2026 年起把业务单独披露为三类：Security（WAF / API security / DDoS / bot / Guardicore 微分段 / ZTNA 等）、
+            Delivery and other cloud applications（传统媒体交付、应用性能、边缘应用），以及 Cloud Infrastructure Services
+            （compute、storage、EdgeWorkers，当前主要投资和资本开支方向）。
+          </p>
+
+          <h3>三大业务分部（FY2026 Q1）</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>业务</th><th class="num">Q1 2026 Revenue</th><th class="num">YoY</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Security</td><td class="num">$590M</td><td class="num pos">+11%</td><td>WAF、API security、DDoS、bot protection、Guardicore 微分段、ZTNA 等</td></tr>
+                <tr><td>Delivery and other cloud applications</td><td class="num">$389M</td><td class="num neg">-7%</td><td>传统媒体交付、应用性能、边缘应用；受续约降价和客户成本优化压力</td></tr>
+                <tr><td>Cloud Infrastructure Services</td><td class="num">$95M</td><td class="num pos">+40%</td><td>compute、storage、EdgeWorkers、compute partner solutions；当前主要投资方向</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <blockquote>
+            Q1 2026 公司宣布一个美国 frontier model provider 对 CIS 做出 $1.8B / 7 年 committed deal，
+            管理层称这是 Akamai 历史上最大的客户合同——也是当前投资故事的核心争议点。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 核心结论 ============ -->
+    <section class="section" data-region="thesis">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>核心结论</h2></div>
+        <div class="section-plain__body">
+          <div class="callout callout--ink">
+            <div class="callout__label">观点 · Watch · 基准合理价值 ~$120</div>
+            <p>
+              Akamai 的估值已经从传统 CDN / 安全软件公司，转向“安全现金流 + 衰退中的 Delivery + 高资本开支 AI/CIS 云基础设施”的组合。
+              基准混合合理价值约 <span class="kpi">$120/股</span>，对比当前股价 <span class="kpi">$120.74</span> 基本持平，当前不是明显低估。
+            </p>
+            <p>
+              DCF 约 $103/股（被 2026 年高 CapEx、SBC 和 CIS 前置投入压低），相对估值约 $129/股，SOTP 约 $134/股
+              （公司未披露分部 EBITDA，仅作低置信度交叉验证）。
+            </p>
+          </div>
+
+          <p class="lede">
+            更适合观察或已有仓位持有，而不是当成有明显安全边际的价值股。
+          </p>
+          <p>
+            真正的上行来自 CIS 大单持续复制、2027 年后收入进入双位数增长、CapEx 强度回落；
+            反向风险是 CIS 需要持续烧 CapEx，ROIC 尚未被验证。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 业务模式（card 仅含核心；表格在外） ============ -->
+    <section class="section section--tinted" data-region="business-model">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>业务模式</h2>
+          <p class="lede">三类业务，分别处于增长、衰退、重资本投入三个阶段：</p>
+          <ul class="numbered-list">
+            <li>
+              <span class="numbered-list__index">01</span>
+              <div class="numbered-list__body">
+                <strong>Security</strong> — 当前最像优质软件资产的部分。Q1 2026 收入 $590M（+11%），需求来自 WAF、API security、Guardicore 分段等；AI 提升攻击自动化，强化企业防护刚需。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">02</span>
+              <div class="numbered-list__body">
+                <strong>Delivery and Other Cloud Applications</strong> — 传统现金流基础，但结构性承压。Q1 2026 收入 $389M（-7%），续约降价 + 客户成本优化驱动下滑。
+              </div>
+            </li>
+            <li>
+              <span class="numbered-list__index">03</span>
+              <div class="numbered-list__body">
+                <strong>Cloud Infrastructure Services</strong> — 投资争议核心。Q1 2026 收入 $95M（+40%），FY2026 constant-currency 增长指引上调到至少 50%，但需要重资本开支支持。
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>业务分部风险 / 机会拆解</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>业务</th><th>优点</th><th>风险</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Security</td><td>客户需求紧迫，毛利和估值倍数通常高于 Delivery</td><td>需与 Cloudflare、Palo Alto、Fortinet、Zscaler、CrowdStrike、Check Point 竞争，并非全部收入都享受纯 SaaS 高倍数</td></tr>
+                <tr><td>Delivery and Other Cloud Applications</td><td>规模、流量入口和现金流，为 Security 与 CIS 提供分布式基础设施</td><td>续约降价 + 客户成本优化，独立增长前景偏弱</td></tr>
+                <tr><td>Cloud Infrastructure Services</td><td>收入可见度提升（$1.8B / 7 年大单），管理层称 2027 年整体增长有望双位数</td><td>FY2026 CapEx 约为收入的 40%-42%，短期 FCF 大幅承压，ROIC 未验证</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <blockquote>
+            CIS 是“收入可见度提升”和“短期 FCF 大幅承压”同时发生的业务：管理层 Q1 call 给出 FY2026 CapEx 约 40%-42% revenue
+            （其中约 $700M 与 $1.8B 大客户合同相关），Q2 CapEx 指引约 $433M-$453M。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 财务表现 ============ -->
+    <section class="section" data-region="financials">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>财务表现</h2>
+          <span class="section-plain__meta">FY2022 – TTM Q1 2026 · 单位：十亿美元</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>年度 / TTM</th>
+                  <th class="num">Revenue</th>
+                  <th class="num">YoY</th>
+                  <th class="num">Operating Margin</th>
+                  <th class="num">Net Income</th>
+                  <th class="num">EPS</th>
+                  <th class="num">FCF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>FY2022</td><td class="num">$3.62B</td><td class="num pos">+4.5%</td><td class="num">19.7%</td><td class="num">$524M</td><td class="num">$3.26</td><td class="num">$816M</td></tr>
+                <tr><td>FY2023</td><td class="num">$3.81B</td><td class="num pos">+5.4%</td><td class="num">18.5%</td><td class="num">$548M</td><td class="num">$3.52</td><td class="num">$618M</td></tr>
+                <tr><td>FY2024</td><td class="num">$3.99B</td><td class="num pos">+4.7%</td><td class="num">15.9%</td><td class="num">$505M</td><td class="num">$3.27</td><td class="num">$834M</td></tr>
+                <tr><td>FY2025</td><td class="num">$4.21B</td><td class="num pos">+5.4%</td><td class="num">14.9%</td><td class="num">$452M</td><td class="num">$3.07</td><td class="num">$699M</td></tr>
+                <tr class="row--highlight"><td>TTM Q1 2026</td><td class="num">$4.27B</td><td class="num pos">+5.8%</td><td class="num">13.8%</td><td class="num">$435M</td><td class="num">$2.97</td><td class="num">$765M</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>
+            趋势很清楚：收入仍在增长，但 GAAP operating margin 从 2022 年的约 19.7% 降到 TTM 的约 13.8%。
+            下降不是单一坏账或一次性因素，而是业务组合和投资节奏变化：Delivery 下滑、CIS 设施建设、co-location、network build-out、折旧、SBC 和人员成本上升。
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 护城河 ============ -->
+    <section class="section section--tinted" data-region="moat">
+      <div class="section__inner">
+        <div class="feature-card">
+          <h2>护城河</h2>
+          <p class="lede">护城河评级：<strong>Distribution Network + Switching Cost, Eroding at the Edges</strong>。核心来源：</p>
+
+          <div class="moat-block">
+            <h4>全球分布式网络规模</h4>
+            <p>平台覆盖约 4,300 locations、700 cities、130 countries，可在靠近用户处提供交付、安全和 compute。</p>
+          </div>
+          <div class="moat-block">
+            <h4>安全数据与流量入口</h4>
+            <p>在应用、API、bot、DDoS 和 WAF 场景积累大量实时流量和攻击数据，提升检测和防护能力。</p>
+          </div>
+          <div class="moat-block">
+            <h4>大客户关系与迁移成本</h4>
+            <p>媒体、金融、零售、游戏和技术公司长期使用 Akamai 网络和安全服务，迁移成本不低。</p>
+          </div>
+          <div class="moat-block">
+            <h4>CIS 的差异化位置</h4>
+            <p>不与 hyperscaler 做全栈云正面对抗，而是押注 distributed compute、edge inference 和 dedicated capacity。</p>
+          </div>
+        </div>
+
+        <div class="section-plain__body">
+          <h3>同业对比</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead>
+                <tr>
+                  <th>公司</th>
+                  <th>Ticker</th>
+                  <th class="num">市值</th>
+                  <th class="num">Forward P/E</th>
+                  <th class="num">EV/Revenue</th>
+                  <th class="num">EV/EBITDA</th>
+                  <th class="num">Gross Margin</th>
+                  <th class="num">Revenue Growth</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row--highlight"><td>Akamai</td><td>AKAM</td><td class="num">$17.6B</td><td class="num">16.9x</td><td class="num">5.3x</td><td class="num">19.6x</td><td class="num">58.3%</td><td class="num pos">+5.8%</td></tr>
+                <tr><td>Cloudflare</td><td>NET</td><td class="num">$77.5B</td><td class="num">138.8x</td><td class="num">32.9x</td><td class="num">n.m.</td><td class="num">73.3%</td><td class="num pos">+33.5%</td></tr>
+                <tr><td>Fastly</td><td>FSLY</td><td class="num">$2.7B</td><td class="num">43.5x</td><td class="num">4.2x</td><td class="num">n.m.</td><td class="num">59.4%</td><td class="num pos">+19.8%</td></tr>
+                <tr><td>F5</td><td>FFIV</td><td class="num">$22.1B</td><td class="num">22.1x</td><td class="num">6.5x</td><td class="num">23.1x</td><td class="num">81.5%</td><td class="num pos">+11.0%</td></tr>
+                <tr><td>Fortinet</td><td>FTNT</td><td class="num">$106.5B</td><td class="num">42.4x</td><td class="num">14.6x</td><td class="num">44.0x</td><td class="num">80.3%</td><td class="num pos">+20.1%</td></tr>
+                <tr><td>Check Point</td><td>CHKP</td><td class="num">$12.5B</td><td class="num">10.5x</td><td class="num">4.3x</td><td class="num">13.5x</td><td class="num">87.7%</td><td class="num pos">+4.8%</td></tr>
+                <tr><td>Palo Alto Networks</td><td>PANW</td><td class="num">$233.4B</td><td class="num">69.6x</td><td class="num">21.9x</td><td class="num">156.7x</td><td class="num">72.0%</td><td class="num pos">+31.1%</td></tr>
+                <tr><td>CrowdStrike</td><td>CRWD</td><td class="num">$171.9B</td><td class="num">108.1x</td><td class="num">33.0x</td><td class="num">2836.4x</td><td class="num">75.1%</td><td class="num pos">+25.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>数据来源：Yahoo Finance / yfinance，2026-06-23 JST 拉取。</blockquote>
+
+          <p>
+            Akamai 的倍数低于高增长安全和云软件公司，原因合理：收入增长低、毛利率低、Delivery 下滑、CIS 资本强度高。
+            更合适的估值锚是 F5、Check Point、部分 Fortinet，而不是直接套 Cloudflare 或 CrowdStrike 的高增长倍数。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 近期动态 ============ -->
+    <section class="section" data-region="recent-developments">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>近期动态</h2></div>
+        <div class="section-plain__body">
+
+          <h3>最近财报（Q1 2026）</h3>
+          <p class="lede">
+            Q1 2026 收入 $1.074B，同比 +6%（constant currency +4%）。GAAP operating income $114M、GAAP operating margin 11%
+            （同比下降 4 个百分点），non-GAAP operating margin 26%。
+          </p>
+          <p>
+            分业务看，Security 增长 11%、CIS 增长 40%、Delivery and other cloud applications 下降 7%。
+            这就是当前投资故事的核心：增长资产在变大，但成熟现金流业务和利润率同时承压。
+          </p>
+
+          <h3>2026-05 可转债融资</h3>
+          <p>
+            2026-05-22，Akamai 完成 <span class="kpi">$3.5B</span> 0.00% convertible senior notes 发行，2030 notes 与 2032 notes 各 $1.75B。
+            公司用约 $236.6M 支付 convertible note hedge 净成本，约 $350M 回购 2,476,298 股，剩余资金主要用于 CIS 加速资本开支和一般公司用途。
+          </p>
+          <p>
+            2030 notes 初始转换价约 $201.41，2032 notes 约 $190.81。在当前股价 $120.74 下短期稀释不明显；
+            但若 bull case 兑现，转换和 warrant 结构会影响高股价区间的普通股价值。
+          </p>
+
+          <h3>其他近期事件</h3>
+          <ul>
+            <li><strong>2026-05-22</strong>　Akamai 发行 $3.5B 0% 可转债并部分回购。<em>为 CIS 资本开支高峰融资，同时用 hedge + buyback 缓解稀释。</em></li>
+            <li><strong>2026 Q1</strong>　公司宣布美国 frontier model provider 对 CIS 做出 $1.8B / 7 年 committed deal，史上最大客户合同。<em>CIS 增长可见度的关键锚点。</em></li>
+            <li><strong>2026 Q1</strong>　管理层将 FY2026 CIS constant-currency 增长指引上调到至少 50%，称 2027 年整体 revenue growth 有望进入双位数。<em>转型叙事的核心承诺，需后续季度验证。</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 催化剂 / 关注点 ============ -->
+    <section class="section" data-region="catalysts">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>催化剂 / 关注点</h2></div>
+        <div class="section-plain__body">
+          <div class="catalyst-grid">
+            <div class="catalyst-card">
+              <h3>短期（&lt; 6 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">bolt</span><span>Q2 2026 财报：revenue、CIS growth、CapEx 是否接近 $433M-$453M 指引。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>$1.8B / 7 年 CIS 合同在 Q4 是否按管理层预期贡献 $20M-$25M revenue。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>FY2026 CapEx 是否维持 40%-42% revenue，还是因 GPU pipeline 继续上调。</span></li>
+                <li><span class="material-symbols-outlined">bolt</span><span>Security 是否维持 high-single-digit 到 low-teens 增长。</span></li>
+              </ul>
+            </div>
+            <div class="catalyst-card catalyst-card--medium">
+              <h3>中期（6 – 18 月）</h3>
+              <ul>
+                <li><span class="material-symbols-outlined">trending_up</span><span>2027 年公司整体 revenue growth 是否真的进入 double digits。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>CIS 的 gross margin / utilization / renewal economics 是否开始可见。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>CapEx 从 2026 高峰回落后，FCF 是否恢复到 $1B+ 年化水平。</span></li>
+                <li><span class="material-symbols-outlined">trending_up</span><span>Delivery 下滑是否缓和，还是继续抵消 Security 和 CIS 增长。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 估值 ============ -->
+    <section class="section" data-region="valuation">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>估值</h2>
+          <span class="section-plain__meta">DCF · 相对估值 · SOTP · 情景三档</span>
+        </div>
+        <div class="section-plain__body">
+
+          <h3>方法一：DCF</h3>
+          <div class="table-wrap table-wrap--dense">
+            <table>
+              <thead><tr><th>关键假设</th><th class="num">取值</th></tr></thead>
+              <tbody>
+                <tr><td>预测期</td><td class="num">2026E – 2030E</td></tr>
+                <tr><td>Revenue</td><td class="num">$4.50B → $5.98B</td></tr>
+                <tr><td>EBIT margin</td><td class="num">12.0% → 18.5%</td></tr>
+                <tr><td>D&A / Revenue</td><td class="num">17%-19%</td></tr>
+                <tr><td>CapEx / Revenue</td><td class="num">41%, 26%, 20%, 18%, 16%</td></tr>
+                <tr><td>Tax rate / WACC / Terminal g</td><td class="num">22% / 7.5% / 2.5%</td></tr>
+                <tr><td>Exit multiple</td><td class="num">15.0x EV/EBITDA</td></tr>
+                <tr><td>净债务口径</td><td class="num">post-note net debt ~$4.72B</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>FCFF 预测</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>年度</th><th class="num">Revenue</th><th class="num">Growth</th><th class="num">EBIT Margin</th><th class="num">EBIT</th><th class="num">NOPAT</th><th class="num">D&A</th><th class="num">CapEx</th><th class="num">FCFF</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>2026E</td><td class="num">$4.50B</td><td class="num pos">+6.9%</td><td class="num">12.0%</td><td class="num">$0.54B</td><td class="num">$0.42B</td><td class="num">$0.77B</td><td class="num">$1.84B</td><td class="num neg">-$0.66B</td></tr>
+                <tr><td>2027E</td><td class="num">$4.99B</td><td class="num pos">+10.9%</td><td class="num">14.0%</td><td class="num">$0.70B</td><td class="num">$0.54B</td><td class="num">$0.90B</td><td class="num">$1.30B</td><td class="num">$0.14B</td></tr>
+                <tr><td>2028E</td><td class="num">$5.39B</td><td class="num pos">+8.0%</td><td class="num">16.0%</td><td class="num">$0.86B</td><td class="num">$0.67B</td><td class="num">$1.02B</td><td class="num">$1.08B</td><td class="num">$0.61B</td></tr>
+                <tr><td>2029E</td><td class="num">$5.72B</td><td class="num pos">+6.1%</td><td class="num">17.5%</td><td class="num">$1.00B</td><td class="num">$0.78B</td><td class="num">$1.09B</td><td class="num">$1.03B</td><td class="num">$0.83B</td></tr>
+                <tr><td>2030E</td><td class="num">$5.98B</td><td class="num pos">+4.5%</td><td class="num">18.5%</td><td class="num">$1.11B</td><td class="num">$0.86B</td><td class="num">$1.08B</td><td class="num">$0.96B</td><td class="num">$0.98B</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>EV-to-equity bridge</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>项目</th><th class="num">金额</th></tr></thead>
+              <tbody>
+                <tr><td>PV of explicit FCFF</td><td class="num">$1.29B</td></tr>
+                <tr><td>PV of terminal value</td><td class="num">$18.38B</td></tr>
+                <tr><td>Implied EV</td><td class="num">$19.67B</td></tr>
+                <tr><td>Less: post-note net debt</td><td class="num">-$4.72B</td></tr>
+                <tr><td>Implied equity value</td><td class="num">$14.95B</td></tr>
+                <tr><td>Shares</td><td class="num">145.4M</td></tr>
+                <tr class="row--highlight"><td><strong>DCF implied price</strong></td><td class="num"><strong>$103</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote>
+            终值占 EV 约 93%，高于通常舒适区间，因此 DCF 点估值不是最重要，敏感性更重要。模型本质是在判断 CIS 资本开支高峰结束后，
+            Akamai 能否把利润率和 FCF 转化率拉回正常水平。
+          </blockquote>
+
+          <h4>DCF 敏感性（$/股）</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>WACC \ Terminal g</th><th class="num">1.5%</th><th class="num">2.0%</th><th class="num">2.5%</th><th class="num">3.0%</th><th class="num">3.5%</th></tr></thead>
+              <tbody>
+                <tr><td>6.5%</td><td class="num">$109</td><td class="num">$115</td><td class="num">$122</td><td class="num">$131</td><td class="num">$144</td></tr>
+                <tr><td>7.0%</td><td class="num">$101</td><td class="num">$106</td><td class="num">$112</td><td class="num">$119</td><td class="num">$128</td></tr>
+                <tr class="row--highlight"><td>7.5%</td><td class="num">$94</td><td class="num">$98</td><td class="num"><strong>$103</strong></td><td class="num">$108</td><td class="num">$115</td></tr>
+                <tr><td>8.0%</td><td class="num">$89</td><td class="num">$92</td><td class="num">$95</td><td class="num">$100</td><td class="num">$105</td></tr>
+                <tr><td>8.5%</td><td class="num">$83</td><td class="num">$86</td><td class="num">$89</td><td class="num">$93</td><td class="num">$97</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>方法二：相对估值</h3>
+          <p>
+            相对估值不直接使用高增长云安全公司的中位数，因为 AKAM 的收入增长、毛利率和资本强度明显不同。
+            基准使用折扣后的成熟基础设施 / 安全软件倍数：
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>估值口径</th><th class="num">假设倍数</th><th class="num">Implied price</th></tr></thead>
+              <tbody>
+                <tr><td>Forward P/E</td><td class="num">18.5x FY2027E EPS</td><td class="num">$132</td></tr>
+                <tr><td>EV / Revenue</td><td class="num">5.5x TTM revenue</td><td class="num">$129</td></tr>
+                <tr><td>EV / EBITDA</td><td class="num">18.0x TTM EBITDA</td><td class="num">$129</td></tr>
+                <tr class="row--highlight"><td><strong>中位数</strong></td><td class="num">—</td><td class="num"><strong>$129</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>这个结果高于 DCF，因为相对估值更愿意给 CIS/AI 叙事定价，也更少惩罚短期 CapEx 高峰。</p>
+
+          <h3>方法三：SOTP</h3>
+          <p>
+            SOTP 使用 2026E revenue 粗略估算。由于 Akamai 未披露 solution category 的 EBIT/EBITDA，以下只是收入倍数交叉验证，
+            不应单独作为投资结论。
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>业务</th><th class="num">2026E Revenue</th><th class="num">EV/Revenue</th><th class="num">Implied EV</th></tr></thead>
+              <tbody>
+                <tr><td>Security</td><td class="num">$2.50B</td><td class="num">6.5x</td><td class="num">$16.25B</td></tr>
+                <tr><td>Delivery and other cloud applications</td><td class="num">$1.60B</td><td class="num">2.8x</td><td class="num">$4.48B</td></tr>
+                <tr><td>Cloud Infrastructure Services</td><td class="num">$0.43B</td><td class="num">8.0x</td><td class="num">$3.44B</td></tr>
+                <tr><td>Segment EV</td><td class="num">—</td><td class="num">—</td><td class="num">$24.17B</td></tr>
+                <tr><td>Less: post-note net debt</td><td class="num">—</td><td class="num">—</td><td class="num">-$4.72B</td></tr>
+                <tr class="row--highlight"><td><strong>Equity value / SOTP implied price</strong></td><td class="num">—</td><td class="num">—</td><td class="num"><strong>$19.45B / $134</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>SOTP 显示 Security + CIS 价值可能被传统 Delivery 拖累，但折价不够明显。当前价 $120.74 相对 SOTP $134 折价约 10%，不属于需要强行动的 conglomerate discount。</p>
+
+          <h3>估值结论</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>方法</th><th class="num">Implied price</th><th class="num">权重</th><th class="num">加权贡献</th></tr></thead>
+              <tbody>
+                <tr><td>DCF</td><td class="num">$103</td><td class="num">40%</td><td class="num">$41</td></tr>
+                <tr><td>Relative</td><td class="num">$129</td><td class="num">30%</td><td class="num">$39</td></tr>
+                <tr><td>SOTP</td><td class="num">$134</td><td class="num">30%</td><td class="num">$40</td></tr>
+                <tr class="row--total"><td><strong>混合合理价值</strong></td><td class="num">—</td><td class="num">100%</td><td class="num"><strong>$120</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>当前 $120.74 相对基准合理价值 $120 基本持平。考虑到模型的主要上行在 bull case，而短期 FCF 压力相当明确，当前缺少安全边际。</p>
+
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-card__label">Bear</div>
+              <div class="scenario-card__value">$47</div>
+              <div class="scenario-card__trigger">CIS 需求不及预期、CapEx 高位持续、Delivery 加速下滑、WACC 升至 8.5%。</div>
+            </div>
+            <div class="scenario-card scenario-card--base">
+              <div class="scenario-card__label">Base</div>
+              <div class="scenario-card__value">$103</div>
+              <div class="scenario-card__trigger">CIS 大单带来 2027 年增长改善，但 CapEx 到 2028 年才逐步正常化。</div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-card__label">Bull</div>
+              <div class="scenario-card__value">$205</div>
+              <div class="scenario-card__trigger">CIS 大单可复制，2030 revenue 接近 $6.7B，EBIT margin 超过 21%，CapEx 强度明显回落。</div>
+            </div>
+          </div>
+          <p>
+            AKAM 是一个偏“路径依赖”的转型股：bull case 空间大，但需要未来几个季度的合同、capex、GPU capacity utilization 和 margin 数据来证明。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 主要风险 ============ -->
+    <section class="section" data-region="risks">
+      <div class="section__inner">
+        <div class="section-plain__head">
+          <h2>主要风险</h2>
+          <span class="section-plain__meta">按可能性 × 影响排序</span>
+        </div>
+        <div class="section-plain__body">
+          <div class="risk-grid">
+            <div class="risk-item">
+              <h4>01. CIS ROIC 尚未验证</h4>
+              <p>公司已承诺重资本开支，收入有可见度，但长期毛利和现金回报还需要验证。</p>
+            </div>
+            <div class="risk-item">
+              <h4>02. CapEx 可能继续上修</h4>
+              <p>管理层表示 GPU pipeline 超过当前和预计库存，若 2026 下半年继续下单，FCF 压力会加大。</p>
+            </div>
+            <div class="risk-item">
+              <h4>03. Delivery 结构性下滑</h4>
+              <p>续约价格下降和客户成本优化仍可能拖累整体收入增速。</p>
+            </div>
+            <div class="risk-item">
+              <h4>04. 估值被 AI 叙事提前重估</h4>
+              <p>过去 12 个月股价已上涨约 52%，当前价格已经部分反映 CIS 大单价值。</p>
+            </div>
+            <div class="risk-item">
+              <h4>05. SBC 是真实成本</h4>
+              <p>TTM SBC 约 $476M，若投资者严格扣除 SBC，owner earnings 低于非 GAAP 利润。</p>
+            </div>
+            <div class="risk-item">
+              <h4>06. 可转债和 warrants 增加复杂度</h4>
+              <p>当前转换价较高，短期稀释有限；但 bull case 中会影响每股价值。</p>
+            </div>
+            <div class="risk-item risk-item--wide">
+              <h4>07. 竞争强度高</h4>
+              <p>CIS 面对 hyperscalers、neoclouds 和 GPU capacity providers；Security 面对 Cloudflare、Palo Alto、Fortinet、Zscaler、CrowdStrike 等，定价和份额持续承压。</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="callout__label">撤回条件</div>
+            <p>
+              如果 FY2026 下半年 CapEx 再次明显上修，而 CIS revenue ramp 或新增合同没有同步兑现，应下调估值中枢。
+              若 Delivery 下滑扩大到 high-single-digit 以上，同时 Security 增速跌破 mid-single-digit，则 AKAM 的转型故事会变成更高风险的资本开支押注。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 待验证问题 ============ -->
+    <section class="section" data-region="open-questions">
+      <div class="section__inner">
+        <div class="section-plain__head"><h2>待验证问题</h2></div>
+        <div class="section-plain__body">
+          <div class="open-questions-card">
+            <ul class="open-questions-list">
+              <li>
+                <span class="q-badge">Q</span>
+                <p>$1.8B / 7 年 CIS 合同的实际 revenue recognition 和 gross margin 是多少？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>CIS 是否能持续签下更多 committed capacity 大单，还是单一客户事件？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>GPU 和 data center capacity 的供应成本是否被合同价格充分覆盖？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Security 的 AI 攻击防护需求是否能转化为持续加速，而不是单季强劲？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>Delivery 是否只是短期 Edgeio / 续约影响，还是长期价格压力？</p>
+              </li>
+              <li>
+                <span class="q-badge">Q</span>
+                <p>可转债融资后的资本配置是否继续优先 CIS，还是会恢复回购抵消稀释？</p>
+              </li>
+            </ul>
+          </div>
+
+          <h3>参考来源</h3>
+          <ul>
+            <li>Akamai, <a class="link-blue" href="https://www.ir.akamai.com/news-releases/news-release-details/akamai-reports-first-quarter-2026-financial-results" rel="noopener" target="_blank">Q1 2026 Earnings Release</a>，2026-05-07。</li>
+            <li>Akamai, <a class="link-blue" href="https://www.sec.gov/Archives/edgar/data/1086222/000108622226000058/akam-20260331.htm" rel="noopener" target="_blank">FY2026 Q1 Form 10-Q</a>，截至 2026-03-31。</li>
+            <li>Akamai, <a class="link-blue" href="https://www.sec.gov/Archives/edgar/data/1086222/000119312526237084/d144441d8k.htm" rel="noopener" target="_blank">2026-05-22 Form 8-K（Convertible Notes）</a>，2026-05-22。</li>
+            <li>Motley Fool, <a class="link-blue" href="https://www.fool.com/earnings/call-transcripts/2026/05/07/akamai-akam-q1-2026-earnings-transcript/" rel="noopener" target="_blank">Akamai Q1 2026 Earnings Call Transcript</a>，2026-05-07。</li>
+            <li>市场数据、同业倍数、分析师预期：Yahoo Finance / yfinance，2026-06-23 JST 拉取。</li>
+          </ul>
+
+          <blockquote>说明：本报告仅用于研究和教育目的，不构成投资建议。</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <div class="changelog-cta" data-region="changelog-link">
+      <a href="changelog.html">查看更新记录 →</a>
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+  <script src="{{SITE_BASE_PATH}}/assets/vendor/chart.umd.min.js"></script>
+  <script src="{{SITE_BASE_PATH}}/assets/js/charts.js"></script>
+  <script>loadCompanyData('AKAM');</script>
+</body>
+</html>
